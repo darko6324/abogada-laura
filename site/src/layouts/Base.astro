@@ -1,0 +1,93 @@
+---
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/cormorant-garamond/latin-600.css';
+import '@fontsource/cormorant-garamond/latin-700.css';
+import '../styles/global.css';
+
+import { getImage } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFlotante from '../components/WhatsAppFlotante.astro';
+import AvisoBorrador from '../components/AvisoBorrador.astro';
+import { SITE, ES_PREVIEW } from '../config/site';
+import { url } from '../lib/url';
+import retrato from '../assets/fotos/laura-3.jpeg';
+
+interface Props {
+  /** <title> completo. Ver tabla de titles en la estrategia §15. */
+  title: string;
+  description: string;
+  /** Clave de MENSAJES para el botón flotante de WhatsApp. */
+  whatsapp?: string;
+  /** Página en borrador: muestra aviso en vista previa. */
+  borrador?: boolean;
+  /** Forzar noindex (p. ej. /gracias). En vista previa todo va con noindex. */
+  noindex?: boolean;
+  /** JSON-LD adicional de la página (Service, FAQPage, BreadcrumbList…). */
+  schema?: Record<string, unknown>[];
+}
+
+const { title, description, whatsapp, borrador = false, noindex = false, schema = [] } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const og = await getImage({ src: retrato, width: 1200, height: 630, fit: 'cover', position: 'top', format: 'jpg' });
+const ogUrl = new URL(og.src, Astro.site).href;
+const robots = ES_PREVIEW || noindex ? 'noindex, nofollow' : 'index, follow';
+
+// Schema global (estrategia §15): Attorney, más preciso que LegalService.
+const attorney = {
+  '@context': 'https://schema.org',
+  '@type': 'Attorney',
+  '@id': new URL(url('/'), Astro.site).href + '#abogada',
+  name: `${SITE.marca} — ${SITE.rol}`,
+  url: new URL(url('/'), Astro.site).href,
+  image: ogUrl,
+  telephone: `+${SITE.whatsapp}`,
+  email: SITE.correo,
+  address: { '@type': 'PostalAddress', addressLocality: SITE.ciudad, addressCountry: SITE.pais },
+  areaServed: { '@type': 'Country', name: 'Colombia' },
+  knowsLanguage: 'es',
+  sameAs: [SITE.instagram],
+};
+---
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={url('/favicon.ico')} sizes="32x32" />
+    <link rel="icon" type="image/png" href={url('/favicon.png')} />
+    <meta name="theme-color" content="#321030" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content={`${SITE.marca} — ${SITE.rol}`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(attorney)} />
+    {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="sr-only" href="#contenido">Saltar al contenido</a>
+    {ES_PREVIEW && borrador && <AvisoBorrador />}
+    <Header />
+    <main id="contenido" data-estado={borrador ? 'borrador' : 'confirmado'}>
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFlotante clave={whatsapp} />
+  </body>
+</html>

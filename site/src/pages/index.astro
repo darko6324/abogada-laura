@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import retrato from '../assets/fotos/laura-3.jpeg';
+import { whatsappUrl } from '../lib/whatsapp';
+import { url } from '../lib/url';
+import { ES_PREVIEW } from '../config/site';
+
+// Fase 1: hero definitivo de la estrategia (§7.2) + índice de revisión visible solo en la vista previa.
+// La home completa (segmentación, ciclo, situaciones, formulario, FAQ) llega en la Fase 2.
+const servicios = (await getCollection('servicios'))
+  .filter((s) => ES_PREVIEW || s.data.estado === 'confirmado')
+  .sort((a, b) => a.data.orden - b.data.orden);
+---
+<Base
+  title="Abogada en Bogotá para personas y empresas — Laura Riaño"
+  description="Asesoría legal clara en Colombia: contratos, creación de empresa, registro de marca, tutelas y familia. Te explico tus opciones sin tecnicismos. Escríbeme por WhatsApp."
+  borrador
+>
+  <section class="hero">
+    <div class="hero__media">
+      <Image
+        src={retrato}
+        alt="Laura Riaño, abogada, sentada con chaqueta blanca"
+        widths={[480, 800, 1086]}
+        sizes="(min-width: 960px) 45vw, 100vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="hero__texto">
+      <p class="etiqueta">Abogada en Bogotá · Atención en toda Colombia</p>
+      <h1>El derecho de tu lado. <em>También en tu negocio.</em></h1>
+      <p class="destacado">
+        Soy Laura Riaño, abogada en Bogotá. Acompaño a personas, emprendedores y empresas en Colombia a tomar
+        decisiones legales con claridad: desde un contrato hasta crear tu empresa o proteger tu marca.
+      </p>
+      <div class="fila-botones">
+        <a class="btn btn--primario" href={whatsappUrl()} target="_blank" rel="noopener"
+           data-evento="whatsapp_click" data-ubicacion="hero">Cuéntame qué necesitas</a>
+      </div>
+    </div>
+  </section>
+
+  {ES_PREVIEW && (
+    <section class="sec">
+      <div class="wrap">
+        <p class="etiqueta">Vista previa · solo para revisión</p>
+        <h2>Páginas en construcción</h2>
+        <p class="destacado">Estas son las páginas que ya existen en la vista previa. Ninguna está publicada en abogadalaura.com.</p>
+        <ul class="revision">
+          {servicios.map((s) => (
+            <li>
+              <a href={url(`/${s.id}`)}>{s.data.titulo}</a>
+              <span class={`estado estado--${s.data.estado}`}>{s.data.estado}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .hero { background: var(--aubergine); color: #fff; display: grid; }
+  .hero__media { position: relative; min-height: 340px; background: var(--aubergine-medio); }
+  .hero__media :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .hero__texto { padding: 40px 20px 56px; max-width: 640px; }
+  .hero h1 { color: #fff; margin-bottom: 18px; }
+  .hero h1 em { display: block; font-style: normal; color: var(--dorado-claro); }
+  .hero .etiqueta { color: var(--dorado); }
+  .hero .destacado { color: #eadde9; }
+  @media (min-width: 960px) {
+    .hero { grid-template-columns: 1.1fr 0.9fr; min-height: 620px; }
+    .hero__texto { order: -1; align-self: center; padding: 72px 48px 72px max(20px, calc((100vw - var(--ancho)) / 2 + 20px)); max-width: none; }
+    .hero__media { min-height: auto; }
+  }
+  .revision { list-style: none; padding: 0; margin-top: 28px; display: grid; gap: 10px; max-width: 640px; }
+  .revision li {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    background: #fff; border: 1px solid rgba(50, 16, 48, 0.12); border-radius: var(--radio); padding: 14px 18px;
+  }
+  .estado { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 999px; }
+  .estado--borrador { background: #fff4cc; color: #4a3a00; }
+  .estado--confirmado { background: #dff3ea; color: #0b4d3a; }
+</style>

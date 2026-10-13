@@ -1,0 +1,31 @@
+name: CI
+
+# Corre en cada pull request y en ramas distintas de main.
+# Compila el sitio dos veces: vista previa (debe pasar siempre) y producción
+# (informa qué falta para poder publicar en abogadalaura.com).
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - name: Build vista previa
+        run: npm run build
+      - name: Revisión de producción (informativa)
+        continue-on-error: true
+        env:
+          PUBLIC_SITE_MODE: produccion
+        run: npm run build

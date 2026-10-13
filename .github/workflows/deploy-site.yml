@@ -1,0 +1,58 @@
+name: Deploy sitio (GitHub Pages)
+
+# Cada push a main publica el sitio.
+# El modo y la dirección se controlan con variables del repositorio
+# (Settings → Secrets and variables → Actions → Variables):
+#   SITE_MODE  preview | produccion   (por defecto: preview)
+#   SITE_URL   https://darko6324.github.io  → el día D: https://www.abogadalaura.com
+#   BASE_PATH  /abogada-laura                → el día D: /
+# En modo produccion el build FALLA si queda algún borrador, [CONFIRMAR] o [TARIFA].
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    env:
+      PUBLIC_SITE_MODE: ${{ vars.SITE_MODE || 'preview' }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://darko6324.github.io' }}
+      BASE_PATH: ${{ vars.BASE_PATH || '/abogada-laura' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

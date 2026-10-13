@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
+---
+<Base title="Página no encontrada — Laura Riaño" description="La página que buscas no existe o cambió de dirección." noindex>
+  <section class="sec">
+    <div class="wrap">
+      <h1>Esta página no existe</h1>
+      <p class="destacado">Puede que el enlace haya cambiado. Vuelve al inicio o escríbeme directamente.</p>
+      <div class="fila-botones">
+        <a class="btn btn--borde" href={url('/')}>Ir al inicio</a>
+      </div>
+    </div>
+  </section>
+</Base>

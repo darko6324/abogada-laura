@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/marca/logo.png';
+import { url } from '../lib/url';
+import { whatsappUrl } from '../lib/whatsapp';
+import { SITE } from '../config/site';
+
+// El menú completo (estrategia §4.2) se agrega en la Fase 2, a medida que existan las páginas.
+// Regla: no enlazar desde el menú a una página que todavía no existe.
+---
+<header class="nav">
+  <div class="nav__in">
+    <a class="marca" href={url('/')} aria-label={`${SITE.marca}, ${SITE.rol} — inicio`}>
+      <Image src={logo} alt="" width={44} height={44} class="marca__logo" loading="eager" />
+      <span>
+        <span class="marca__nombre">{SITE.marca}</span>
+        <span class="marca__rol">{SITE.rol}</span>
+      </span>
+    </a>
+    <a
+      class="btn btn--whatsapp nav__cta"
+      href={whatsappUrl()}
+      target="_blank"
+      rel="noopener"
+      data-evento="whatsapp_click"
+      data-ubicacion="nav"
+    >Escríbeme</a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 248, 243, 0.94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(50, 16, 48, 0.08);
+  }
+  .nav__in {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    max-width: var(--ancho); height: 64px; margin-inline: auto; padding-inline: 20px;
+  }
+  .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--texto); }
+  .marca__logo { width: 44px; height: 44px; border-radius: 50%; background: #fff; }
+  .marca__nombre { display: block; font-family: var(--serif); font-size: 1.2rem; font-weight: 600; line-height: 1.1; color: var(--aubergine); }
+  .marca__rol { display: block; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--texto-secundario); }
+  .nav__cta { min-height: 44px; padding: 10px 18px; font-size: 0.95rem; }
+</style>

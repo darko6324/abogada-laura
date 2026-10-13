@@ -1,0 +1,39 @@
+---
+import { SITE, AVISO_GENERAL } from '../config/site';
+import { whatsappUrl } from '../lib/whatsapp';
+
+const anio = new Date().getFullYear();
+// Columnas de servicios y enlaces legales se agregan cuando existan esas páginas (Fase 2).
+---
+<footer class="pie">
+  <div class="wrap pie__in">
+    <div>
+      <p class="pie__lema">{SITE.lema}</p>
+      <p>{SITE.marca} · {SITE.rol} · {SITE.ciudad}, Colombia</p>
+    </div>
+    <ul class="pie__contacto">
+      <li>
+        <a href={whatsappUrl()} target="_blank" rel="noopener" data-evento="whatsapp_click" data-ubicacion="footer">
+          WhatsApp {SITE.telefonoVisible}
+        </a>
+      </li>
+      <li><a href={`mailto:${SITE.correo}`} data-evento="email_click">{SITE.correo}</a></li>
+      <li><a href={SITE.instagram} target="_blank" rel="noopener">Instagram {SITE.instagramUsuario}</a></li>
+    </ul>
+  </div>
+  <div class="wrap">
+    <p class="pie__aviso">{AVISO_GENERAL}</p>
+    <p class="pie__copy">© {anio} {SITE.marca}. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<style>
+  .pie { background: var(--aubergine); color: #e9dce8; padding-block: 56px 96px; font-size: 15px; }
+  .pie a { color: #fff; }
+  .pie__in { display: grid; gap: 28px; margin-bottom: 32px; }
+  @media (min-width: 760px) { .pie__in { grid-template-columns: 1fr auto; } }
+  .pie__lema { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
+  .pie__contacto { list-style: none; padding: 0; display: grid; gap: 8px; }
+  .pie__aviso { font-size: 13px; font-style: italic; color: #c9b4c7; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; }
+  .pie__copy { font-size: 13px; color: #c9b4c7; margin-top: 10px; }
+</style>

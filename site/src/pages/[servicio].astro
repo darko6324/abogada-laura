@@ -1,0 +1,62 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { ES_PREVIEW } from '../config/site';
+import { whatsappUrl, mensajePara } from '../lib/whatsapp';
+import { url } from '../lib/url';
+
+// En producción solo se generan las páginas confirmadas. Un borrador NO existe en el sitio publicado.
+export async function getStaticPaths() {
+  const todos = await getCollection('servicios');
+  return todos
+    .filter((s) => ES_PREVIEW || s.data.estado === 'confirmado')
+    .map((s) => ({ params: { servicio: s.id }, props: { entrada: s } }));
+}
+
+const { entrada } = Astro.props;
+const { Content } = await render(entrada);
+const d = entrada.data;
+const clave = d.whatsapp ?? entrada.id;
+
+const hub = d.vertical === 'negocio'
+  ? { nombre: 'Emprendedores y Empresas', ruta: '/emprendedores-y-empresas' }
+  : { nombre: 'Servicios para personas', ruta: '/servicios-personas' };
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: d.titulo,
+    serviceType: d.titulo,
+    areaServed: { '@type': 'Country', name: 'Colombia' },
+    provider: { '@id': new URL(url('/'), Astro.site).href + '#abogada' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(url('/'), Astro.site).href },
+      { '@type': 'ListItem', position: 2, name: hub.nombre, item: new URL(url(hub.ruta), Astro.site).href },
+      { '@type': 'ListItem', position: 3, name: d.titulo },
+    ],
+  },
+];
+---
+<Base title={d.metaTitle} description={d.metaDescription} whatsapp={clave} borrador={d.estado === 'borrador'} schema={schema}>
+  <article class="sec">
+    <div class="wrap contenido">
+      <Content />
+      <div class="fila-botones">
+        <a class="btn btn--whatsapp" href={whatsappUrl(mensajePara(clave))} target="_blank" rel="noopener"
+           data-evento="whatsapp_click" data-ubicacion="cierre" data-servicio={clave}>Escribir por WhatsApp</a>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .contenido :global(h1) { margin-bottom: 20px; }
+  .contenido :global(h2) { margin: 48px 0 16px; }
+  .contenido :global(p), .contenido :global(ul) { margin-bottom: 16px; }
+  .contenido :global(ul) { padding-left: 1.2em; }
+</style>
