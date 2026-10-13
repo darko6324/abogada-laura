@@ -1,0 +1,39 @@
+---
+// Página posterior al formulario (noindex). Ofrece el siguiente paso: WhatsApp con el mensaje del servicio elegido.
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
+import { whatsappUrl, MENSAJES } from '../lib/whatsapp';
+
+const PORSERVICIO: Record<string, string> = {
+  'crear-empresa': MENSAJES['crear-empresa'],
+  'registro-de-marca': MENSAJES['registro-de-marca'],
+  contrato: MENSAJES['contratos-empresas'],
+  socios: MENSAJES['acuerdo-de-socios'],
+  'asesoria-empresa': MENSAJES['emprendedores-y-empresas'],
+};
+---
+<Base title="Gracias — Laura Riaño" description="Recibí tu mensaje." noindex>
+  <section class="sec">
+    <div class="wrap gracias">
+      <p class="etiqueta">Mensaje recibido</p>
+      <h1>Gracias, ya tengo tu mensaje</h1>
+      <p class="destacado">Lo reviso personalmente y te respondo por WhatsApp o por correo. Si prefieres adelantar la conversación, escríbeme directamente.</p>
+      <div class="fila-botones">
+        <a class="btn btn--whatsapp" id="wa-gracias" href={whatsappUrl()} target="_blank" rel="noopener"
+           data-evento="whatsapp_click" data-ubicacion="gracias">Escribir por WhatsApp</a>
+        <a class="btn btn--borde" href={url('/')}>Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script define:vars={{ PORSERVICIO, numero: whatsappUrl('').split('?')[0] }}>
+  const s = new URLSearchParams(location.search).get('s');
+  const enlace = document.getElementById('wa-gracias');
+  if (s && PORSERVICIO[s] && enlace) enlace.href = `${numero}?text=${encodeURIComponent(PORSERVICIO[s])}`;
+</script>
+
+<style>
+  .gracias { max-width: 720px; }
+  .gracias h1 { margin-bottom: 14px; }
+</style>

@@ -1,0 +1,18 @@
+---
+// El texto del aviso legal lo redacta o aprueba Laura (estrategia §23, punto 7). No se escribe aquí.
+import Base from '../layouts/Base.astro';
+import { AVISO_GENERAL } from '../config/site';
+---
+<Base title="Aviso legal — Laura Riaño" description="Aviso legal del sitio abogadalaura.com." borrador>
+  <section class="sec">
+    <div class="wrap texto">
+      <h1>Aviso legal</h1>
+      <p>{AVISO_GENERAL}</p>
+      <p>[CONFIRMAR: texto completo del aviso legal, redactado o aprobado por Laura]</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .texto > * + * { margin-top: 16px; }
+</style>

@@ -1,0 +1,42 @@
+---
+// Bloque corto «Sobre Laura» (estrategia §7.7). Las señales sin confirmar llevan [CONFIRMAR]
+// y bloquean producción hasta que Laura las valide o se retiren.
+import { Image } from 'astro:assets';
+import foto from '../assets/fotos/laura-4.jpeg';
+import { url } from '../lib/url';
+
+interface Props { enlace?: boolean }
+const { enlace = true } = Astro.props;
+---
+<section class="sec">
+  <div class="wrap laura">
+    <div class="laura__foto">
+      <Image src={foto} alt="Laura Riaño, abogada, con traje gris" widths={[400, 700]} sizes="(min-width: 960px) 40vw, 100vw" />
+    </div>
+    <div>
+      <p class="etiqueta">Quién te acompaña</p>
+      <h2>Hola, soy Laura Riaño</h2>
+      <p>Soy abogada y sé que enfrentar temas legales puede sentirse como un laberinto. Mi trabajo es acompañarte y guiarte a la salida de forma clara, precisa y eficiente.</p>
+      <p>Trabajo con personas que necesitan resolver algo concreto y con emprendedores que están construyendo un negocio y quieren hacerlo bien desde el comienzo. En los dos casos mi punto de partida es el mismo: que entiendas qué estás haciendo y por qué.</p>
+      <p>[CONFIRMAR: 1-2 frases de formación — universidad, especialización, áreas de profundización]</p>
+      <ul class="senales">
+        <li>Bogotá y atención virtual en toda Colombia</li>
+        <li>Trato directo: hablas conmigo, no con un asistente</li>
+        <li>+7 años de experiencia [CONFIRMAR]</li>
+        <li>Tarjeta profesional N.º ____ — Consejo Superior de la Judicatura [CONFIRMAR]</li>
+      </ul>
+      {enlace && <a class="btn btn--borde" href={url('/sobre-laura')}>Conoce más sobre mí</a>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .laura { display: grid; gap: 32px; align-items: center; }
+  @media (min-width: 960px) { .laura { grid-template-columns: 0.8fr 1.2fr; gap: 56px; } }
+  .laura__foto { border-radius: var(--radio); overflow: hidden; aspect-ratio: 4 / 5; background: var(--aubergine-claro); }
+  .laura__foto :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+  .laura p + p { margin-top: 14px; }
+  .laura h2 { margin-bottom: 16px; }
+  .senales { list-style: none; padding: 0; margin: 24px 0 28px; display: flex; flex-wrap: wrap; gap: 9px; }
+  .senales li { font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; background: var(--aubergine-claro); color: var(--aubergine); font-weight: 500; }
+</style>

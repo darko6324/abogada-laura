@@ -20,8 +20,9 @@ const { clave } = Astro.props;
 </a>
 
 <style>
+  /* En móvil queda encima de la barra inferior; nunca tapa el CTA de la barra. */
   .flotante {
-    position: fixed; right: 18px; bottom: 18px; z-index: 60;
+    position: fixed; right: 16px; bottom: 76px; z-index: 60;
     width: 56px; height: 56px; border-radius: 50%;
     display: grid; place-items: center;
     background: var(--verde-whatsapp); color: #fff;
@@ -29,5 +30,5 @@ const { clave } = Astro.props;
     transition: transform 0.15s ease;
   }
   .flotante:hover { transform: scale(1.06); }
-  @media (min-width: 960px) { .flotante { right: 28px; bottom: 28px; } }
+  @media (min-width: 1040px) { .flotante { right: 28px; bottom: 28px; } }
 </style>

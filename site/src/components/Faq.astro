@@ -1,0 +1,38 @@
+---
+import { t } from '../lib/texto';
+
+export interface Pregunta { p: string; r: string }
+interface Props { preguntas: Pregunta[]; titulo?: string; etiqueta?: string }
+const { preguntas, titulo = 'Preguntas frecuentes', etiqueta = 'Dudas comunes' } = Astro.props;
+// El schema FAQPage lo arma la página con faqSchema() para que viva en el <head>.
+---
+<section class="sec" id="preguntas">
+  <div class="wrap">
+    <p class="etiqueta">{etiqueta}</p>
+    <h2>{titulo}</h2>
+    <div class="faq">
+      {preguntas.map((q) => (
+        <details data-evento="faq_open" data-pregunta={q.p}>
+          <summary>{q.p}</summary>
+          <p set:html={t(q.r)} />
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq { margin-top: 28px; border-top: 1px solid rgba(50, 16, 48, 0.12); max-width: 820px; }
+  details { border-bottom: 1px solid rgba(50, 16, 48, 0.12); }
+  summary {
+    position: relative; cursor: pointer; list-style: none; padding: 20px 44px 20px 0;
+    font-weight: 600; font-size: 1.04rem; min-height: 44px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: '+'; position: absolute; right: 8px; top: 16px;
+    font-size: 1.5rem; font-weight: 400; color: var(--dorado-texto);
+  }
+  details[open] summary::after { content: '–'; }
+  details p { padding-bottom: 20px; color: var(--texto-secundario); }
+</style>

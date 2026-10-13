@@ -1,0 +1,56 @@
+---
+// Hub de personas, versión mínima (plan de ejecución, paso 13): conserva los servicios que hoy existen
+// para que el cambio de dominio no los haga desaparecer. Las landings individuales llegan después.
+import Base from '../layouts/Base.astro';
+import Formulario from '../components/Formulario.astro';
+import { whatsappUrl } from '../lib/whatsapp';
+import { migasSchema } from '../lib/schema';
+import { SERVICIOS_PERSONAS } from '../config/personas';
+---
+<Base
+  title="Servicios legales para personas en Bogotá — Laura Riaño"
+  description="Contratos, tutelas, derechos de petición, familia, consumidor y acoso laboral. Te explico qué se puede hacer, sin tecnicismos y sin compromiso."
+  borrador
+  schema={[migasSchema(Astro.site, [{ nombre: 'Inicio', ruta: '/' }, { nombre: 'Servicios para personas' }])]}
+>
+  <section class="hero">
+    <div class="wrap">
+      <p class="etiqueta">Para personas</p>
+      <h1>Servicios legales para personas</h1>
+      <p class="destacado">Lo de siempre, resuelto de forma simple. Me cuentas qué te pasa con tus propias palabras y te explico qué se puede hacer.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <ul class="servicios">
+        {SERVICIOS_PERSONAS.map((s) => (
+          <li id={s.id}>
+            <h2>{s.titulo}</h2>
+            <p>{s.texto}</p>
+            <a class="btn btn--whatsapp" href={whatsappUrl(s.mensaje)} target="_blank" rel="noopener"
+               data-evento="whatsapp_click" data-ubicacion="tarjeta" data-servicio={s.id}>Consultar por WhatsApp</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Formulario servicio="personal" titulo="Cuéntame tu caso" intro="No necesitas saber cómo se llama jurídicamente lo que te pasa. Con dos o tres frases me basta para empezar." />
+</Base>
+
+<style>
+  .hero { background: var(--calido); padding-block: 56px 64px; }
+  .hero h1 { margin-bottom: 14px; }
+  .servicios { list-style: none; padding: 0; display: grid; gap: 16px; }
+  @media (min-width: 760px) { .servicios { grid-template-columns: 1fr 1fr; } }
+  .servicios li {
+    max-width: none; padding: 28px 24px; border-radius: var(--radio); background: #fff;
+    border: 1px solid rgba(50, 16, 48, 0.1); scroll-margin-top: 84px; display: grid; gap: 12px; align-content: start;
+  }
+  .servicios h2 { font-size: 1.7rem; }
+  @media (min-width: 960px) { .servicios h2 { font-size: 2rem; } }
+  .servicios p { color: var(--texto-secundario); }
+  .servicios .btn { justify-self: start; }
+  .servicios li:target { border-color: var(--dorado); box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.25); }
+</style>

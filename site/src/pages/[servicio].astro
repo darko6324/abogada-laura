@@ -1,9 +1,16 @@
 ---
-import { getCollection, render } from 'astro:content';
+// Plantilla de landing de servicio (estrategia §4.5). Orden fijo de 11 bloques:
+// 1 Hero · 2 Reconocimiento · 3 Qué es · 4 Qué incluye · 5 Cómo funciona · 6 Qué no incluye
+// 7 Por qué con Laura · 8 Relacionados · 9 FAQ · 10 Formulario + WhatsApp · 11 Aviso
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { ES_PREVIEW } from '../config/site';
+import Faq from '../components/Faq.astro';
+import Formulario from '../components/Formulario.astro';
+import { ES_PREVIEW, AVISO_GENERAL } from '../config/site';
 import { whatsappUrl, mensajePara } from '../lib/whatsapp';
 import { url } from '../lib/url';
+import { t } from '../lib/texto';
+import { faqSchema, migasSchema } from '../lib/schema';
 
 // En producción solo se generan las páginas confirmadas. Un borrador NO existe en el sitio publicado.
 export async function getStaticPaths() {
@@ -14,9 +21,9 @@ export async function getStaticPaths() {
 }
 
 const { entrada } = Astro.props;
-const { Content } = await render(entrada);
 const d = entrada.data;
 const clave = d.whatsapp ?? entrada.id;
+const wa = whatsappUrl(mensajePara(clave));
 
 const hub = d.vertical === 'negocio'
   ? { nombre: 'Emprendedores y Empresas', ruta: '/emprendedores-y-empresas' }
@@ -28,35 +35,174 @@ const schema = [
     '@type': 'Service',
     name: d.titulo,
     serviceType: d.titulo,
+    description: d.metaDescription,
     areaServed: { '@type': 'Country', name: 'Colombia' },
     provider: { '@id': new URL(url('/'), Astro.site).href + '#abogada' },
   },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(url('/'), Astro.site).href },
-      { '@type': 'ListItem', position: 2, name: hub.nombre, item: new URL(url(hub.ruta), Astro.site).href },
-      { '@type': 'ListItem', position: 3, name: d.titulo },
-    ],
-  },
+  faqSchema(d.faq),
+  migasSchema(Astro.site, [{ nombre: 'Inicio', ruta: '/' }, { nombre: hub.nombre, ruta: hub.ruta }, { nombre: d.titulo }]),
 ];
 ---
 <Base title={d.metaTitle} description={d.metaDescription} whatsapp={clave} borrador={d.estado === 'borrador'} schema={schema}>
-  <article class="sec">
-    <div class="wrap contenido">
-      <Content />
+  <!-- 1 · Hero -->
+  <section class={`hero hero--${d.vertical}`}>
+    <div class="wrap">
+      <nav class="migas" aria-label="Ruta">
+        <a href={url('/')}>Inicio</a> <span aria-hidden="true">/</span>
+        <a href={url(hub.ruta)}>{hub.nombre}</a>
+      </nav>
+      <h1>{d.hero.h1}</h1>
+      <p class="destacado" set:html={t(d.hero.intro)} />
       <div class="fila-botones">
-        <a class="btn btn--whatsapp" href={whatsappUrl(mensajePara(clave))} target="_blank" rel="noopener"
-           data-evento="whatsapp_click" data-ubicacion="cierre" data-servicio={clave}>Escribir por WhatsApp</a>
+        <a class="btn btn--primario" href="#contacto" data-evento="cta_click" data-posicion="hero">{d.hero.cta}</a>
+        <a class="btn btn--claro" href={wa} target="_blank" rel="noopener"
+           data-evento="whatsapp_click" data-ubicacion="hero" data-servicio={clave}>{d.hero.ctaWhatsapp}</a>
       </div>
     </div>
-  </article>
+  </section>
+
+  <!-- 2 · Reconocimiento -->
+  <section class="sec">
+    <div class="wrap">
+      <h2>{d.reconocimiento.titulo}</h2>
+      <ul class="reconoce">
+        {d.reconocimiento.items.map((i) => <li set:html={t(i)} />)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3 · Qué es / qué no es -->
+  <section class="sec sec--calida">
+    <div class="wrap texto">
+      <h2>{d.educativo.titulo}</h2>
+      {d.educativo.parrafos.map((p) => <p set:html={t(p)} />)}
+    </div>
+  </section>
+
+  <!-- 4 · Qué incluye -->
+  <section class="sec">
+    <div class="wrap">
+      <h2>{d.incluye.titulo}</h2>
+      <ul class="incluye">
+        {d.incluye.items.map((i) => <li set:html={t(i)} />)}
+      </ul>
+      {d.incluye.extra && (
+        <>
+          <h3 class="sub">{d.incluye.extra.titulo}</h3>
+          <ul class="incluye">
+            {d.incluye.extra.items.map((i) => <li set:html={t(i)} />)}
+          </ul>
+        </>
+      )}
+    </div>
+  </section>
+
+  <!-- 5 · Cómo funciona -->
+  <section class="sec sec--oscura">
+    <div class="wrap">
+      <p class="etiqueta">Cómo funciona</p>
+      <h2>{d.proceso.titulo}</h2>
+      <ol class="pasos">
+        {d.proceso.pasos.map((p, i) => (
+          <li>
+            <span class="pasos__n">{String(i + 1).padStart(2, '0')}</span>
+            <div><h3>{p.t}</h3><p set:html={t(p.d)} /></div>
+          </li>
+        ))}
+      </ol>
+      {d.proceso.nota && <p class="nota-proceso" set:html={t(d.proceso.nota)} />}
+      <div class="fila-botones">
+        <a class="btn btn--primario" href="#contacto" data-evento="cta_click" data-posicion="proceso">{d.hero.cta}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Qué no incluye -->
+  <section class="sec">
+    <div class="wrap texto">
+      <h2>{d.noIncluye.titulo}</h2>
+      <ul class="no-incluye">
+        {d.noIncluye.items.map((i) => <li set:html={t(i)} />)}
+      </ul>
+      {d.noIncluye.cierre && <p class="cierre-honesto" set:html={t(d.noIncluye.cierre)} />}
+    </div>
+  </section>
+
+  <!-- 7 · Por qué con Laura -->
+  <section class="sec sec--calida">
+    <div class="wrap texto">
+      <h2>{d.porQue.titulo}</h2>
+      {d.porQue.parrafos.map((p) => <p set:html={t(p)} />)}
+      <p><a href={url('/sobre-laura')}>Conoce a Laura →</a></p>
+    </div>
+  </section>
+
+  <!-- 8 · Servicios relacionados -->
+  {d.relacionados.enlaces.length > 0 && (
+    <section class="sec sec--corta">
+      <div class="wrap">
+        <p class="etiqueta">{d.relacionados.intro}</p>
+        <div class="relacionados">
+          {d.relacionados.enlaces.map((e) => (
+            <a href={url(e.ruta)} data-evento="servicio_card_click" data-servicio-destino={e.ruta}>{e.texto} →</a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 9 · Preguntas frecuentes -->
+  <Faq preguntas={d.faq} />
+
+  <!-- 10 · Cierre: formulario contextual + WhatsApp propio de la página -->
+  <Formulario servicio={d.formulario} whatsapp={clave} titulo={d.cierre.titulo} intro={d.cierre.texto} />
+
+  <!-- 11 · Aviso -->
+  <div class="wrap aviso"><p>{AVISO_GENERAL}</p></div>
 </Base>
 
 <style>
-  .contenido :global(h1) { margin-bottom: 20px; }
-  .contenido :global(h2) { margin: 48px 0 16px; }
-  .contenido :global(p), .contenido :global(ul) { margin-bottom: 16px; }
-  .contenido :global(ul) { padding-left: 1.2em; }
+  .hero { background: var(--aubergine); color: #fff; padding-block: 48px 64px; }
+  @media (min-width: 960px) { .hero { padding-block: 72px 96px; } }
+  .hero h1 { color: #fff; max-width: 20ch; margin-bottom: 18px; }
+  .hero .destacado { color: #eadde9; }
+  .migas { font-size: 14px; margin-bottom: 20px; color: #c9b4c7; }
+  .migas a { color: #e8d5a0; }
+
+  .texto > * + * { margin-top: 16px; }
+  .texto h2 { margin-bottom: 8px; }
+
+  .reconoce { list-style: none; padding: 0; margin-top: 28px; display: grid; gap: 12px; }
+  @media (min-width: 960px) { .reconoce { grid-template-columns: 1fr 1fr; } }
+  .reconoce li {
+    background: #fff; border: 1px solid rgba(50, 16, 48, 0.1); border-left: 3px solid var(--dorado);
+    border-radius: 12px; padding: 18px 20px; font-family: var(--serif); font-size: 1.2rem; font-style: italic; max-width: none;
+  }
+
+  .incluye { list-style: none; padding: 0; margin-top: 24px; display: grid; gap: 14px; }
+  @media (min-width: 960px) { .incluye { grid-template-columns: 1fr 1fr; gap: 16px 32px; } }
+  .incluye li { position: relative; padding-left: 30px; }
+  .incluye li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--dorado-texto); font-weight: 700; }
+  .sub { margin-top: 40px; }
+
+  .pasos { list-style: none; padding: 0; margin-top: 32px; }
+  .pasos li { display: grid; grid-template-columns: auto 1fr; gap: 20px; padding: 20px 0; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+  .pasos li:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.14); }
+  .pasos__n { font-family: var(--serif); font-size: 1.8rem; color: var(--dorado); min-width: 44px; line-height: 1.1; }
+  .pasos h3 { color: #fff; font-size: 1.1rem; margin-bottom: 4px; }
+  .pasos p { color: #d9c8d8; }
+  .nota-proceso { margin-top: 24px; color: #eadde9; font-style: italic; }
+
+  .no-incluye { padding-left: 1.2em; display: grid; gap: 12px; }
+  .cierre-honesto { font-family: var(--serif); font-size: 1.35rem; color: var(--aubergine); }
+
+  .sec--corta { padding-block: 40px; }
+  .relacionados { display: flex; flex-wrap: wrap; gap: 12px; }
+  .relacionados a {
+    padding: 12px 18px; border-radius: 999px; border: 1px solid rgba(50, 16, 48, 0.2);
+    background: #fff; color: var(--aubergine); text-decoration: none; font-weight: 500;
+  }
+  .relacionados a:hover { border-color: var(--aubergine); }
+
+  .aviso { padding-block: 24px; font-size: 14px; font-style: italic; color: var(--texto-secundario); }
 </style>

@@ -2,11 +2,12 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/marca/logo.png';
 import { url } from '../lib/url';
-import { whatsappUrl } from '../lib/whatsapp';
+import { whatsappUrl, mensajePara } from '../lib/whatsapp';
 import { SITE } from '../config/site';
+import { NEGOCIO, PERSONAS } from '../config/navegacion';
 
-// El menú completo (estrategia §4.2) se agrega en la Fase 2, a medida que existan las páginas.
-// Regla: no enlazar desde el menú a una página que todavía no existe.
+interface Props { whatsapp?: string }
+const { whatsapp } = Astro.props;
 ---
 <header class="nav">
   <div class="nav__in">
@@ -14,24 +15,75 @@ import { SITE } from '../config/site';
       <Image src={logo} alt="" width={44} height={44} class="marca__logo" loading="eager" />
       <span>
         <span class="marca__nombre">{SITE.marca}</span>
-        <span class="marca__rol">{SITE.rol}</span>
+        <span class="marca__rol">{SITE.rol} · {SITE.ciudad}</span>
       </span>
     </a>
-    <a
-      class="btn btn--whatsapp nav__cta"
-      href={whatsappUrl()}
-      target="_blank"
-      rel="noopener"
-      data-evento="whatsapp_click"
-      data-ubicacion="nav"
-    >Escríbeme</a>
+
+    <nav class="nav__links" aria-label="Principal">
+      <details class="drop">
+        <summary>Emprendedores y Empresas</summary>
+        <div class="drop__panel">
+          <a href={url('/emprendedores-y-empresas')}><strong>Todo para tu negocio</strong></a>
+          {NEGOCIO.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}
+        </div>
+      </details>
+      <details class="drop">
+        <summary>Servicios para personas</summary>
+        <div class="drop__panel">
+          <a href={url('/servicios-personas')}><strong>Todos los servicios</strong></a>
+          {PERSONAS.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}
+        </div>
+      </details>
+      <a href={url('/sobre-laura')}>Sobre Laura</a>
+      <a href={url('/contacto')}>Contacto</a>
+    </nav>
+
+    <a class="btn btn--primario nav__cta" href={whatsappUrl(mensajePara(whatsapp))} target="_blank" rel="noopener"
+       data-evento="whatsapp_click" data-ubicacion="nav" data-servicio={whatsapp ?? 'general'}>Escríbeme</a>
+
+    <button class="hamburguesa" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+      <span></span>
+    </button>
+  </div>
+
+  <div class="movil" id="menu-movil" hidden>
+    <a class="puerta" href={url('/servicios-personas')} data-evento="segmento_click" data-segmento="personas">
+      <b>Es un tema personal</b><span>Contratos, tutelas, familia, consumo, trabajo</span>
+    </a>
+    <a class="puerta puerta--negocio" href={url('/emprendedores-y-empresas')} data-evento="segmento_click" data-segmento="negocio">
+      <b>Es para mi negocio</b><span>Crear empresa, marca, contratos</span>
+    </a>
+    <ul class="movil__lista">
+      {NEGOCIO.map((e) => <li><a href={url(e.ruta)}>{e.texto}</a></li>)}
+      <li><a href={url('/sobre-laura')}>Sobre Laura</a></li>
+      <li><a href={url('/contacto')}>Contacto</a></li>
+    </ul>
   </div>
 </header>
+
+<script>
+  const boton = document.querySelector<HTMLButtonElement>('.hamburguesa');
+  const menu = document.getElementById('menu-movil');
+  boton?.addEventListener('click', () => {
+    const abierto = boton.getAttribute('aria-expanded') === 'true';
+    boton.setAttribute('aria-expanded', String(!abierto));
+    boton.setAttribute('aria-label', abierto ? 'Abrir menú' : 'Cerrar menú');
+    if (menu) menu.hidden = abierto;
+  });
+  // Cierra los desplegables de escritorio al hacer clic fuera o al abrir otro.
+  const drops = document.querySelectorAll<HTMLDetailsElement>('.drop');
+  drops.forEach((d) => d.addEventListener('toggle', () => {
+    if (d.open) drops.forEach((o) => { if (o !== d) o.open = false; });
+  }));
+  document.addEventListener('click', (e) => {
+    drops.forEach((d) => { if (!d.contains(e.target as Node)) d.open = false; });
+  });
+</script>
 
 <style>
   .nav {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(250, 248, 243, 0.94);
+    background: rgba(250, 248, 243, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(50, 16, 48, 0.08);
   }
@@ -43,5 +95,48 @@ import { SITE } from '../config/site';
   .marca__logo { width: 44px; height: 44px; border-radius: 50%; background: #fff; }
   .marca__nombre { display: block; font-family: var(--serif); font-size: 1.2rem; font-weight: 600; line-height: 1.1; color: var(--aubergine); }
   .marca__rol { display: block; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--texto-secundario); }
-  .nav__cta { min-height: 44px; padding: 10px 18px; font-size: 0.95rem; }
+
+  .nav__links { display: none; align-items: center; gap: 4px; }
+  .nav__links > a, .drop summary {
+    display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 12px;
+    border-radius: 8px; font-size: 0.94rem; color: var(--texto); text-decoration: none; cursor: pointer; list-style: none;
+  }
+  .drop summary::-webkit-details-marker { display: none; }
+  .drop summary::after { content: '▾'; font-size: 0.7rem; color: var(--texto-secundario); }
+  .nav__links > a:hover, .drop summary:hover { background: var(--aubergine-claro); }
+  .drop { position: relative; }
+  .drop__panel {
+    position: absolute; top: calc(100% + 8px); left: 0; min-width: 280px; padding: 8px;
+    background: #fff; border: 1px solid rgba(50, 16, 48, 0.1); border-radius: var(--radio);
+    box-shadow: 0 18px 44px rgba(50, 16, 48, 0.14);
+  }
+  .drop__panel a { display: block; padding: 10px 12px; border-radius: 9px; font-size: 0.92rem; color: var(--texto); text-decoration: none; }
+  .drop__panel a:hover { background: var(--aubergine-claro); }
+  .nav__cta { display: none; min-height: 44px; padding: 10px 20px; font-size: 0.95rem; }
+
+  .hamburguesa {
+    width: 46px; height: 46px; display: grid; place-items: center; cursor: pointer;
+    border: 1px solid rgba(50, 16, 48, 0.18); border-radius: 10px; background: none;
+  }
+  .hamburguesa span {
+    display: block; width: 20px; height: 2px; background: var(--aubergine);
+    box-shadow: 0 -6px 0 var(--aubergine), 0 6px 0 var(--aubergine);
+  }
+  .movil { padding: 12px 20px 24px; border-top: 1px solid rgba(50, 16, 48, 0.08); background: var(--crema); }
+  .puerta {
+    display: block; margin-bottom: 10px; padding: 16px; border-radius: var(--radio); text-decoration: none;
+    background: #fff; border: 1px solid rgba(50, 16, 48, 0.12); color: var(--texto);
+  }
+  .puerta b { font-family: var(--serif); font-size: 1.2rem; color: var(--aubergine); }
+  .puerta span { display: block; font-size: 0.86rem; color: var(--texto-secundario); }
+  .puerta--negocio { background: var(--aubergine); border-color: var(--dorado); }
+  .puerta--negocio b { color: #fff; }
+  .puerta--negocio span { color: #d9c8d8; }
+  .movil__lista { list-style: none; padding: 0; margin-top: 8px; }
+  .movil__lista a { display: block; padding: 12px 4px; border-bottom: 1px solid rgba(50, 16, 48, 0.07); color: var(--texto); text-decoration: none; }
+
+  @media (min-width: 1040px) {
+    .nav__links, .nav__cta { display: flex; }
+    .hamburguesa, .movil { display: none; }
+  }
 </style>

@@ -7,7 +7,22 @@
 // En VISTA PREVIA solo informa: los borradores se pueden revisar ahí.
 
 import { readdir, readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { join, relative } from 'node:path';
+
+const BASE = (process.env.BASE_PATH || '/abogada-laura').replace(/\/$/, '');
+
+/** ¿Existe en dist/ la página a la que apunta un enlace interno? */
+function existe(href) {
+  let ruta = href.split('#')[0].split('?')[0];
+  if (!ruta) return true; // ancla en la misma página
+  if (BASE && ruta.startsWith(BASE)) ruta = ruta.slice(BASE.length);
+  ruta = ruta.replace(/^\//, '');
+  if (!ruta) return existsSync(join(DIST, 'index.html'));
+  return existsSync(join(DIST, ruta)) && !ruta.endsWith('/')
+    ? true
+    : existsSync(join(DIST, ruta, 'index.html')) || existsSync(join(DIST, ruta));
+}
 
 const DIST = new URL('../dist/', import.meta.url).pathname;
 const PRODUCCION = process.env.PUBLIC_SITE_MODE === 'produccion';
@@ -42,6 +57,7 @@ function textoVisible(src) {
 }
 
 const problemas = [];
+const rotos = [];
 let paginas = 0;
 
 for await (const archivo of html(DIST)) {
@@ -51,9 +67,14 @@ for await (const archivo of html(DIST)) {
   const texto = textoVisible(src);
 
   if (src.includes('data-estado="borrador"')) problemas.push(`${ruta} — página en borrador`);
+  if (src.includes('data-sin-endpoint')) problemas.push(`${ruta} — formulario sin endpoint de leads (PUBLIC_LEADS_ENDPOINT)`);
   for (const m of MARCADORES) {
     const n = texto.split(m).length - 1;
     if (n) problemas.push(`${ruta} — ${n}× ${m}]`);
+  }
+  // Enlaces internos rotos: fallan en cualquier modo, porque nunca deben publicarse.
+  for (const [, href] of src.matchAll(/<a[^>]+href="(\/[^"]*)"/g)) {
+    if (!existe(href)) rotos.push(`${ruta} → ${href}`);
   }
   for (const re of VETO) {
     const m = texto.match(re);
@@ -62,6 +83,11 @@ for await (const archivo of html(DIST)) {
 }
 
 console.log(`\nGuardia de publicación · modo ${PRODUCCION ? 'PRODUCCIÓN' : 'vista previa'} · ${paginas} páginas`);
+if (rotos.length) {
+  console.error(`\n✗ ${rotos.length} enlace(s) interno(s) roto(s):`);
+  for (const r of rotos) console.error(`  · ${r}`);
+  process.exit(1);
+}
 if (!problemas.length) {
   console.log('✓ Sin borradores, marcadores ni frases vetadas.\n');
   process.exit(0);

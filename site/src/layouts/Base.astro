@@ -11,6 +11,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppFlotante from '../components/WhatsAppFlotante.astro';
 import AvisoBorrador from '../components/AvisoBorrador.astro';
+import BarraMovil from '../components/BarraMovil.astro';
 import { SITE, ES_PREVIEW } from '../config/site';
 import { url } from '../lib/url';
 import retrato from '../assets/fotos/laura-3.jpeg';
@@ -83,11 +84,12 @@ const attorney = {
   <body>
     <a class="sr-only" href="#contenido">Saltar al contenido</a>
     {ES_PREVIEW && borrador && <AvisoBorrador />}
-    <Header />
+    <Header whatsapp={whatsapp} />
     <main id="contenido" data-estado={borrador ? 'borrador' : 'confirmado'}>
       <slot />
     </main>
     <Footer />
     <WhatsAppFlotante clave={whatsapp} />
+    <BarraMovil clave={whatsapp} />
   </body>
 </html>

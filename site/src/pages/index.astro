@@ -1,87 +1,224 @@
 ---
+// Home (estrategia §6 y §7). La home convierte y reparte; las landings son las que posicionan.
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Ciclo from '../components/Ciclo.astro';
+import ComoTrabajo from '../components/ComoTrabajo.astro';
+import BloqueLaura from '../components/BloqueLaura.astro';
+import Formulario from '../components/Formulario.astro';
+import Faq from '../components/Faq.astro';
 import retrato from '../assets/fotos/laura-3.jpeg';
-import { whatsappUrl } from '../lib/whatsapp';
 import { url } from '../lib/url';
-import { ES_PREVIEW } from '../config/site';
+import { faqSchema } from '../lib/schema';
+import { SERVICIOS_PERSONAS } from '../config/personas';
 
-// Fase 1: hero definitivo de la estrategia (§7.2) + índice de revisión visible solo en la vista previa.
-// La home completa (segmentación, ciclo, situaciones, formulario, FAQ) llega en la Fase 2.
-const servicios = (await getCollection('servicios'))
-  .filter((s) => ES_PREVIEW || s.data.estado === 'confirmado')
-  .sort((a, b) => a.data.orden - b.data.orden);
+// Situaciones reales (§7.5). Las que apuntan a páginas aún no construidas llevan al formulario.
+const situaciones = [
+  ['Voy a montar un negocio con un socio y quiero que quede claro desde el principio.', '#contacto', 'Cuéntame tu caso'],
+  ['Ya tengo la empresa, pero nunca registré la marca.', '/registro-de-marca', 'Registro de marca'],
+  ['Un cliente grande me mandó un contrato y no sé si me conviene firmarlo.', '/contratos-empresas', 'Revisión de contratos'],
+  ['Le voy a dar trabajo a alguien y necesito formalizar bien la relación.', '/contratos-empresas', 'Contratos'],
+  ['Vendo por internet y no tengo nada de esto organizado legalmente.', '#contacto', 'Cuéntame tu caso'],
+  ['Llevo años facturando como persona natural y creo que ya es hora de formalizar.', '/crear-empresa', 'Crear tu empresa'],
+];
+
+const faq = [
+  { p: '¿Atiendes solo en Bogotá?', r: 'Estoy en Bogotá y atiendo presencialmente aquí, pero trabajo de forma virtual con clientes de todo el país. La mayoría de los asuntos empresariales se resuelven completamente en línea.' },
+  { p: '¿La primera conversación tiene costo?', r: 'No. La primera conversación es para entender tu situación y decirte si puedo ayudarte y de qué forma. Si hay un servicio que contratar, te paso una propuesta con el alcance y los honorarios antes de empezar cualquier trabajo. [CONFIRMAR]' },
+  { p: '¿Cómo cobras?', r: 'Te presento una propuesta con el alcance del servicio y los honorarios antes de empezar. Si hay costos que no dependen de mí —tasas oficiales, derechos de trámite, gastos de terceros— te los indico por separado desde el comienzo para que sepas el total. [TARIFA / CONFIRMAR modalidad]' },
+  { p: '¿Cuánto se demora mi trámite?', r: 'Depende del asunto. En lo que yo controlo —redactar, revisar, radicar— te doy un plazo concreto y lo cumplo. En lo que depende de una entidad, te digo cuáles son los tiempos habituales, pero ni yo ni ningún abogado puede comprometerlos.' },
+  { p: '¿Trabajas con empresas ya constituidas o solo con emprendedores que empiezan?', r: 'Con ambas. Con quien está empezando, acompaño la creación. Con empresas en funcionamiento, trabajo contratos, marca y temas societarios. [CONFIRMAR]' },
+  { p: '¿Qué pasa si mi caso no es de tu área?', r: 'Te lo digo desde el principio y te oriento sobre a quién acudir. Prefiero eso a aceptar un asunto que no voy a poder manejar bien.' },
+];
 ---
 <Base
   title="Abogada en Bogotá para personas y empresas — Laura Riaño"
   description="Asesoría legal clara en Colombia: contratos, creación de empresa, registro de marca, tutelas y familia. Te explico tus opciones sin tecnicismos. Escríbeme por WhatsApp."
   borrador
+  schema={[faqSchema(faq)]}
 >
+  <!-- 1 · Hero -->
   <section class="hero">
     <div class="hero__media">
-      <Image
-        src={retrato}
-        alt="Laura Riaño, abogada, sentada con chaqueta blanca"
-        widths={[480, 800, 1086]}
-        sizes="(min-width: 960px) 45vw, 100vw"
-        loading="eager"
-        fetchpriority="high"
-      />
+      <Image src={retrato} alt="Laura Riaño, abogada en Bogotá" widths={[480, 800, 1086]}
+             sizes="(min-width: 960px) 45vw, 100vw" loading="eager" fetchpriority="high" />
     </div>
     <div class="hero__texto">
-      <p class="etiqueta">Abogada en Bogotá · Atención en toda Colombia</p>
       <h1>El derecho de tu lado. <em>También en tu negocio.</em></h1>
       <p class="destacado">
         Soy Laura Riaño, abogada en Bogotá. Acompaño a personas, emprendedores y empresas en Colombia a tomar
         decisiones legales con claridad: desde un contrato hasta crear tu empresa o proteger tu marca.
       </p>
       <div class="fila-botones">
-        <a class="btn btn--primario" href={whatsappUrl()} target="_blank" rel="noopener"
-           data-evento="whatsapp_click" data-ubicacion="hero">Cuéntame qué necesitas</a>
+        <a class="btn btn--primario" href="#contacto" data-evento="cta_click" data-posicion="hero">Cuéntame qué necesitas</a>
+        <a class="btn btn--claro" href="#como-trabajo" data-evento="cta_click" data-posicion="hero-secundario">Ver cómo trabajo</a>
+      </div>
+      <ul class="hero__meta">
+        <li>Bogotá y toda Colombia</li>
+        <li>Atención virtual</li>
+        <li>Te respondo en menos de 24 horas [CONFIRMAR]</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2 · Segmentación temprana -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="etiqueta">Empecemos por aquí</p>
+      <h2>¿Cómo puedo ayudarte?</h2>
+      <p class="destacado">Dime desde dónde llegas y te muestro lo que aplica a tu caso.</p>
+      <div class="puertas">
+        <a class="puerta" href={url('/servicios-personas')} data-evento="segmento_click" data-segmento="personas">
+          <span class="puerta__tag">Para mí</span>
+          <h3>Es un tema personal</h3>
+          <p>Un contrato que vas a firmar, una tutela, un tema de familia, una compra que salió mal o un problema en tu trabajo.</p>
+          <span class="puerta__ir">Ver servicios para personas →</span>
+        </a>
+        <a class="puerta puerta--negocio" href={url('/emprendedores-y-empresas')} data-evento="segmento_click" data-segmento="negocio">
+          <span class="puerta__tag">Para mi negocio</span>
+          <h3>Es para mi negocio</h3>
+          <p>Vas a crear tu empresa, quieres proteger tu marca, necesitas contratos con clientes o proveedores, o vas a asociarte con alguien.</p>
+          <span class="puerta__ir">Ver servicios para tu negocio →</span>
+        </a>
       </div>
     </div>
   </section>
 
-  {ES_PREVIEW && (
-    <section class="sec">
-      <div class="wrap">
-        <p class="etiqueta">Vista previa · solo para revisión</p>
-        <h2>Páginas en construcción</h2>
-        <p class="destacado">Estas son las páginas que ya existen en la vista previa. Ninguna está publicada en abogadalaura.com.</p>
-        <ul class="revision">
-          {servicios.map((s) => (
-            <li>
-              <a href={url(`/${s.id}`)}>{s.data.titulo}</a>
-              <span class={`estado estado--${s.data.estado}`}>{s.data.estado}</span>
-            </li>
-          ))}
-        </ul>
+  <!-- 3 · Ciclo de vida empresarial -->
+  <section class="sec sec--oscura">
+    <div class="wrap">
+      <p class="etiqueta">Emprendedores y empresas</p>
+      <h2 class="corto">Tu negocio puede empezar pequeño. Sus bases legales no.</h2>
+      <p class="destacado">
+        La mayoría de los problemas legales de un negocio no aparecen de un día para otro: se arman despacio, mientras nadie
+        los mira. Un acuerdo que quedó de palabra. Una marca que nunca se registró. Un contrato que se firmó sin leerlo
+        completo. Acompaño tu negocio en las cuatro decisiones que evitan casi todos esos problemas.
+      </p>
+      <Ciclo />
+      <div class="fila-botones">
+        <a class="btn btn--primario" href={url('/emprendedores-y-empresas')}>Ver todo lo que puedo hacer por tu negocio</a>
       </div>
-    </section>
-  )}
+    </div>
+  </section>
+
+  <!-- 4 · Situaciones reales -->
+  <section class="sec sec--calida">
+    <div class="wrap">
+      <p class="etiqueta">Situaciones reales</p>
+      <h2>¿Te suena alguna de estas?</h2>
+      <p class="destacado">Casi nadie llega diciendo «necesito derecho societario». Llegan así:</p>
+      <ul class="situaciones">
+        {situaciones.map(([frase, destino, etiqueta]) => (
+          <li>
+            <a href={destino.startsWith('#') ? destino : url(destino)}>
+              <q>{frase}</q>
+              <small>{etiqueta} →</small>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="situaciones__otra">¿No te ves en ninguna? <a href="#contacto">Cuéntame tu caso →</a></p>
+    </div>
+  </section>
+
+  <!-- 5 · Cómo trabajo -->
+  <ComoTrabajo />
+
+  <!-- 6 · Sobre Laura (corto) -->
+  <BloqueLaura />
+
+  <!-- 7 · Servicios para personas (condensado) -->
+  <section class="sec sec--calida">
+    <div class="wrap">
+      <p class="etiqueta">Para personas</p>
+      <h2>Servicios para personas</h2>
+      <p class="destacado">Lo de siempre, resuelto de forma simple.</p>
+      <ul class="tarjetas">
+        {SERVICIOS_PERSONAS.map((s) => (
+          <li>
+            <a href={url(`/servicios-personas#${s.id}`)}>
+              <h3>{s.titulo}</h3>
+              <p>{s.texto}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="fila-botones">
+        <a class="btn btn--borde" href={url('/servicios-personas')}>Ver todos los servicios para personas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Recurso gratuito: llega en la Fase 5 junto con la checklist (estrategia §19). -->
+
+  <!-- 9 · Formulario -->
+  <Formulario
+    titulo="Cuéntame qué necesitas"
+    intro="Primera conversación sin compromiso. Me cuentas tu caso y te digo con franqueza qué se puede hacer y qué no. [CONFIRMAR]"
+  />
+
+  <!-- 10 · FAQ -->
+  <Faq preguntas={faq} />
 </Base>
 
 <style>
   .hero { background: var(--aubergine); color: #fff; display: grid; }
   .hero__media { position: relative; min-height: 340px; background: var(--aubergine-medio); }
   .hero__media :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-  .hero__texto { padding: 40px 20px 56px; max-width: 640px; }
+  .hero__texto { padding: 40px 20px 56px; }
   .hero h1 { color: #fff; margin-bottom: 18px; }
   .hero h1 em { display: block; font-style: normal; color: var(--dorado-claro); }
-  .hero .etiqueta { color: var(--dorado); }
   .hero .destacado { color: #eadde9; }
+  .hero__meta { list-style: none; padding: 0; margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.88rem; color: #c9b4c7; }
+  .hero__meta li::before { content: ''; display: inline-block; width: 6px; height: 6px; margin: 0 8px 2px 0; border-radius: 50%; background: var(--dorado); }
   @media (min-width: 960px) {
     .hero { grid-template-columns: 1.1fr 0.9fr; min-height: 620px; }
-    .hero__texto { order: -1; align-self: center; padding: 72px 48px 72px max(20px, calc((100vw - var(--ancho)) / 2 + 20px)); max-width: none; }
+    .hero__texto { order: -1; align-self: center; padding: 72px 48px 72px max(20px, calc((100vw - var(--ancho)) / 2 + 20px)); }
     .hero__media { min-height: auto; }
   }
-  .revision { list-style: none; padding: 0; margin-top: 28px; display: grid; gap: 10px; max-width: 640px; }
-  .revision li {
-    display: flex; justify-content: space-between; align-items: center; gap: 12px;
-    background: #fff; border: 1px solid rgba(50, 16, 48, 0.12); border-radius: var(--radio); padding: 14px 18px;
+
+  .puertas { display: grid; gap: 16px; margin-top: 32px; }
+  @media (min-width: 760px) { .puertas { grid-template-columns: 1fr 1fr; gap: 20px; } }
+  .puerta {
+    display: block; min-height: 160px; padding: 30px 26px 26px; border-radius: var(--radio);
+    background: #fff; border: 1px solid rgba(50, 16, 48, 0.12); color: var(--texto); text-decoration: none;
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
   }
-  .estado { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 999px; }
-  .estado--borrador { background: #fff4cc; color: #4a3a00; }
-  .estado--confirmado { background: #dff3ea; color: #0b4d3a; }
+  .puerta:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(50, 16, 48, 0.13); }
+  .puerta--negocio { background: var(--aubergine); border: 2px solid var(--dorado); color: #fff; }
+  .puerta__tag { font-size: 12px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dorado-texto); }
+  .puerta--negocio .puerta__tag, .puerta--negocio .puerta__ir { color: var(--dorado); }
+  .puerta h3 { font-family: var(--serif); font-size: 1.7rem; margin: 8px 0 10px; color: var(--aubergine); }
+  .puerta--negocio h3 { color: #fff; }
+  .puerta p { color: var(--texto-secundario); }
+  .puerta--negocio p { color: #e2d2e1; }
+  .puerta__ir { display: inline-block; margin-top: 18px; font-weight: 600; color: var(--dorado-texto); }
+
+  .corto { max-width: 28ch; }
+
+  .situaciones { list-style: none; padding: 0; margin-top: 30px; display: grid; gap: 12px; }
+  @media (min-width: 1040px) { .situaciones { grid-template-columns: 1fr 1fr; gap: 14px; } }
+  .situaciones li { max-width: none; }
+  .situaciones a {
+    display: block; height: 100%; padding: 20px 22px; border-radius: 12px; text-decoration: none; color: var(--texto);
+    background: #fff; border: 1px solid rgba(50, 16, 48, 0.1); border-left: 3px solid var(--dorado);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .situaciones a:hover { transform: translateX(4px); box-shadow: 0 10px 26px rgba(50, 16, 48, 0.1); }
+  .situaciones q { font-family: var(--serif); font-size: 1.2rem; font-style: italic; }
+  .situaciones small { display: block; margin-top: 6px; font-size: 0.84rem; font-weight: 600; color: var(--dorado-texto); }
+  .situaciones__otra { margin-top: 24px; }
+  .situaciones__otra a { font-weight: 600; }
+
+  .tarjetas { list-style: none; padding: 0; margin-top: 30px; display: grid; gap: 12px; }
+  @media (min-width: 760px) { .tarjetas { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1040px) { .tarjetas { grid-template-columns: repeat(3, 1fr); } }
+  .tarjetas li { max-width: none; }
+  .tarjetas a {
+    display: block; height: 100%; padding: 22px; border-radius: var(--radio); text-decoration: none; color: var(--texto);
+    background: #fff; border: 1px solid rgba(50, 16, 48, 0.1); transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .tarjetas a:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(50, 16, 48, 0.1); }
+  .tarjetas h3 { font-size: 1.1rem; margin-bottom: 6px; color: var(--aubergine); }
+  .tarjetas p { font-size: 0.95rem; color: var(--texto-secundario); }
 </style>

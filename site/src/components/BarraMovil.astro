@@ -1,0 +1,39 @@
+---
+// Barra inferior en móvil (estrategia §20): aparece después del primer scroll.
+import { SITE } from '../config/site';
+import { whatsappUrl, mensajePara } from '../lib/whatsapp';
+
+interface Props { clave?: string }
+const { clave } = Astro.props;
+---
+<div class="barra" aria-label="Contacto rápido">
+  <a class="barra__wa" href={whatsappUrl(mensajePara(clave))} target="_blank" rel="noopener"
+     data-evento="whatsapp_click" data-ubicacion="sticky" data-servicio={clave ?? 'general'}>Escribir</a>
+  <a href={`tel:+${SITE.whatsapp}`} data-evento="phone_click">Llamar</a>
+</div>
+
+<script>
+  const barra = document.querySelector<HTMLElement>('.barra');
+  if (barra) {
+    const revisar = () => barra.classList.toggle('visible', window.scrollY > 320);
+    window.addEventListener('scroll', revisar, { passive: true });
+    revisar();
+  }
+</script>
+
+<style>
+  .barra {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 55;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(50, 16, 48, 0.14);
+    padding-bottom: env(safe-area-inset-bottom);
+    transform: translateY(105%); transition: transform 0.25s ease;
+  }
+  .barra.visible { transform: none; }
+  .barra a {
+    background: #fff; color: var(--aubergine); padding: 16px; min-height: 52px;
+    text-align: center; font-weight: 600; text-decoration: none;
+  }
+  .barra .barra__wa { background: var(--verde-whatsapp); color: #fff; }
+  @media (min-width: 1040px) { .barra { display: none; } }
+</style>

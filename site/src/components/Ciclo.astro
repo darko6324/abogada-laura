@@ -1,0 +1,80 @@
+---
+// Sistema Crea · Protege · Contrata · Crece (estrategia §3.2). Siempre esos cuatro verbos, en ese orden.
+// «Crece» no enlaza todavía: /abogada-para-empresas depende de que Laura confirme el servicio (§12).
+import { url } from '../lib/url';
+
+interface Props { variante?: 'home' | 'hub' }
+const { variante = 'home' } = Astro.props;
+
+const pasos = [
+  {
+    n: '01', verbo: 'Crea', titulo: 'Crea tu empresa', ruta: '/crear-empresa', ir: 'Crear mi empresa',
+    home: 'Decidir qué tipo de sociedad te conviene, cómo se reparte, quién decide y qué dicen tus estatutos. Antes de llenar formularios.',
+    hub: 'Tipo societario, constitución, estatutos, objeto social, capital, administración y representación legal. Las decisiones que después no se pueden deshacer fácil.',
+    pregunta: '«Quiero montar esto en serio»',
+  },
+  {
+    n: '02', verbo: 'Protege', titulo: 'Protege tu marca', ruta: '/registro-de-marca', ir: 'Proteger mi marca',
+    home: 'Tener la empresa registrada no significa que tu nombre esté protegido. Son dos cosas distintas, y una no incluye a la otra.',
+    hub: 'Registro de marca: revisión del signo, búsqueda de antecedentes, clasificación y acompañamiento durante la solicitud ante la autoridad competente.',
+    pregunta: '«Que nadie me quite lo que construí»',
+  },
+  {
+    n: '03', verbo: 'Contrata', titulo: 'Contrata con seguridad', ruta: '/contratos-empresas', ir: 'Ver contratos',
+    home: 'Contratos con clientes, proveedores, aliados y colaboradores, escritos según cómo funciona tu negocio de verdad.',
+    hub: 'Contratos con clientes, proveedores, aliados y colaboradores. Revisión antes de firmar y acompañamiento en la negociación.',
+    pregunta: '«Que cada acuerdo esté bien hecho»',
+  },
+  {
+    n: '04', verbo: 'Crece', titulo: 'Crece acompañado', ruta: null, ir: 'Muy pronto',
+    home: 'Cuando cada mes hay algo legal que revisar, tiene más sentido tener a alguien de confianza que buscar un abogado nuevo cada vez. [CONFIRMAR]',
+    hub: 'Acuerdos entre socios, reformas estatutarias, documentos del negocio digital y acompañamiento jurídico recurrente para empresas sin departamento legal. [CONFIRMAR]',
+    pregunta: '«Ya no puedo con todo yo solo»',
+  },
+];
+---
+<ol class="ciclo">
+  {pasos.map((p) => {
+    const cuerpo = (
+      <>
+        <span class="ciclo__n">{p.n} · {p.verbo}</span>
+        <h3>{p.titulo}</h3>
+        {variante === 'hub' && <p class="ciclo__pregunta">{p.pregunta}</p>}
+        <p>{variante === 'hub' ? p.hub : p.home}</p>
+        <span class="ciclo__ir">{p.ir}{p.ruta ? ' →' : ''}</span>
+      </>
+    );
+    return (
+      <li>
+        {p.ruta
+          ? <a class="ciclo__paso" href={url(p.ruta)} data-evento="servicio_card_click" data-servicio-destino={p.ruta}>{cuerpo}</a>
+          : <div class="ciclo__paso ciclo__paso--pendiente">{cuerpo}</div>}
+      </li>
+    );
+  })}
+</ol>
+
+<style>
+  .ciclo { list-style: none; padding: 0; margin-top: 36px; display: grid; gap: 14px; }
+  @media (min-width: 760px) and (max-width: 1039px) { .ciclo { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1040px) {
+    .ciclo { grid-template-columns: repeat(4, 1fr); }
+    /* Conector dorado entre etapas, en el espacio entre tarjetas */
+    .ciclo li:not(:last-child)::after {
+      content: ''; position: absolute; top: 34px; right: -14px; width: 14px; height: 1px; background: var(--dorado);
+    }
+  }
+  .ciclo li { max-width: none; position: relative; }
+  .ciclo__paso {
+    display: block; height: 100%; padding: 26px 22px; border-radius: var(--radio);
+    background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(201, 168, 76, 0.35);
+    color: inherit; text-decoration: none; transition: background 0.16s ease, transform 0.16s ease;
+  }
+  a.ciclo__paso:hover { background: rgba(255, 255, 255, 0.11); transform: translateY(-3px); }
+  .ciclo__paso--pendiente { opacity: 0.8; }
+  .ciclo__n { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dorado); }
+  .ciclo h3 { color: #fff; margin: 10px 0 8px; font-size: 1.2rem; }
+  .ciclo__pregunta { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--dorado-claro); margin-bottom: 6px; }
+  .ciclo p { color: #d9c8d8; font-size: 0.95rem; }
+  .ciclo__ir { display: inline-block; margin-top: 14px; font-size: 0.9rem; font-weight: 600; color: var(--dorado); }
+</style>

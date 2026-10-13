@@ -1,0 +1,36 @@
+---
+// Proceso de 5 pasos (estrategia §7.6).
+const pasos = [
+  ['Me cuentas', 'Me escribes y me explicas tu situación con tus propias palabras. No necesitas saber cómo se llama jurídicamente lo que te pasa.'],
+  ['Analizo tu caso', 'Reviso lo que me contaste, identifico qué está en juego y qué alternativas existen de verdad.'],
+  ['Te explico opciones y alcance', 'Te digo qué se puede hacer, qué implica cada camino, cuánto tomaría y qué parte depende de una entidad y no de nosotros. Aquí acordamos el alcance por escrito.'],
+  ['Definimos la estrategia', 'Elegimos la ruta juntos. Tú decides con información, no a ciegas.'],
+  ['Ejecutamos', 'Me hago cargo de lo acordado y te mantengo al tanto de cada avance.'],
+];
+---
+<section class="sec sec--oscura" id="como-trabajo">
+  <div class="wrap">
+    <p class="etiqueta">Cómo trabajo</p>
+    <h2>Así es trabajar conmigo</h2>
+    <p class="destacado">Sin tecnicismos y sin sorpresas. Sabes en qué punto estás en todo momento.</p>
+    <ol class="fases">
+      {pasos.map(([t, d], i) => (
+        <li>
+          <span class="fases__n">{String(i + 1).padStart(2, '0')}</span>
+          <div><h3>{t}</h3><p>{d}</p></div>
+        </li>
+      ))}
+    </ol>
+    <p class="fases__cierre">Si después de revisarlo lo que necesitas no está dentro de lo que yo manejo, te lo digo y te oriento sobre a quién acudir.</p>
+  </div>
+</section>
+
+<style>
+  .fases { list-style: none; padding: 0; margin-top: 32px; }
+  .fases li { display: grid; grid-template-columns: auto 1fr; gap: 20px; padding: 20px 0; border-top: 1px solid rgba(255, 255, 255, 0.14); max-width: none; }
+  .fases li:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.14); }
+  .fases__n { font-family: var(--serif); font-size: 1.8rem; line-height: 1.1; color: var(--dorado); min-width: 44px; }
+  .fases h3 { color: #fff; font-size: 1.1rem; margin-bottom: 4px; }
+  .fases p { color: #d9c8d8; }
+  .fases__cierre { margin-top: 24px; font-family: var(--serif); font-size: 1.3rem; font-style: italic; color: var(--dorado-claro); }
+</style>

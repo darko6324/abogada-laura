@@ -1,0 +1,127 @@
+---
+// Hub de la vertical empresarial (estrategia §11). No vende un servicio: vende la relación.
+import Base from '../layouts/Base.astro';
+import Ciclo from '../components/Ciclo.astro';
+import BloqueLaura from '../components/BloqueLaura.astro';
+import Formulario from '../components/Formulario.astro';
+import Faq from '../components/Faq.astro';
+import { url } from '../lib/url';
+import { faqSchema, migasSchema } from '../lib/schema';
+
+const momentos = [
+  { t: 'Todavía no he formalizado nada.', d: 'Facturas como persona natural o estás empezando.', ir: 'Crear tu empresa', ruta: '/crear-empresa' },
+  { t: 'Acabo de crear la empresa.', d: 'Ya está constituida y ahora vienen los contratos y la marca.', ir: 'Registro de marca', ruta: '/registro-de-marca' },
+  { t: 'Llevo un tiempo operando pero está todo informal.', d: 'Acuerdos de palabra, sin contratos, marca sin registrar. Empecemos por un diagnóstico.', ir: 'Cuéntame tu caso', ruta: '#contacto' },
+  { t: 'Vamos a asociarnos o a recibir un socio nuevo.', d: 'Reglas claras antes de que haga falta usarlas.', ir: 'Cuéntame tu caso', ruta: '#contacto' },
+  { t: 'Mi negocio es digital.', d: 'Ecommerce, agencia, servicios en línea o creador de contenido.', ir: 'Cuéntame tu caso', ruta: '#contacto' },
+  { t: 'Ya facturo bien y cada mes hay algo legal.', d: 'Necesitas a alguien que ya conozca tu negocio.', ir: 'Cuéntame tu caso', ruta: '#contacto' },
+];
+
+const faq = [
+  { p: '¿Desde qué tamaño de negocio tiene sentido asesorarse?', r: 'Desde antes de que exista. Las decisiones más difíciles de corregir son las del comienzo: con quién te asocias, cómo se reparte y qué dicen tus estatutos.' },
+  { p: '¿Trabajas con startups?', r: 'Sí, en lo que corresponde a estructura societaria, acuerdos entre socios, contratos y marca. [CONFIRMAR alcance en rondas de inversión]' },
+  { p: '¿Puedo contratarte solo para una cosa puntual?', r: 'Claro. La mayoría empieza con un contrato o con la creación de la empresa. El acompañamiento continuo es una opción, no un requisito.' },
+  { p: '¿Atiendes empresas fuera de Bogotá?', r: 'Sí, de forma virtual en todo el país.' },
+];
+
+const schema = [faqSchema(faq), migasSchema(Astro.site, [{ nombre: 'Inicio', ruta: '/' }, { nombre: 'Emprendedores y Empresas' }])];
+---
+<Base
+  title="Abogada para emprendedores y empresas en Colombia"
+  description="Crea tu empresa, protege tu marca y firma contratos con seguridad. Acompañamiento jurídico para emprendedores y pymes, explicado en palabras que se entienden."
+  whatsapp="emprendedores-y-empresas"
+  borrador
+  schema={schema}
+>
+  <section class="hero">
+    <div class="wrap">
+      <p class="etiqueta">Emprendedores y empresas</p>
+      <h1>Tu aliada legal mientras construyes tu negocio</h1>
+      <p class="destacado">Acompaño a emprendedores y empresas en Colombia a crear, proteger y organizar su negocio jurídicamente. Con explicaciones que se entienden y decisiones que puedes tomar con información.</p>
+      <div class="fila-botones">
+        <a class="btn btn--primario" href="#contacto" data-evento="cta_click" data-posicion="hero">Cuéntame de tu negocio</a>
+        <a class="btn btn--claro" href="#sistema">Ver cómo funciona</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--oscura sistema" id="sistema">
+    <div class="wrap">
+      <h2>Crea · Protege · Contrata · Crece</h2>
+      <p class="destacado">Tu negocio no necesita todo el derecho al mismo tiempo. Necesita lo que corresponde a la etapa en la que está.</p>
+      <Ciclo variante="hub" />
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <p class="etiqueta">En qué momento estás</p>
+      <h2>Encuentra tu momento</h2>
+      <ul class="momentos">
+        {momentos.map((m) => (
+          <li>
+            <h3>{m.t}</h3>
+            <p>{m.d}</p>
+            <a href={m.ruta.startsWith('#') ? m.ruta : url(m.ruta)}>{m.ir} →</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec sec--calida">
+    <div class="wrap texto">
+      <h2>Entre el bufete y el formulario</h2>
+      <p>Los grandes bufetes trabajan bien, pero están diseñados para empresas con presupuesto legal, y muchas veces ni siquiera vas a hablar con el abogado que contrataste.</p>
+      <p>Las plataformas de trámites son rápidas y económicas, pero son un formulario: nadie te pregunta con quién te asocias ni te advierte de lo que quedó fuera.</p>
+      <p>Yo estoy en el medio a propósito: <strong>hablas directamente conmigo</strong>, entiendo cómo funciona tu negocio antes de redactar y te explico cada decisión en palabras que se entienden. Y cuando vuelvas por lo siguiente, no tienes que explicar tu negocio otra vez.</p>
+    </div>
+  </section>
+
+  <section class="sec sec--corta">
+    <div class="wrap">
+      <p class="etiqueta">Sectores con los que trabajo [CONFIRMAR]</p>
+      <ul class="sectores">
+        <li>Servicios profesionales y consultoría</li>
+        <li>Agencias y estudios creativos</li>
+        <li>Comercio electrónico</li>
+        <li>Negocios de servicios digitales</li>
+        <li>Comercio y distribución</li>
+        <li>Startups en etapa temprana</li>
+      </ul>
+    </div>
+  </section>
+
+  <BloqueLaura />
+
+  <Faq preguntas={faq} />
+
+  <Formulario
+    servicio="asesoria-empresa"
+    whatsapp="emprendedores-y-empresas"
+    titulo="Cuéntame qué estás construyendo"
+    intro="Dime en qué etapa está tu negocio y qué te preocupa. Te digo por dónde empezaría yo."
+  />
+</Base>
+
+<style>
+  .hero { background: var(--aubergine); color: #fff; padding-block: 56px 72px; }
+  @media (min-width: 960px) { .hero { padding-block: 88px 104px; } }
+  .hero h1 { color: #fff; max-width: 18ch; margin-bottom: 18px; }
+  .hero .etiqueta { color: var(--dorado); }
+  .hero .destacado { color: #eadde9; }
+  .sistema { background: var(--aubergine-medio); }
+  .texto > * + * { margin-top: 16px; }
+
+  .momentos { list-style: none; padding: 0; margin-top: 30px; display: grid; gap: 14px; }
+  @media (min-width: 760px) { .momentos { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1040px) { .momentos { grid-template-columns: repeat(3, 1fr); } }
+  .momentos li { max-width: none; padding: 22px; border-radius: var(--radio); background: #fff; border: 1px solid rgba(50, 16, 48, 0.1); }
+  .momentos h3 { font-family: var(--serif); font-size: 1.35rem; color: var(--aubergine); margin-bottom: 6px; }
+  .momentos p { font-size: 0.95rem; color: var(--texto-secundario); margin-bottom: 12px; }
+  .momentos a { font-weight: 600; }
+
+  .sec--corta { padding-block: 48px; }
+  .sectores { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .sectores li { padding: 10px 16px; border-radius: 999px; background: #fff; border: 1px solid rgba(50, 16, 48, 0.15); font-size: 0.95rem; }
+</style>

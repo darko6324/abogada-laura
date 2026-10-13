@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import Formulario from '../components/Formulario.astro';
+import { SITE } from '../config/site';
+import { whatsappUrl } from '../lib/whatsapp';
+import { migasSchema } from '../lib/schema';
+---
+<Base
+  title="Contacto — Laura Riaño, abogada en Bogotá"
+  description="Cuéntame tu situación por WhatsApp o por el formulario. Primera conversación sin compromiso."
+  borrador
+  schema={[migasSchema(Astro.site, [{ nombre: 'Inicio', ruta: '/' }, { nombre: 'Contacto' }])]}
+>
+  <section class="hero">
+    <div class="wrap">
+      <p class="etiqueta">Contacto</p>
+      <h1>Cuéntame tu situación</h1>
+      <p class="destacado">Por el formulario o directo por WhatsApp, como te quede más fácil. Primera conversación sin compromiso. [CONFIRMAR]</p>
+      <ul class="canales">
+        <li><a class="btn btn--whatsapp" href={whatsappUrl()} target="_blank" rel="noopener" data-evento="whatsapp_click" data-ubicacion="contacto">WhatsApp {SITE.telefonoVisible}</a></li>
+        <li><a href={`mailto:${SITE.correo}`} data-evento="email_click">{SITE.correo}</a></li>
+        <li><a href={SITE.instagram} target="_blank" rel="noopener">Instagram {SITE.instagramUsuario}</a></li>
+      </ul>
+      <p class="horario">Horario de atención: [CONFIRMAR]</p>
+    </div>
+  </section>
+
+  <Formulario id="contacto" titulo="Escríbeme aquí" intro="Me cuentas tu caso y te digo con franqueza qué se puede hacer y qué no." />
+</Base>
+
+<style>
+  .hero { padding-block: 56px 40px; }
+  .hero h1 { margin-bottom: 14px; }
+  .canales { list-style: none; padding: 0; margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+  .horario { margin-top: 18px; color: var(--texto-secundario); font-size: 0.95rem; }
+</style>

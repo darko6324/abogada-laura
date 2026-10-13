@@ -1,39 +1,59 @@
 ---
 import { SITE, AVISO_GENERAL } from '../config/site';
+import { NEGOCIO, PERSONAS, LEGALES } from '../config/navegacion';
 import { whatsappUrl } from '../lib/whatsapp';
+import { url } from '../lib/url';
 
 const anio = new Date().getFullYear();
-// Columnas de servicios y enlaces legales se agregan cuando existan esas páginas (Fase 2).
 ---
 <footer class="pie">
-  <div class="wrap pie__in">
-    <div>
-      <p class="pie__lema">{SITE.lema}</p>
-      <p>{SITE.marca} · {SITE.rol} · {SITE.ciudad}, Colombia</p>
-    </div>
-    <ul class="pie__contacto">
-      <li>
-        <a href={whatsappUrl()} target="_blank" rel="noopener" data-evento="whatsapp_click" data-ubicacion="footer">
-          WhatsApp {SITE.telefonoVisible}
-        </a>
-      </li>
-      <li><a href={`mailto:${SITE.correo}`} data-evento="email_click">{SITE.correo}</a></li>
-      <li><a href={SITE.instagram} target="_blank" rel="noopener">Instagram {SITE.instagramUsuario}</a></li>
-    </ul>
-  </div>
   <div class="wrap">
-    <p class="pie__aviso">{AVISO_GENERAL}</p>
-    <p class="pie__copy">© {anio} {SITE.marca}. Todos los derechos reservados.</p>
+    <p class="pie__lema">{SITE.lema}</p>
+    <p class="pie__quien">{SITE.marca} · {SITE.rol} · {SITE.ciudad}, Colombia</p>
+
+    <div class="pie__grid">
+      <nav aria-label="Para tu negocio">
+        <h2 class="pie__h">Para tu negocio</h2>
+        <a href={url('/emprendedores-y-empresas')}>Todo para tu negocio</a>
+        {NEGOCIO.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}
+      </nav>
+      <nav aria-label="Para personas">
+        <h2 class="pie__h">Para personas</h2>
+        {PERSONAS.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}
+      </nav>
+      <nav aria-label="Laura">
+        <h2 class="pie__h">Laura</h2>
+        <a href={url('/sobre-laura')}>Sobre mí</a>
+        <a href={url('/contacto')}>Contacto</a>
+      </nav>
+      <div>
+        <h2 class="pie__h">Contacto</h2>
+        <a href={whatsappUrl()} target="_blank" rel="noopener" data-evento="whatsapp_click" data-ubicacion="footer">WhatsApp {SITE.telefonoVisible}</a>
+        <a href={`mailto:${SITE.correo}`} data-evento="email_click">{SITE.correo}</a>
+        <a href={SITE.instagram} target="_blank" rel="noopener">Instagram {SITE.instagramUsuario}</a>
+      </div>
+    </div>
+
+    <div class="pie__legal">
+      <p class="pie__enlaces">{LEGALES.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}</p>
+      <p class="pie__aviso">{AVISO_GENERAL}</p>
+      <p>© {anio} {SITE.marca}. Todos los derechos reservados.</p>
+    </div>
   </div>
 </footer>
 
 <style>
-  .pie { background: var(--aubergine); color: #e9dce8; padding-block: 56px 96px; font-size: 15px; }
-  .pie a { color: #fff; }
-  .pie__in { display: grid; gap: 28px; margin-bottom: 32px; }
-  @media (min-width: 760px) { .pie__in { grid-template-columns: 1fr auto; } }
-  .pie__lema { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
-  .pie__contacto { list-style: none; padding: 0; display: grid; gap: 8px; }
-  .pie__aviso { font-size: 13px; font-style: italic; color: #c9b4c7; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; }
-  .pie__copy { font-size: 13px; color: #c9b4c7; margin-top: 10px; }
+  .pie { background: var(--aubergine); color: #e5d6e4; padding-block: 56px 120px; font-size: 15px; }
+  @media (min-width: 1040px) { .pie { padding-bottom: 56px; } }
+  .pie a { display: block; padding: 5px 0; color: #e5d6e4; text-decoration: none; }
+  .pie a:hover { color: var(--dorado-claro); text-decoration: underline; }
+  .pie__lema { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; color: #fff; }
+  .pie__quien { margin-bottom: 36px; }
+  .pie__grid { display: grid; gap: 28px; }
+  @media (min-width: 760px) { .pie__grid { grid-template-columns: repeat(4, 1fr); } }
+  .pie__h { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dorado); margin-bottom: 10px; }
+  .pie__legal { margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 13px; color: #c9b4c7; display: grid; gap: 10px; }
+  .pie__enlaces { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+  .pie__enlaces a { display: inline; }
+  .pie__aviso { font-style: italic; max-width: 90ch; }
 </style>

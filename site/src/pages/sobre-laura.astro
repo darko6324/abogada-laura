@@ -1,0 +1,60 @@
+---
+// /sobre-laura. La versión larga depende de los datos de §23-B (formación, trayectoria).
+// Todo lo no confirmado va con [CONFIRMAR] y bloquea producción.
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Formulario from '../components/Formulario.astro';
+import foto from '../assets/fotos/laura-2.jpeg';
+import { migasSchema } from '../lib/schema';
+---
+<Base
+  title="Laura Riaño, abogada en Bogotá — sobre mí"
+  description="Abogada en Bogotá. Acompaño a personas y emprendedores a tomar decisiones legales con claridad. Conoce cómo trabajo y en qué puedo ayudarte."
+  borrador
+  schema={[migasSchema(Astro.site, [{ nombre: 'Inicio', ruta: '/' }, { nombre: 'Sobre Laura' }])]}
+>
+  <section class="sec">
+    <div class="wrap sobre">
+      <div class="sobre__foto">
+        <Image src={foto} alt="Laura Riaño, abogada, sentada junto a un sillón de cuero" widths={[400, 800]}
+               sizes="(min-width: 960px) 40vw, 100vw" loading="eager" />
+      </div>
+      <div class="texto">
+        <p class="etiqueta">Sobre mí</p>
+        <h1>Hola, soy Laura Riaño</h1>
+        <p class="destacado">Soy abogada y sé que enfrentar temas legales puede sentirse como un laberinto. Mi trabajo es acompañarte y guiarte a la salida de forma clara, precisa y eficiente.</p>
+        <p>Trabajo con personas que necesitan resolver algo concreto y con emprendedores que están construyendo un negocio y quieren hacerlo bien desde el comienzo. En los dos casos mi punto de partida es el mismo: que entiendas qué estás haciendo y por qué.</p>
+        <p>El derecho no tiene por qué ser complicado. Yo me encargo de que no lo sea.</p>
+
+        <h2>Formación y trayectoria</h2>
+        <p>[CONFIRMAR: universidad, año de grado, especializaciones y diplomados]</p>
+        <p>[CONFIRMAR: áreas de profundización y años de ejercicio]</p>
+
+        <h2>Cómo trabajo</h2>
+        <ul>
+          <li><strong>Trato directo.</strong> Hablas conmigo, no con un asistente.</li>
+          <li><strong>Sin tecnicismos.</strong> Te explico cada decisión en palabras que se entienden.</li>
+          <li><strong>Alcance claro.</strong> Antes de empezar acordamos por escrito qué incluye el servicio y cuánto cuesta.</li>
+          <li><strong>Honestidad.</strong> Si tu caso no es de mi área, te lo digo desde el principio y te oriento sobre a quién acudir.</li>
+          <li><strong>Bogotá y toda Colombia.</strong> Atención presencial en Bogotá y virtual en todo el país.</li>
+        </ul>
+
+        <h2>Datos profesionales</h2>
+        <p>Tarjeta profesional N.º ____ — Consejo Superior de la Judicatura [CONFIRMAR]</p>
+      </div>
+    </div>
+  </section>
+
+  <Formulario titulo="¿Hablamos?" intro="Cuéntame qué necesitas. Te digo con franqueza si puedo ayudarte y cómo." />
+</Base>
+
+<style>
+  .sobre { display: grid; gap: 36px; }
+  @media (min-width: 960px) { .sobre { grid-template-columns: 0.8fr 1.2fr; gap: 64px; align-items: start; } }
+  .sobre__foto { border-radius: var(--radio); overflow: hidden; aspect-ratio: 4 / 5; background: var(--aubergine-claro); }
+  @media (min-width: 960px) { .sobre__foto { position: sticky; top: 96px; } }
+  .sobre__foto :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .texto > * + * { margin-top: 16px; }
+  .texto h2 { margin-top: 40px; }
+  .texto ul { padding-left: 1.2em; display: grid; gap: 8px; }
+</style>
