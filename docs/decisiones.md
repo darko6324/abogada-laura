@@ -39,3 +39,5 @@
 - El formulario envía `text/plain` para evitar la consulta previa de CORS que Apps Script no responde.
 - **Textos legales aprobados (2026-10-14)** por David y Laura, con el nombre completo (Laura Valentina Riaño Pacheco) y la dirección de notificaciones (Carrera 76 # 80B-16, Minuto de Dios, Bogotá).
 - **Receptor de leads publicado** como aplicación web de Apps Script (versión 1, acceso «Cualquiera», se ejecuta como David). Probado desde github.io: la fila llega al Sheet. La URL `/exec` quedó como valor por defecto en el workflow.
+- **Zona horaria del Sheet** pasó a Bogotá (GMT-5). La fila de prueba conserva la hora anterior; las nuevas llegan bien.
+- **Dominio:** verificación de `abogadalaura.com` iniciada en GitHub Pages. El dominio no está en la cuenta de GoDaddy de David; los pasos siguen en `docs/dia-d.md`.
