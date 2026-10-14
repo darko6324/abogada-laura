@@ -29,3 +29,4 @@
 - **Home nueva** con las tres líneas en el orden del manual (Marca → Empresa → Crecimiento digital), la pieza «Nombre, logo y marca no son lo mismo» con papel rasgado y la sección de personas como secundaria.
 - **Crecimiento digital** (web, marketing, automatización) entra al formulario y a la home. Todavía no tiene landing.
 - **Confirmado por David (2026-10-14):** Marca & Empresa usa el mismo WhatsApp y correo de Laura, y Laura presta todos los servicios, incluido el digital. El descriptor del logo («Soluciones integrales para tu negocio») se deja por ahora.
+- **Favicon (2026-10-14):** pasa al isotipo M&E azul sobre fondo blanco, con archivos `isotipo-*.png`. Se cambió el nombre de los archivos porque Chrome seguía mostrando el ícono de Astro que se publicó en la Fase 1 como `favicon.ico`.

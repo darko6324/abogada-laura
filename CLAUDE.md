@@ -9,7 +9,7 @@ La estrategia completa vive en el Project «Laura Abogada» (`estrategia-web-v2.
 - Contenido en Markdown dentro de `site/src/content/` (servicios, faq, blog). Sin CMS.
 - `api/` (Fase 3) — endpoint de leads en Cloud Run; guarda en Google Sheets.
 - Fuentes autoalojadas (@fontsource: Libre Caslon Text y Montserrat), imágenes por `astro:assets`. Nada de Google Fonts por `<link>`.
-- Favicon: monograma M&E blanco sobre azul notarial (`site/public/`).
+- Favicon: isotipo M&E azul sobre fondo blanco (`site/public/isotipo-*.png` y `favicon.ico`). Si se cambia, usar un nombre de archivo nuevo: los navegadores guardan el ícono en caché por nombre.
 
 ## Reglas que no se rompen
 1. **Nada se publica sin validación de Laura.** Todo contenido nace con `estado: borrador`. Solo Laura lo pasa a `confirmado`.
