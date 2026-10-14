@@ -3,9 +3,9 @@ name: Deploy sitio (GitHub Pages)
 # Cada push a main publica el sitio.
 # El modo y la dirección se controlan con variables del repositorio
 # (Settings → Secrets and variables → Actions → Variables):
-#   SITE_MODE  preview | produccion   (por defecto: preview)
-#   SITE_URL   https://darko6324.github.io  → el día D: https://www.abogadalaura.com
-#   BASE_PATH  /abogada-laura                → el día D: /
+#   SITE_MODE  preview | produccion   (por defecto: produccion, desde el día D 2026-10-14)
+#   SITE_URL   por defecto https://www.abogadalaura.com
+#   BASE_PATH  por defecto /
 #   LEADS_ENDPOINT  URL /exec del receptor de leads (api/leads, Apps Script)
 # En modo produccion el build FALLA si queda algún borrador, [CONFIRMAR] o [TARIFA].
 on:
@@ -32,9 +32,9 @@ jobs:
       run:
         working-directory: site
     env:
-      PUBLIC_SITE_MODE: ${{ vars.SITE_MODE || 'preview' }}
-      SITE_URL: ${{ vars.SITE_URL || 'https://darko6324.github.io' }}
-      BASE_PATH: ${{ vars.BASE_PATH || '/abogada-laura' }}
+      PUBLIC_SITE_MODE: ${{ vars.SITE_MODE || 'produccion' }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://www.abogadalaura.com' }}
+      BASE_PATH: ${{ vars.BASE_PATH || '/' }}
       PUBLIC_LEADS_ENDPOINT: ${{ vars.LEADS_ENDPOINT || 'https://script.google.com/macros/s/AKfycbw-Wq5DYY5Jh43d97VxDOoPti5obAyneknSyDuUSEvHTK2yZdikUJukSQSuI_KJnXLT/exec' }}
     steps:
       - uses: actions/checkout@v4

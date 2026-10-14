@@ -18,7 +18,7 @@ La estrategia completa vive en el Project «Laura Abogada» (`estrategia-web-v2.
 4. **Voz:** tuteo siempre, lenguaje sencillo. La marca habla en plural neutro («registramos tu marca»); Laura habla en primera persona en las landings jurídicas y en su bloque. Sin alarmismo (manual, «Cómo suena»).
 5. **Accesibilidad:** sobre fondos `--azul-notarial`, los acentos van en `--acento-claro` o `--hielo`, nunca en `--cobalto`. Objetivos táctiles de 44 px. Un solo H1 por página.
 6. **WhatsApp:** siempre con `whatsappUrl()` de `src/lib/whatsapp.ts` y el mensaje de su página (§13). Nunca el número a mano.
-7. **Enlaces internos:** siempre con `url()` de `src/lib/url.ts` (el sitio vive bajo `/abogada-laura/` hasta el día D).
+7. **Enlaces internos:** siempre con `url()` de `src/lib/url.ts` (desde el día D el sitio vive en la raíz de www.abogadalaura.com; `url()` sigue siendo obligatorio).
 8. **No enlazar a páginas que no existen** desde menú o footer.
 9. **Sin secretos en el repo.** Es público. Credenciales solo en GitHub Secrets.
 10. **Textos legales** (política de datos, aviso legal): cualquier cambio necesita la aprobación de Laura antes de publicarse.
