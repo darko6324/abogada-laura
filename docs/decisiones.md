@@ -27,5 +27,5 @@
 - **Identidad del manual** (`docs/marca-y-empresa/`): azul notarial #002870 del logo, cobalto #3346C8 como acento, fondo papel #F3F2EE, Libre Caslon Text para titulares (cursiva que plantea, negrita que afirma) y Montserrat para el texto.
 - **Logo** horizontal azul en el encabezado y blanco en el footer; **favicon** con el monograma M&E blanco sobre azul notarial (ico 16/32/48, png 512 y apple-touch-icon).
 - **Home nueva** con las tres líneas en el orden del manual (Marca → Empresa → Crecimiento digital), la pieza «Nombre, logo y marca no son lo mismo» con papel rasgado y la sección de personas como secundaria.
-- **Crecimiento digital** (web, marketing, automatización) entra al formulario y a la home con `[CONFIRMAR alcance]`: todavía no tiene landing.
-- **Pendiente:** confirmar si Marca & Empresa usa el mismo WhatsApp y correo de Laura (`src/config/site.ts`) y quién presta los servicios digitales.
+- **Crecimiento digital** (web, marketing, automatización) entra al formulario y a la home. Todavía no tiene landing.
+- **Confirmado por David (2026-10-14):** Marca & Empresa usa el mismo WhatsApp y correo de Laura, y Laura presta todos los servicios, incluido el digital. El descriptor del logo («Soluciones integrales para tu negocio») se deja por ahora.

@@ -12,11 +12,11 @@ export const SITE = {
   /** Descriptor corto para el encabezado y los títulos. */
   rol: 'Marca, empresa y crecimiento digital',
   lema: 'Primero proteges lo que construyes. Después lo haces crecer.',
-  /** La abogada que lleva los casos. */
+  /** La abogada que presta todos los servicios: marca, empresa y crecimiento digital. */
   abogada: 'Laura Riaño',
   ciudad: 'Bogotá',
   pais: 'CO',
-  // Número en formato internacional, sin +, espacios ni guiones. [CONFIRMAR si Marca & Empresa usa otro número]
+  // Número en formato internacional, sin +, espacios ni guiones. Marca & Empresa usa el mismo de Laura.
   whatsapp: '573218180713',
   telefonoVisible: '+57 321 818 0713',
   correo: 'laurarianoabogada@gmail.com',
