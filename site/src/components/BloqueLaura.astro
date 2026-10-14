@@ -14,7 +14,7 @@ const { enlace = true } = Astro.props;
       <Image src={foto} alt="Laura Riaño, abogada, con traje gris" widths={[400, 700]} sizes="(min-width: 960px) 40vw, 100vw" />
     </div>
     <div>
-      <p class="etiqueta">Quién te acompaña</p>
+      <p class="etiqueta">La abogada detrás de tu caso</p>
       <h2>Hola, soy Laura Riaño</h2>
       <p>Soy abogada y sé que enfrentar temas legales puede sentirse como un laberinto. Mi trabajo es acompañarte y guiarte a la salida de forma clara, precisa y eficiente.</p>
       <p>Trabajo con personas que necesitan resolver algo concreto y con emprendedores que están construyendo un negocio y quieren hacerlo bien desde el comienzo. En los dos casos mi punto de partida es el mismo: que entiendas qué estás haciendo y por qué.</p>
@@ -33,10 +33,10 @@ const { enlace = true } = Astro.props;
 <style>
   .laura { display: grid; gap: 32px; align-items: center; }
   @media (min-width: 960px) { .laura { grid-template-columns: 0.8fr 1.2fr; gap: 56px; } }
-  .laura__foto { border-radius: var(--radio); overflow: hidden; aspect-ratio: 4 / 5; background: var(--aubergine-claro); }
+  .laura__foto { border-radius: var(--radio); overflow: hidden; aspect-ratio: 4 / 5; background: var(--hielo); }
   .laura__foto :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
   .laura p + p { margin-top: 14px; }
   .laura h2 { margin-bottom: 16px; }
   .senales { list-style: none; padding: 0; margin: 24px 0 28px; display: flex; flex-wrap: wrap; gap: 9px; }
-  .senales li { font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; background: var(--aubergine-claro); color: var(--aubergine); font-weight: 500; }
+  .senales li { font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; background: var(--hielo); color: var(--azul-notarial); font-weight: 500; }
 </style>

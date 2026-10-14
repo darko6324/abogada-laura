@@ -9,7 +9,7 @@ import { SITE } from '../config/site';
 
 interface Props {
   /** Opción preseleccionada en «¿Qué necesitas?» */
-  servicio?: 'crear-empresa' | 'registro-de-marca' | 'contrato' | 'socios' | 'asesoria-empresa' | 'personal' | 'otro';
+  servicio?: 'crear-empresa' | 'registro-de-marca' | 'contrato' | 'socios' | 'asesoria-empresa' | 'digital' | 'personal' | 'otro';
   /** Clave del mensaje de WhatsApp de la página */
   whatsapp?: string;
   titulo?: string;
@@ -28,11 +28,12 @@ const endpoint = import.meta.env.PUBLIC_LEADS_ENDPOINT ?? '';
 const AUTORIZACION = 'Autorizo el tratamiento de mis datos personales conforme a la Política de Tratamiento de Datos Personales.';
 
 const opciones = [
-  ['crear-empresa', 'Crear mi empresa'],
   ['registro-de-marca', 'Registrar mi marca'],
+  ['crear-empresa', 'Crear mi empresa'],
   ['contrato', 'Un contrato'],
   ['socios', 'Un tema entre socios o accionistas'],
   ['asesoria-empresa', 'Asesoría para mi empresa'],
+  ['digital', 'Página web, marketing o automatización'],
   ['personal', 'Un tema legal personal'],
   ['otro', 'Otro'],
 ];
@@ -44,6 +45,7 @@ const condicionales: Record<string, { pregunta: string; opciones: string[] }> = 
   contrato: { pregunta: '¿Necesitas crear uno o revisar uno que te enviaron?', opciones: ['Crear', 'Revisar', 'Negociar'] },
   socios: { pregunta: '¿Es para prevenir o ya hay una diferencia?', opciones: ['Prevenir', 'Ya hay una situación'] },
   'asesoria-empresa': { pregunta: '¿Cada cuánto te aparecen temas legales?', opciones: ['Puntual', 'Varias veces al año', 'Casi cada mes'] },
+  digital: { pregunta: '¿Qué necesitas primero?', opciones: ['Página web', 'Marketing', 'Automatización', 'Todavía no lo sé'] },
 };
 ---
 <section class="sec sec--calida" id={id}>
@@ -140,6 +142,7 @@ const condicionales: Record<string, { pregunta: string; opciones: string[] }> = 
     contrato: 'Un contrato',
     socios: 'Un tema entre socios o accionistas',
     'asesoria-empresa': 'Asesoría para mi empresa',
+    digital: 'Página web, marketing o automatización',
     personal: 'Un tema legal personal',
     otro: 'Otro',
   };
@@ -247,16 +250,16 @@ const condicionales: Record<string, { pregunta: string; opciones: string[] }> = 
   @media (min-width: 960px) { .formulario { grid-template-columns: 0.8fr 1.2fr; align-items: start; } }
   .form {
     display: grid; gap: 18px; padding: 24px; background: #fff;
-    border: 1px solid rgba(50, 16, 48, 0.1); border-radius: var(--radio);
+    border: 1px solid rgba(0, 40, 112, 0.1); border-radius: var(--radio);
   }
   @media (min-width: 760px) { .form { padding: 34px; } .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; } }
   .dos { display: grid; gap: 18px; }
   .campo { display: grid; gap: 7px; border: 0; padding: 0; min-width: 0; }
   .campo > label, legend { font-size: 0.9rem; font-weight: 600; }
-  .opcional { font-weight: 400; color: var(--texto-secundario); }
+  .opcional { font-weight: 400; color: var(--gris-pizarra); }
   input[type='text'], input[type='tel'], input[type='email'], select, textarea {
-    width: 100%; min-height: 52px; padding: 13px 15px; font: 400 1rem/1.4 var(--sans); color: var(--texto);
-    background: #fff; border: 1px solid rgba(50, 16, 48, 0.25); border-radius: 11px;
+    width: 100%; min-height: 52px; padding: 13px 15px; font: 400 1rem/1.4 var(--sans); color: var(--tinta);
+    background: #fff; border: 1px solid rgba(0, 40, 112, 0.25); border-radius: 11px;
   }
   textarea { min-height: 110px; resize: vertical; }
   [aria-invalid='true'] { border-color: #a3261b; }
@@ -264,16 +267,16 @@ const condicionales: Record<string, { pregunta: string; opciones: string[] }> = 
   .opciones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
   .opcion {
     display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px;
-    border: 1px solid rgba(50, 16, 48, 0.2); border-radius: 999px; font-size: 0.94rem; cursor: pointer;
+    border: 1px solid rgba(0, 40, 112, 0.2); border-radius: 999px; font-size: 0.94rem; cursor: pointer;
   }
-  .opcion:has(input:checked) { border-color: var(--aubergine); background: var(--aubergine-claro); }
-  .check { display: flex; gap: 11px; align-items: flex-start; font-size: 0.9rem; font-weight: 400; color: var(--texto-secundario); }
+  .opcion:has(input:checked) { border-color: var(--azul-notarial); background: var(--hielo); }
+  .check { display: flex; gap: 11px; align-items: flex-start; font-size: 0.9rem; font-weight: 400; color: var(--gris-pizarra); }
   .check input { width: 20px; height: 20px; margin-top: 2px; flex: none; }
   .trampa { position: absolute; left: -9999px; }
   .enviar { justify-self: start; min-width: 160px; }
   .enviar:disabled { opacity: 0.7; cursor: progress; }
   .estado { font-size: 0.95rem; color: var(--verde-whatsapp); }
-  .nota { font-size: 0.84rem; color: var(--texto-secundario); }
-  .alterna { font-size: 0.95rem; color: var(--texto-secundario); }
+  .nota { font-size: 0.84rem; color: var(--gris-pizarra); }
+  .alterna { font-size: 0.95rem; color: var(--gris-pizarra); }
   .alterna a { font-weight: 600; }
 </style>

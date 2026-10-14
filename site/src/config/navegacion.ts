@@ -5,8 +5,8 @@
 export interface Enlace { texto: string; ruta: string }
 
 export const NEGOCIO: Enlace[] = [
-  { texto: 'Crear tu empresa', ruta: '/crear-empresa' },
   { texto: 'Registro de marca', ruta: '/registro-de-marca' },
+  { texto: 'Crear tu empresa', ruta: '/crear-empresa' },
   { texto: 'Contratos para tu negocio', ruta: '/contratos-empresas' },
   // Fase 3, tras confirmar alcance: /acuerdo-de-socios · /negocios-digitales · /abogada-para-empresas
 ];

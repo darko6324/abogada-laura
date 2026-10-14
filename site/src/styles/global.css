@@ -1,23 +1,24 @@
-/* Tokens de marca (estrategia §20).
-   Regla dura: --dorado es SOLO decorativo sobre fondo claro (2.15:1). Para texto usar --dorado-texto. */
+/* Tokens de Marca & Empresa (manual en docs/marca-y-empresa/).
+   Concepto: papel claro con bloques de azul notarial; el cobalto resalta una sola cosa por bloque. */
 :root {
-  --aubergine: #321030;
-  --aubergine-medio: #4a1a48;
-  --aubergine-claro: #f2e8f2;
-  --dorado: #c9a84c;
-  --dorado-claro: #e8d5a0;
-  --dorado-texto: #7a5e10;
-  --crema: #faf8f3;
-  --calido: #f2ebd9;
-  --texto: #2c2b3a;
-  --texto-secundario: #6b697a;
-  --verde-whatsapp: #0f6b60;
-  --negocio-acento: #4a1a48;
+  --azul-notarial: #002870;   /* logo, titulares, bloques oscuros */
+  --azul-medio: #0a3487;      /* segundo plano de bloques oscuros */
+  --cobalto: #3346c8;         /* acento: palabra clave, botón, enlace (6.6:1 sobre papel) */
+  --acento-claro: #a9b6f5;    /* acento sobre azul-notarial (7:1) */
+  --hielo: #dce2f7;           /* tinte de apoyo; texto claro sobre azul */
+  --papel: #f3f2ee;           /* fondo principal */
+  --papel-sombra: #e7e6e1;    /* fondo secundario */
+  --blanco: #ffffff;
+  --tinta: #13203f;           /* texto corrido */
+  --gris-pizarra: #5b6275;    /* texto secundario (5.4:1 sobre papel) */
+  --linea: #c5c9d6;           /* filetes decorativos */
+  --verde-whatsapp: #0f6b60;  /* solo botones de WhatsApp */
 
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --radio: 14px;
-  --ancho: 1180px;
+  --serif: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --sans: Montserrat, 'Helvetica Neue', Arial, sans-serif;
+  --radio: 6px;
+  --radio-pill: 999px;
+  --ancho: 1200px;
   --medida: 68ch;
 }
 
@@ -33,59 +34,65 @@ body {
   font-family: var(--sans);
   font-size: 17px;
   line-height: 1.65;
-  color: var(--texto);
-  background: var(--crema);
+  color: var(--tinta);
+  background: var(--papel);
   overflow-x: hidden;
 }
-@media (min-width: 960px) { body { font-size: 18px; line-height: 1.7; } }
+@media (min-width: 960px) { body { font-size: 17.5px; line-height: 1.7; } }
 img { max-width: 100%; height: auto; display: block; }
-a { color: var(--dorado-texto); text-underline-offset: 3px; }
-:focus-visible { outline: 2px solid var(--dorado-texto); outline-offset: 2px; }
+a { color: var(--cobalto); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--cobalto); outline-offset: 2px; }
 
-h1, h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; color: var(--aubergine); }
-h1 { font-size: 36px; line-height: 1.15; }
-h2 { font-size: 28px; line-height: 1.2; }
-h3 { font-family: var(--sans); font-size: 21px; font-weight: 600; line-height: 1.3; }
+/* Titulares en serif: la cursiva plantea, la negrita afirma (manual, «Tipografía»). */
+h1, h2 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.015em; color: var(--azul-notarial); text-wrap: balance; }
+h1 { font-size: 38px; line-height: 1.08; }
+h2 { font-size: 30px; line-height: 1.15; }
+h1 em, h2 em { font-style: italic; font-weight: 400; }
+h3 { font-family: var(--sans); font-size: 20px; font-weight: 600; line-height: 1.3; }
 @media (min-width: 960px) {
-  h1 { font-size: 56px; line-height: 1.1; }
-  h2 { font-size: 40px; line-height: 1.15; }
-  h3 { font-size: 24px; }
+  h1 { font-size: 60px; line-height: 1.04; }
+  h2 { font-size: 42px; line-height: 1.1; }
+  h3 { font-size: 22px; }
 }
-h1 + p, h2 + p { margin-top: 12px; }
+h1 + p, h2 + p { margin-top: 14px; }
 p, li { max-width: var(--medida); }
 
-.wrap { max-width: var(--ancho); margin-inline: auto; padding-inline: 20px; }
+.wrap { max-width: var(--ancho); margin-inline: auto; padding-inline: max(20px, env(safe-area-inset-left, 0px)); }
 .sec { padding-block: 64px; }
-@media (min-width: 960px) { .sec { padding-block: 96px; } }
-.sec--oscura { background: var(--aubergine); color: #fff; }
-.sec--oscura h1, .sec--oscura h2 { color: #fff; }
-.sec--calida { background: var(--calido); }
+@media (min-width: 960px) { .sec { padding-block: 104px; } }
+.sec--oscura { background: var(--azul-notarial); color: var(--blanco); }
+.sec--oscura h1, .sec--oscura h2 { color: var(--blanco); }
+.sec--calida { background: var(--papel-sombra); }
 
 .etiqueta {
-  font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--dorado-texto); margin-bottom: 12px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--cobalto); margin-bottom: 14px;
 }
-.sec--oscura .etiqueta { color: var(--dorado); }
-.destacado { font-size: 19px; line-height: 1.55; color: var(--texto-secundario); }
-.sec--oscura .destacado { color: #eadde9; }
-@media (min-width: 960px) { .destacado { font-size: 21px; line-height: 1.6; } }
+.sec--oscura .etiqueta { color: var(--acento-claro); }
+.destacado { font-size: 19px; line-height: 1.55; font-weight: 500; color: var(--gris-pizarra); }
+.sec--oscura .destacado { color: var(--hielo); }
+@media (min-width: 960px) { .destacado { font-size: 20px; } }
 
-/* Botones: objetivos táctiles de 44px mínimo (estrategia §20) */
+/* Botones en píldora (manual, componente Boton). Altura mínima 44px. */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-  min-height: 48px; padding: 12px 24px; border-radius: 999px;
-  font: 500 1rem/1.2 var(--sans); text-decoration: none; cursor: pointer;
+  min-height: 48px; padding: 12px 24px; border-radius: var(--radio-pill);
+  font: 600 1rem/1.2 var(--sans); text-decoration: none; cursor: pointer;
   border: 1.5px solid transparent;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 .btn:hover { transform: translateY(-2px); }
-.btn--primario { background: var(--dorado); color: #26111f; font-weight: 600; }
-.btn--primario:hover { box-shadow: 0 10px 24px rgba(50, 16, 48, 0.22); }
-.btn--claro { border-color: rgba(255, 255, 255, 0.5); color: #fff; }
+.btn--primario { background: var(--cobalto); color: var(--blanco); }
+.btn--primario:hover { background: var(--azul-notarial); box-shadow: 0 10px 24px rgba(0, 40, 112, 0.22); }
+.btn--claro { border-color: rgba(255, 255, 255, 0.55); color: var(--blanco); }
 .btn--claro:hover { background: rgba(255, 255, 255, 0.1); }
-.btn--borde { border-color: var(--aubergine); color: var(--aubergine); }
-.btn--borde:hover { background: var(--aubergine); color: #fff; }
-.btn--whatsapp { background: var(--verde-whatsapp); color: #fff; }
+.btn--borde { border-color: var(--azul-notarial); color: var(--azul-notarial); }
+.btn--borde:hover { background: var(--azul-notarial); color: var(--blanco); }
+.btn--whatsapp { background: var(--verde-whatsapp); color: var(--blanco); }
+/* Sobre fondos azules el primario pasa a blanco para que el botón se distinga del fondo. */
+.sec--oscura .btn--primario, .sobre-azul .btn--primario { background: var(--blanco); color: var(--azul-notarial); }
+.sec--oscura .btn--primario:hover, .sobre-azul .btn--primario:hover { background: var(--hielo); }
+.sec--oscura :focus-visible, .sobre-azul :focus-visible { outline-color: var(--blanco); }
 .fila-botones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 
 .sr-only {

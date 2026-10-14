@@ -25,13 +25,13 @@ const { clave } = Astro.props;
   .barra {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 55;
     display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    background: rgba(50, 16, 48, 0.14);
+    background: rgba(0, 40, 112, 0.14);
     padding-bottom: env(safe-area-inset-bottom);
     transform: translateY(105%); transition: transform 0.25s ease;
   }
   .barra.visible { transform: none; }
   .barra a {
-    background: #fff; color: var(--aubergine); padding: 16px; min-height: 52px;
+    background: #fff; color: var(--azul-notarial); padding: 16px; min-height: 52px;
     text-align: center; font-weight: 600; text-decoration: none;
   }
   .barra .barra__wa { background: var(--verde-whatsapp); color: #fff; }

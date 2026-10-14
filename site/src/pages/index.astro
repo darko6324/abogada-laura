@@ -1,8 +1,9 @@
 ---
-// Home (estrategia §6 y §7). La home convierte y reparte; las landings son las que posicionan.
+// Home de Marca & Empresa (manual en docs/marca-y-empresa/).
+// Orden de las líneas de servicio según el manual: Marca → Empresa → Crecimiento digital.
+// Laura aparece como la abogada que lleva los casos.
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Ciclo from '../components/Ciclo.astro';
 import ComoTrabajo from '../components/ComoTrabajo.astro';
 import BloqueLaura from '../components/BloqueLaura.astro';
 import Formulario from '../components/Formulario.astro';
@@ -10,103 +11,153 @@ import Faq from '../components/Faq.astro';
 import retrato from '../assets/fotos/laura-3.jpeg';
 import { url } from '../lib/url';
 import { faqSchema } from '../lib/schema';
+import { SITE } from '../config/site';
 import { SERVICIOS_PERSONAS } from '../config/personas';
 
-// Situaciones reales (§7.5). Las que apuntan a páginas aún no construidas llevan al formulario.
+const lineas = [
+  {
+    n: '01', nombre: 'Marca', titulo: 'Protege el nombre de tu negocio',
+    texto: 'Búsqueda de antecedentes, clasificación y solicitud de registro de marca ante la Superintendencia de Industria y Comercio (SIC).',
+    enlaces: [{ texto: 'Registro de marca', ruta: '/registro-de-marca' }],
+    destacada: true,
+  },
+  {
+    n: '02', nombre: 'Empresa', titulo: 'Crea tu empresa con bases claras',
+    texto: 'Tipo de sociedad, estatutos a la medida y formalización ante la Cámara de Comercio. Y los contratos con tus clientes y proveedores.',
+    enlaces: [{ texto: 'Crear tu empresa', ruta: '/crear-empresa' }, { texto: 'Contratos', ruta: '/contratos-empresas' }],
+  },
+  {
+    n: '03', nombre: 'Crecimiento digital', titulo: 'Sal a vender con todo en orden',
+    texto: 'Página web, marketing y automatización para un negocio que ya tiene su marca y su empresa en regla. [CONFIRMAR alcance]',
+    enlaces: [{ texto: 'Cuéntanos tu proyecto', ruta: '#contacto' }],
+  },
+];
+
+// La diferencia que más confunde (manual, «Cómo suena»: una diferencia por pieza).
+const diferencias = [
+  { t: 'Razón social', d: 'Identifica a tu sociedad en el registro mercantil. No te da derechos sobre el nombre como marca.' },
+  { t: 'Nombre comercial', d: 'Es el nombre con el que operas ante el público. Su protección depende del uso y es difícil de probar.' },
+  { t: 'Dominio y redes', d: 'Tener el .com o el usuario de Instagram no te da ningún derecho sobre la marca.' },
+  { t: 'Marca registrada', d: 'Es la única que te da un derecho exclusivo sobre el signo, para los productos o servicios que registres.', marca: true },
+];
+
 const situaciones = [
-  ['Voy a montar un negocio con un socio y quiero que quede claro desde el principio.', '#contacto', 'Cuéntame tu caso'],
   ['Ya tengo la empresa, pero nunca registré la marca.', '/registro-de-marca', 'Registro de marca'],
-  ['Un cliente grande me mandó un contrato y no sé si me conviene firmarlo.', '/contratos-empresas', 'Revisión de contratos'],
-  ['Le voy a dar trabajo a alguien y necesito formalizar bien la relación.', '/contratos-empresas', 'Contratos'],
-  ['Vendo por internet y no tengo nada de esto organizado legalmente.', '#contacto', 'Cuéntame tu caso'],
+  ['Alguien empezó a usar un nombre muy parecido al mío.', '/registro-de-marca', 'Registro de marca'],
   ['Llevo años facturando como persona natural y creo que ya es hora de formalizar.', '/crear-empresa', 'Crear tu empresa'],
+  ['Voy a montar un negocio con un socio y quiero que quede claro desde el principio.', '/crear-empresa', 'Crear tu empresa'],
+  ['Un cliente grande me mandó un contrato y no sé si me conviene firmarlo.', '/contratos-empresas', 'Contratos'],
+  ['Ya tengo todo en regla, pero mi negocio no se ve en internet.', '#contacto', 'Cuéntanos tu proyecto'],
 ];
 
 const faq = [
-  { p: '¿Atiendes solo en Bogotá?', r: 'Estoy en Bogotá y atiendo presencialmente aquí, pero trabajo de forma virtual con clientes de todo el país. La mayoría de los asuntos empresariales se resuelven completamente en línea.' },
-  { p: '¿La primera conversación tiene costo?', r: 'No. La primera conversación es para entender tu situación y decirte si puedo ayudarte y de qué forma. Si hay un servicio que contratar, te paso una propuesta con el alcance y los honorarios antes de empezar cualquier trabajo. [CONFIRMAR]' },
-  { p: '¿Cómo cobras?', r: 'Te presento una propuesta con el alcance del servicio y los honorarios antes de empezar. Si hay costos que no dependen de mí —tasas oficiales, derechos de trámite, gastos de terceros— te los indico por separado desde el comienzo para que sepas el total. [TARIFA / CONFIRMAR modalidad]' },
-  { p: '¿Cuánto se demora mi trámite?', r: 'Depende del asunto. En lo que yo controlo —redactar, revisar, radicar— te doy un plazo concreto y lo cumplo. En lo que depende de una entidad, te digo cuáles son los tiempos habituales, pero ni yo ni ningún abogado puede comprometerlos.' },
-  { p: '¿Trabajas con empresas ya constituidas o solo con emprendedores que empiezan?', r: 'Con ambas. Con quien está empezando, acompaño la creación. Con empresas en funcionamiento, trabajo contratos, marca y temas societarios. [CONFIRMAR]' },
-  { p: '¿Qué pasa si mi caso no es de tu área?', r: 'Te lo digo desde el principio y te oriento sobre a quién acudir. Prefiero eso a aceptar un asunto que no voy a poder manejar bien.' },
+  { p: '¿Registrar mi empresa no protege ya mi marca?', r: 'No. La inscripción en la Cámara de Comercio identifica a tu sociedad. La protección como marca se pide aparte, ante la Superintendencia de Industria y Comercio. Son dos trámites distintos. [Ver registro de marca](/registro-de-marca)' },
+  { p: '¿Me pueden asegurar que la marca quedará registrada?', r: 'Nadie puede. La decisión es de la Superintendencia de Industria y Comercio. Lo que sí hacemos es revisar antecedentes y darte un concepto honesto sobre el riesgo antes de que pagues las tasas.' },
+  { p: '¿Quién lleva la parte legal?', r: `La abogada ${SITE.abogada}. Hablas directamente con ella, no con un asistente.` },
+  { p: '¿También hacen la página web y el marketing?', r: 'Sí, cuando tu marca y tu empresa ya están en orden. Cuéntanos qué necesitas y te decimos por dónde empezar. [CONFIRMAR alcance]' },
+  { p: '¿La primera conversación tiene costo?', r: 'No. Es para entender tu caso y decirte qué se puede hacer. Si hay un servicio que contratar, recibes una propuesta con el alcance y los honorarios antes de empezar. [CONFIRMAR]' },
+  { p: '¿Atienden fuera de Bogotá?', r: 'Sí. Los trámites de marca y empresa se pueden hacer completamente en línea, en todo el país.' },
 ];
 ---
 <Base
-  title="Abogada en Bogotá para personas y empresas — Laura Riaño"
-  description="Asesoría legal clara en Colombia: contratos, creación de empresa, registro de marca, tutelas y familia. Te explico tus opciones sin tecnicismos. Escríbeme por WhatsApp."
+  title="Registro de marca y creación de empresa en Colombia — Marca & Empresa"
+  description="Protege tu marca ante la SIC, crea tu empresa con bases claras y sal a vender con página web, marketing y automatización. Asesoría con abogada en Bogotá."
   borrador
   schema={[faqSchema(faq)]}
 >
   <!-- 1 · Hero -->
   <section class="hero">
-    <div class="hero__media">
-      <Image src={retrato} alt="Laura Riaño, abogada en Bogotá" widths={[480, 800, 1086]}
-             sizes="(min-width: 960px) 45vw, 100vw" loading="eager" fetchpriority="high" />
-    </div>
-    <div class="hero__texto">
-      <h1>El derecho de tu lado. <em>También en tu negocio.</em></h1>
-      <p class="destacado">
-        Soy Laura Riaño, abogada en Bogotá. Acompaño a personas, emprendedores y empresas en Colombia a tomar
-        decisiones legales con claridad: desde un contrato hasta crear tu empresa o proteger tu marca.
-      </p>
-      <div class="fila-botones">
-        <a class="btn btn--primario" href="#contacto" data-evento="cta_click" data-posicion="hero">Cuéntame qué necesitas</a>
-        <a class="btn btn--claro" href="#como-trabajo" data-evento="cta_click" data-posicion="hero-secundario">Ver cómo trabajo</a>
+    <div class="wrap hero__in">
+      <div class="hero__texto">
+        <p class="etiqueta">Marca · Empresa · Crecimiento digital</p>
+        <h1><em>Antes de crecer,</em> protege lo que construyes.</h1>
+        <p class="destacado">
+          Registramos tu marca, creamos tu empresa y dejamos tus contratos en orden, con una abogada que te explica cada paso.
+          Después, llevamos tu negocio a internet.
+        </p>
+        <div class="fila-botones">
+          <a class="btn btn--primario" href="#contacto" data-evento="cta_click" data-posicion="hero">Agenda tu asesoría</a>
+          <a class="btn btn--borde" href={url('/registro-de-marca')} data-evento="cta_click" data-posicion="hero-secundario">Revisar mi marca</a>
+        </div>
+        <ul class="hero__datos">
+          <li><b>SIC</b><span>Registro de marca</span></li>
+          <li><b>Cámara de Comercio</b><span>Creación de empresa</span></li>
+          <li><b>Web</b><span>Marketing y automatización</span></li>
+        </ul>
       </div>
-      <ul class="hero__meta">
-        <li>Bogotá y toda Colombia</li>
-        <li>Atención virtual</li>
-        <li>Te respondo en menos de 24 horas [CONFIRMAR]</li>
-      </ul>
+
+      <figure class="hero__visual">
+        <div class="rasgado" aria-hidden="true"></div>
+        <svg class="gotas" viewBox="0 0 120 260" aria-hidden="true">
+          <rect x="18" y="0" width="3" height="150" rx="1.5" />
+          <circle cx="19.5" cy="158" r="8" />
+          <rect x="58" y="0" width="3" height="210" rx="1.5" />
+          <circle cx="59.5" cy="218" r="8" />
+          <rect x="98" y="0" width="3" height="110" rx="1.5" />
+          <circle cx="99.5" cy="118" r="8" />
+        </svg>
+        <div class="hero__foto">
+          <Image src={retrato} alt={`${SITE.abogada}, abogada de Marca & Empresa`} widths={[420, 640, 900]}
+                 sizes="(min-width: 960px) 40vw, 90vw" loading="eager" fetchpriority="high" />
+        </div>
+        <figcaption class="hero__firma"><b>{SITE.abogada}</b> Abogada · Bogotá</figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- 2 · Segmentación temprana -->
-  <section class="sec">
+  <!-- 2 · Tres líneas de servicio, en el orden del manual -->
+  <section class="sec lineas-sec">
     <div class="wrap">
-      <p class="etiqueta">Empecemos por aquí</p>
-      <h2>¿Cómo puedo ayudarte?</h2>
-      <p class="destacado">Dime desde dónde llegas y te muestro lo que aplica a tu caso.</p>
-      <div class="puertas">
-        <a class="puerta" href={url('/servicios-personas')} data-evento="segmento_click" data-segmento="personas">
-          <span class="puerta__tag">Para mí</span>
-          <h3>Es un tema personal</h3>
-          <p>Un contrato que vas a firmar, una tutela, un tema de familia, una compra que salió mal o un problema en tu trabajo.</p>
-          <span class="puerta__ir">Ver servicios para personas →</span>
-        </a>
-        <a class="puerta puerta--negocio" href={url('/emprendedores-y-empresas')} data-evento="segmento_click" data-segmento="negocio">
-          <span class="puerta__tag">Para mi negocio</span>
-          <h3>Es para mi negocio</h3>
-          <p>Vas a crear tu empresa, quieres proteger tu marca, necesitas contratos con clientes o proveedores, o vas a asociarte con alguien.</p>
-          <span class="puerta__ir">Ver servicios para tu negocio →</span>
-        </a>
+      <div class="cabeza">
+        <p class="etiqueta">Lo que hacemos</p>
+        <h2>Primero proteges lo que construyes. <em>Después lo haces crecer.</em></h2>
       </div>
+      <ol class="lineas">
+        {lineas.map((l) => (
+          <li class={l.destacada ? 'linea linea--marca' : 'linea'}>
+            <span class="linea__n">{l.n}</span>
+            <p class="linea__nombre">{l.nombre}</p>
+            <h3>{l.titulo}</h3>
+            <p class="linea__texto">{l.texto}</p>
+            <p class="linea__enlaces">
+              {l.enlaces.map((e) => (
+                <a href={e.ruta.startsWith('#') ? e.ruta : url(e.ruta)} data-evento="servicio_card_click" data-servicio-destino={e.ruta}>{e.texto} →</a>
+              ))}
+            </p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
-  <!-- 3 · Ciclo de vida empresarial -->
-  <section class="sec sec--oscura">
-    <div class="wrap">
-      <p class="etiqueta">Emprendedores y empresas</p>
-      <h2 class="corto">Tu negocio puede empezar pequeño. Sus bases legales no.</h2>
-      <p class="destacado">
-        La mayoría de los problemas legales de un negocio no aparecen de un día para otro: se arman despacio, mientras nadie
-        los mira. Un acuerdo que quedó de palabra. Una marca que nunca se registró. Un contrato que se firmó sin leerlo
-        completo. Acompaño tu negocio en las cuatro decisiones que evitan casi todos esos problemas.
-      </p>
-      <Ciclo />
-      <div class="fila-botones">
-        <a class="btn btn--primario" href={url('/emprendedores-y-empresas')}>Ver todo lo que puedo hacer por tu negocio</a>
+  <!-- 3 · La diferencia que más confunde (pieza firma de la marca) -->
+  <section class="sec papel">
+    <div class="rasgado-banda" aria-hidden="true"></div>
+    <div class="wrap papel__in">
+      <div class="papel__titulo">
+        <p class="papel__idea">Nombre, logo y marca</p>
+        <h2 class="papel__afirmacion">no son lo mismo</h2>
+        <p class="destacado">La protección empieza cuando se entiende la diferencia.</p>
+        <div class="fila-botones">
+          <a class="btn btn--primario" href={url('/registro-de-marca')}>Revisar mi marca</a>
+        </div>
       </div>
+      <dl class="diferencias">
+        {diferencias.map((x) => (
+          <div class={x.marca ? 'dif dif--marca' : 'dif'}>
+            <dt>{x.t}</dt>
+            <dd>{x.d}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </section>
 
   <!-- 4 · Situaciones reales -->
-  <section class="sec sec--calida">
+  <section class="sec">
     <div class="wrap">
       <p class="etiqueta">Situaciones reales</p>
       <h2>¿Te suena alguna de estas?</h2>
-      <p class="destacado">Casi nadie llega diciendo «necesito derecho societario». Llegan así:</p>
       <ul class="situaciones">
         {situaciones.map(([frase, destino, etiqueta]) => (
           <li>
@@ -117,108 +168,133 @@ const faq = [
           </li>
         ))}
       </ul>
-      <p class="situaciones__otra">¿No te ves en ninguna? <a href="#contacto">Cuéntame tu caso →</a></p>
     </div>
   </section>
 
-  <!-- 5 · Cómo trabajo -->
+  <!-- 5 · Cómo trabajamos -->
   <ComoTrabajo />
 
-  <!-- 6 · Sobre Laura (corto) -->
+  <!-- 6 · La abogada detrás -->
   <BloqueLaura />
 
-  <!-- 7 · Servicios para personas (condensado) -->
-  <section class="sec sec--calida">
-    <div class="wrap">
-      <p class="etiqueta">Para personas</p>
-      <h2>Servicios para personas</h2>
-      <p class="destacado">Lo de siempre, resuelto de forma simple.</p>
-      <ul class="tarjetas">
+  <!-- 7 · Para personas (secundario) -->
+  <section class="sec sec--calida personas">
+    <div class="wrap personas__in">
+      <div>
+        <p class="etiqueta">Para personas</p>
+        <h2>¿Es un tema personal?</h2>
+        <p class="destacado">Laura también atiende asuntos de personas naturales.</p>
+      </div>
+      <ul class="personas__lista">
         {SERVICIOS_PERSONAS.map((s) => (
-          <li>
-            <a href={url(`/servicios-personas#${s.id}`)}>
-              <h3>{s.titulo}</h3>
-              <p>{s.texto}</p>
-            </a>
-          </li>
+          <li><a href={url(`/servicios-personas#${s.id}`)}>{s.titulo}</a></li>
         ))}
       </ul>
-      <div class="fila-botones">
-        <a class="btn btn--borde" href={url('/servicios-personas')}>Ver todos los servicios para personas</a>
-      </div>
     </div>
   </section>
 
-  <!-- 8 · Recurso gratuito: llega en la Fase 5 junto con la checklist (estrategia §19). -->
-
-  <!-- 9 · Formulario -->
+  <!-- 8 · Formulario -->
   <Formulario
-    titulo="Cuéntame qué necesitas"
-    intro="Primera conversación sin compromiso. Me cuentas tu caso y te digo con franqueza qué se puede hacer y qué no. [CONFIRMAR]"
+    titulo="Agenda tu asesoría"
+    intro="Cuéntanos qué quieres proteger, crear o lanzar. Te decimos con franqueza qué se puede hacer y por dónde empezar."
   />
 
-  <!-- 10 · FAQ -->
+  <!-- 9 · FAQ -->
   <Faq preguntas={faq} />
 </Base>
 
 <style>
-  .hero { background: var(--aubergine); color: #fff; display: grid; }
-  .hero__media { position: relative; min-height: 340px; background: var(--aubergine-medio); }
-  .hero__media :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-  .hero__texto { padding: 40px 20px 56px; }
-  .hero h1 { color: #fff; margin-bottom: 18px; }
-  .hero h1 em { display: block; font-style: normal; color: var(--dorado-claro); }
-  .hero .destacado { color: #eadde9; }
-  .hero__meta { list-style: none; padding: 0; margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.88rem; color: #c9b4c7; }
-  .hero__meta li::before { content: ''; display: inline-block; width: 6px; height: 6px; margin: 0 8px 2px 0; border-radius: 50%; background: var(--dorado); }
-  @media (min-width: 960px) {
-    .hero { grid-template-columns: 1.1fr 0.9fr; min-height: 620px; }
-    .hero__texto { order: -1; align-self: center; padding: 72px 48px 72px max(20px, calc((100vw - var(--ancho)) / 2 + 20px)); }
-    .hero__media { min-height: auto; }
+  /* Hero: papel claro, texto a la izquierda; foto con papel rasgado cobalto y los trazos con gota del logo. */
+  .hero { padding-block: 40px 64px; overflow: hidden; }
+  .hero__in { display: grid; gap: 40px; align-items: center; }
+  @media (min-width: 960px) { .hero { padding-block: 72px 96px; } .hero__in { grid-template-columns: 1.15fr 0.85fr; gap: 64px; } }
+  .hero h1 { margin-bottom: 4px; }
+  .hero h1 em { display: block; color: var(--cobalto); }
+  .hero__datos { list-style: none; padding: 0; margin-top: 40px; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 12px 32px; border-top: 1px solid var(--linea); padding-top: 20px; }
+  .hero__datos li { display: grid; gap: 2px; }
+  .hero__datos b { font-family: var(--serif); font-size: 1.15rem; color: var(--azul-notarial); }
+  .hero__datos span { font-size: 0.85rem; color: var(--gris-pizarra); }
+  @media (max-width: 560px) { .hero__datos { grid-template-columns: 1fr 1fr; } }
+
+  .hero__visual { position: relative; margin: 0 auto; width: min(100%, 440px); padding: 28px 28px 0 0; }
+  .hero__foto { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--hielo); }
+  .hero__foto :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .rasgado {
+    position: absolute; top: 0; right: 0; width: 78%; height: 72%; background: var(--cobalto);
+    clip-path: polygon(0 6%, 9% 0, 22% 5%, 36% 1%, 50% 6%, 63% 0, 78% 4%, 92% 0, 100% 3%, 100% 100%, 0 100%);
   }
-
-  .puertas { display: grid; gap: 16px; margin-top: 32px; }
-  @media (min-width: 760px) { .puertas { grid-template-columns: 1fr 1fr; gap: 20px; } }
-  .puerta {
-    display: block; min-height: 160px; padding: 30px 26px 26px; border-radius: var(--radio);
-    background: #fff; border: 1px solid rgba(50, 16, 48, 0.12); color: var(--texto); text-decoration: none;
-    transition: transform 0.16s ease, box-shadow 0.16s ease;
+  .gotas { display: none; position: absolute; left: -64px; top: 64px; width: 48px; height: auto; fill: var(--azul-notarial); }
+  @media (min-width: 960px) { .gotas { display: block; } }
+  .hero__firma {
+    position: absolute; left: -12px; bottom: 28px; z-index: 2; background: var(--blanco); padding: 10px 16px;
+    font-size: 0.85rem; color: var(--gris-pizarra); box-shadow: 0 10px 26px rgba(0, 40, 112, 0.14);
   }
-  .puerta:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(50, 16, 48, 0.13); }
-  .puerta--negocio { background: var(--aubergine); border: 2px solid var(--dorado); color: #fff; }
-  .puerta__tag { font-size: 12px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dorado-texto); }
-  .puerta--negocio .puerta__tag, .puerta--negocio .puerta__ir { color: var(--dorado); }
-  .puerta h3 { font-family: var(--serif); font-size: 1.7rem; margin: 8px 0 10px; color: var(--aubergine); }
-  .puerta--negocio h3 { color: #fff; }
-  .puerta p { color: var(--texto-secundario); }
-  .puerta--negocio p { color: #e2d2e1; }
-  .puerta__ir { display: inline-block; margin-top: 18px; font-weight: 600; color: var(--dorado-texto); }
+  .hero__firma b { display: block; font-family: var(--serif); font-size: 1.05rem; color: var(--azul-notarial); }
 
-  .corto { max-width: 28ch; }
+  /* Tres líneas */
+  .lineas-sec { padding-top: 32px; }
+  .cabeza h2 { max-width: 24ch; }
+  .cabeza h2 em { color: var(--cobalto); }
+  .lineas { list-style: none; padding: 0; margin-top: 40px; display: grid; gap: 16px; counter-reset: none; }
+  @media (min-width: 900px) { .lineas { grid-template-columns: 1.15fr 1fr 1fr; } }
+  .linea {
+    max-width: none; display: flex; flex-direction: column; gap: 10px; padding: 32px 28px;
+    background: var(--blanco); border: 1px solid rgba(0, 40, 112, 0.1);
+  }
+  .linea--marca { background: var(--azul-notarial); border-color: var(--azul-notarial); color: var(--blanco); }
+  .linea__n { font-family: var(--serif); font-size: 2.6rem; line-height: 1; color: var(--cobalto); }
+  .linea--marca .linea__n { color: var(--acento-claro); }
+  .linea__nombre { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris-pizarra); }
+  .linea--marca .linea__nombre { color: var(--hielo); }
+  .linea h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--azul-notarial); }
+  .linea--marca h3 { color: var(--blanco); }
+  .linea__texto { color: var(--gris-pizarra); }
+  .linea--marca .linea__texto { color: var(--hielo); }
+  .linea__enlaces { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  .linea__enlaces a { font-weight: 600; text-decoration: none; }
+  .linea__enlaces a:hover { text-decoration: underline; }
+  .linea--marca .linea__enlaces a { color: var(--blanco); }
+  .linea--marca :focus-visible { outline-color: var(--blanco); }
 
+  /* Pieza firma: papel con borde rasgado cobalto, como en Instagram */
+  .papel { position: relative; background: var(--papel-sombra); overflow: hidden; }
+  .rasgado-banda {
+    position: absolute; left: 0; right: 0; top: 0; height: 28px; background: var(--cobalto);
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 94% 70%, 86% 45%, 77% 80%, 68% 50%, 58% 85%, 49% 55%, 40% 90%, 31% 50%, 22% 75%, 13% 45%, 5% 80%, 0 55%);
+  }
+  .papel__in { display: grid; gap: 40px; align-items: center; }
+  @media (min-width: 960px) { .papel__in { grid-template-columns: 0.9fr 1.1fr; gap: 64px; } }
+  .papel__idea { font-family: var(--serif); font-style: italic; font-size: 30px; line-height: 1.1; color: var(--azul-notarial); }
+  .papel__afirmacion { font-size: 40px; margin-top: 2px; }
+  @media (min-width: 960px) { .papel__idea { font-size: 44px; } .papel__afirmacion { font-size: 62px; } }
+  .diferencias { display: grid; gap: 12px; margin: 0; }
+  @media (min-width: 640px) { .diferencias { grid-template-columns: 1fr 1fr; } }
+  .dif { background: var(--papel); padding: 22px; border: 1px solid rgba(0, 40, 112, 0.1); }
+  .dif dt { font-family: var(--serif); font-weight: 700; font-size: 1.2rem; color: var(--azul-notarial); margin-bottom: 6px; }
+  .dif dd { margin: 0; color: var(--gris-pizarra); font-size: 0.95rem; }
+  .dif--marca { background: var(--cobalto); border-color: var(--cobalto); }
+  .dif--marca dt, .dif--marca dd { color: var(--blanco); }
+
+  /* Situaciones */
   .situaciones { list-style: none; padding: 0; margin-top: 30px; display: grid; gap: 12px; }
-  @media (min-width: 1040px) { .situaciones { grid-template-columns: 1fr 1fr; gap: 14px; } }
+  @media (min-width: 900px) { .situaciones { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
   .situaciones li { max-width: none; }
   .situaciones a {
-    display: block; height: 100%; padding: 20px 22px; border-radius: 12px; text-decoration: none; color: var(--texto);
-    background: #fff; border: 1px solid rgba(50, 16, 48, 0.1); border-left: 3px solid var(--dorado);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 14px; height: 100%; padding: 22px;
+    text-decoration: none; color: var(--tinta); background: var(--blanco); border: 1px solid rgba(0, 40, 112, 0.1);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   }
-  .situaciones a:hover { transform: translateX(4px); box-shadow: 0 10px 26px rgba(50, 16, 48, 0.1); }
-  .situaciones q { font-family: var(--serif); font-size: 1.2rem; font-style: italic; }
-  .situaciones small { display: block; margin-top: 6px; font-size: 0.84rem; font-weight: 600; color: var(--dorado-texto); }
-  .situaciones__otra { margin-top: 24px; }
-  .situaciones__otra a { font-weight: 600; }
+  .situaciones a:hover { transform: translateY(-3px); border-color: var(--cobalto); box-shadow: 0 12px 28px rgba(0, 40, 112, 0.1); }
+  .situaciones q { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--azul-notarial); }
+  .situaciones small { font-size: 0.84rem; font-weight: 600; color: var(--cobalto); }
 
-  .tarjetas { list-style: none; padding: 0; margin-top: 30px; display: grid; gap: 12px; }
-  @media (min-width: 760px) { .tarjetas { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1040px) { .tarjetas { grid-template-columns: repeat(3, 1fr); } }
-  .tarjetas li { max-width: none; }
-  .tarjetas a {
-    display: block; height: 100%; padding: 22px; border-radius: var(--radio); text-decoration: none; color: var(--texto);
-    background: #fff; border: 1px solid rgba(50, 16, 48, 0.1); transition: transform 0.15s ease, box-shadow 0.15s ease;
+  /* Personas */
+  .personas__in { display: grid; gap: 28px; align-items: center; }
+  @media (min-width: 900px) { .personas__in { grid-template-columns: 1fr 1fr; } }
+  .personas__lista { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .personas__lista a {
+    display: inline-flex; min-height: 44px; align-items: center; padding: 8px 18px; border-radius: var(--radio-pill);
+    background: var(--papel); border: 1px solid rgba(0, 40, 112, 0.18); color: var(--azul-notarial); text-decoration: none; font-weight: 500;
   }
-  .tarjetas a:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(50, 16, 48, 0.1); }
-  .tarjetas h3 { font-size: 1.1rem; margin-bottom: 6px; color: var(--aubergine); }
-  .tarjetas p { font-size: 0.95rem; color: var(--texto-secundario); }
+  .personas__lista a:hover { border-color: var(--azul-notarial); }
 </style>

@@ -8,7 +8,7 @@ import foto from '../assets/fotos/laura-2.jpeg';
 import { migasSchema } from '../lib/schema';
 ---
 <Base
-  title="Laura Riaño, abogada en Bogotá — sobre mí"
+  title="Laura Riaño, abogada — Marca & Empresa"
   description="Abogada en Bogotá. Acompaño a personas y emprendedores a tomar decisiones legales con claridad. Conoce cómo trabajo y en qué puedo ayudarte."
   borrador
   schema={[migasSchema(Astro.site, [{ nombre: 'Inicio', ruta: '/' }, { nombre: 'Sobre Laura' }])]}
@@ -51,7 +51,7 @@ import { migasSchema } from '../lib/schema';
 <style>
   .sobre { display: grid; gap: 36px; }
   @media (min-width: 960px) { .sobre { grid-template-columns: 0.8fr 1.2fr; gap: 64px; align-items: start; } }
-  .sobre__foto { border-radius: var(--radio); overflow: hidden; aspect-ratio: 4 / 5; background: var(--aubergine-claro); }
+  .sobre__foto { border-radius: var(--radio); overflow: hidden; aspect-ratio: 4 / 5; background: var(--hielo); }
   @media (min-width: 960px) { .sobre__foto { position: sticky; top: 96px; } }
   .sobre__foto :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
   .texto > * + * { margin-top: 16px; }

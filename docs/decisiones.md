@@ -20,3 +20,12 @@
 - **Ajuste de copy:** en `/registro-de-marca`, «Si alguien te garantiza el registro…» pasa a «Si alguien te asegura el registro…», para no usar una palabra de la lista de veto ni siquiera en negativo.
 - **Recurso gratuito (checklist) pendiente** para la Fase 5: el bloque 8 de la home se omite hasta tener el PDF y el envío por correo.
 - **Aviso legal y política de datos** existen como páginas en borrador con el marcador `[CONFIRMAR]`: el texto lo redacta o aprueba Laura.
+
+## 2026-10-14 · Giro a Marca & Empresa
+
+- **La marca del sitio pasa a ser Marca & Empresa.** Laura sigue como la abogada que lleva los casos: aparece en el hero, en su bloque y en `/sobre-laura`.
+- **Identidad del manual** (`docs/marca-y-empresa/`): azul notarial #002870 del logo, cobalto #3346C8 como acento, fondo papel #F3F2EE, Libre Caslon Text para titulares (cursiva que plantea, negrita que afirma) y Montserrat para el texto.
+- **Logo** horizontal azul en el encabezado y blanco en el footer; **favicon** con el monograma M&E blanco sobre azul notarial (ico 16/32/48, png 512 y apple-touch-icon).
+- **Home nueva** con las tres líneas en el orden del manual (Marca → Empresa → Crecimiento digital), la pieza «Nombre, logo y marca no son lo mismo» con papel rasgado y la sección de personas como secundaria.
+- **Crecimiento digital** (web, marketing, automatización) entra al formulario y a la home con `[CONFIRMAR alcance]`: todavía no tiene landing.
+- **Pendiente:** confirmar si Marca & Empresa usa el mismo WhatsApp y correo de Laura (`src/config/site.ts`) y quién presta los servicios digitales.

@@ -5,7 +5,8 @@ import { SITE } from '../config/site';
  * Cada página usa su propia clave: así Laura sabe de dónde viene el contacto desde el primer mensaje.
  */
 export const MENSAJES = {
-  general: 'Hola Laura, llegué a tu página y quisiera hacerte una consulta.',
+  general: 'Hola, llegué a la página de Marca & Empresa y quisiera agendar una asesoría.',
+  digital: 'Hola, quiero hablar sobre una página web, marketing o automatización para mi negocio.',
   'crear-empresa': 'Hola Laura, estoy interesado/a en crear una empresa y quisiera conocer cómo funciona la asesoría.',
   'registro-de-marca': 'Hola Laura, quiero revisar la posibilidad de registrar mi marca.',
   'contratos-empresas': 'Hola Laura, necesito elaborar o revisar un contrato para mi negocio.',

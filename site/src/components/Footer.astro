@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import logoBlanco from '../assets/marca/logo-horizontal-blanco.png';
 import { SITE, AVISO_GENERAL } from '../config/site';
 import { NEGOCIO, PERSONAS, LEGALES } from '../config/navegacion';
 import { whatsappUrl } from '../lib/whatsapp';
@@ -8,8 +10,9 @@ const anio = new Date().getFullYear();
 ---
 <footer class="pie">
   <div class="wrap">
+    <Image src={logoBlanco} alt={SITE.marca} width={240} height={59} densities={[1, 2]} class="pie__logo" />
     <p class="pie__lema">{SITE.lema}</p>
-    <p class="pie__quien">{SITE.marca} · {SITE.rol} · {SITE.ciudad}, Colombia</p>
+    <p class="pie__quien">Asesoría jurídica a cargo de la abogada {SITE.abogada} · {SITE.ciudad}, Colombia</p>
 
     <div class="pie__grid">
       <nav aria-label="Para tu negocio">
@@ -21,9 +24,9 @@ const anio = new Date().getFullYear();
         <h2 class="pie__h">Para personas</h2>
         {PERSONAS.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}
       </nav>
-      <nav aria-label="Laura">
-        <h2 class="pie__h">Laura</h2>
-        <a href={url('/sobre-laura')}>Sobre mí</a>
+      <nav aria-label="Marca & Empresa">
+        <h2 class="pie__h">Marca & Empresa</h2>
+        <a href={url('/sobre-laura')}>Quién te asesora</a>
         <a href={url('/contacto')}>Contacto</a>
       </nav>
       <div>
@@ -43,16 +46,17 @@ const anio = new Date().getFullYear();
 </footer>
 
 <style>
-  .pie { background: var(--aubergine); color: #e5d6e4; padding-block: 56px 120px; font-size: 15px; }
+  .pie { background: var(--azul-notarial); color: #dde3f6; padding-block: 56px 120px; font-size: 15px; }
   @media (min-width: 1040px) { .pie { padding-bottom: 56px; } }
-  .pie a { display: block; padding: 5px 0; color: #e5d6e4; text-decoration: none; }
-  .pie a:hover { color: var(--dorado-claro); text-decoration: underline; }
-  .pie__lema { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; color: #fff; }
+  .pie a { display: block; padding: 5px 0; color: #dde3f6; text-decoration: none; }
+  .pie a:hover { color: var(--hielo); text-decoration: underline; }
+  .pie__logo { width: 240px; height: auto; margin-bottom: 20px; }
+  .pie__lema { font-family: var(--serif); font-style: italic; font-size: 1.4rem; color: #fff; }
   .pie__quien { margin-bottom: 36px; }
   .pie__grid { display: grid; gap: 28px; }
   @media (min-width: 760px) { .pie__grid { grid-template-columns: repeat(4, 1fr); } }
-  .pie__h { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dorado); margin-bottom: 10px; }
-  .pie__legal { margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 13px; color: #c9b4c7; display: grid; gap: 10px; }
+  .pie__h { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--acento-claro); margin-bottom: 10px; }
+  .pie__legal { margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 13px; color: #b9c4ea; display: grid; gap: 10px; }
   .pie__enlaces { display: flex; flex-wrap: wrap; gap: 4px 20px; }
   .pie__enlaces a { display: inline; }
   .pie__aviso { font-style: italic; max-width: 90ch; }

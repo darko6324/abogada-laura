@@ -25,7 +25,7 @@ const servicios = defineCollection({
     /** Clave del mensaje de WhatsApp (src/lib/whatsapp.ts). Por defecto, el id del archivo. */
     whatsapp: z.string().optional(),
     /** Opción preseleccionada en el formulario. */
-    formulario: z.enum(['crear-empresa', 'registro-de-marca', 'contrato', 'socios', 'asesoria-empresa', 'personal', 'otro']),
+    formulario: z.enum(['crear-empresa', 'registro-de-marca', 'contrato', 'socios', 'asesoria-empresa', 'digital', 'personal', 'otro']),
     orden: z.number().default(99),
     estado,
 

@@ -162,12 +162,12 @@ const schema = [
 </Base>
 
 <style>
-  .hero { background: var(--aubergine); color: #fff; padding-block: 48px 64px; }
+  .hero { background: var(--azul-notarial); color: #fff; padding-block: 48px 64px; }
   @media (min-width: 960px) { .hero { padding-block: 72px 96px; } }
   .hero h1 { color: #fff; max-width: 20ch; margin-bottom: 18px; }
-  .hero .destacado { color: #eadde9; }
-  .migas { font-size: 14px; margin-bottom: 20px; color: #c9b4c7; }
-  .migas a { color: #e8d5a0; }
+  .hero .destacado { color: #e3e8f8; }
+  .migas { font-size: 14px; margin-bottom: 20px; color: #b9c4ea; }
+  .migas a { color: var(--hielo); }
 
   .texto > * + * { margin-top: 16px; }
   .texto h2 { margin-bottom: 8px; }
@@ -175,34 +175,34 @@ const schema = [
   .reconoce { list-style: none; padding: 0; margin-top: 28px; display: grid; gap: 12px; }
   @media (min-width: 960px) { .reconoce { grid-template-columns: 1fr 1fr; } }
   .reconoce li {
-    background: #fff; border: 1px solid rgba(50, 16, 48, 0.1); border-left: 3px solid var(--dorado);
+    background: #fff; border: 1px solid rgba(0, 40, 112, 0.1); border-left: 3px solid var(--cobalto);
     border-radius: 12px; padding: 18px 20px; font-family: var(--serif); font-size: 1.2rem; font-style: italic; max-width: none;
   }
 
   .incluye { list-style: none; padding: 0; margin-top: 24px; display: grid; gap: 14px; }
   @media (min-width: 960px) { .incluye { grid-template-columns: 1fr 1fr; gap: 16px 32px; } }
   .incluye li { position: relative; padding-left: 30px; }
-  .incluye li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--dorado-texto); font-weight: 700; }
+  .incluye li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--cobalto); font-weight: 700; }
   .sub { margin-top: 40px; }
 
   .pasos { list-style: none; padding: 0; margin-top: 32px; }
   .pasos li { display: grid; grid-template-columns: auto 1fr; gap: 20px; padding: 20px 0; border-top: 1px solid rgba(255, 255, 255, 0.14); }
   .pasos li:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.14); }
-  .pasos__n { font-family: var(--serif); font-size: 1.8rem; color: var(--dorado); min-width: 44px; line-height: 1.1; }
+  .pasos__n { font-family: var(--serif); font-size: 1.8rem; color: var(--acento-claro); min-width: 44px; line-height: 1.1; }
   .pasos h3 { color: #fff; font-size: 1.1rem; margin-bottom: 4px; }
-  .pasos p { color: #d9c8d8; }
-  .nota-proceso { margin-top: 24px; color: #eadde9; font-style: italic; }
+  .pasos p { color: #cfd8f3; }
+  .nota-proceso { margin-top: 24px; color: #e3e8f8; font-style: italic; }
 
   .no-incluye { padding-left: 1.2em; display: grid; gap: 12px; }
-  .cierre-honesto { font-family: var(--serif); font-size: 1.35rem; color: var(--aubergine); }
+  .cierre-honesto { font-family: var(--serif); font-size: 1.35rem; color: var(--azul-notarial); }
 
   .sec--corta { padding-block: 40px; }
   .relacionados { display: flex; flex-wrap: wrap; gap: 12px; }
   .relacionados a {
-    padding: 12px 18px; border-radius: 999px; border: 1px solid rgba(50, 16, 48, 0.2);
-    background: #fff; color: var(--aubergine); text-decoration: none; font-weight: 500;
+    padding: 12px 18px; border-radius: 999px; border: 1px solid rgba(0, 40, 112, 0.2);
+    background: #fff; color: var(--azul-notarial); text-decoration: none; font-weight: 500;
   }
-  .relacionados a:hover { border-color: var(--aubergine); }
+  .relacionados a:hover { border-color: var(--azul-notarial); }
 
-  .aviso { padding-block: 24px; font-size: 14px; font-style: italic; color: var(--texto-secundario); }
+  .aviso { padding-block: 24px; font-size: 14px; font-style: italic; color: var(--gris-pizarra); }
 </style>

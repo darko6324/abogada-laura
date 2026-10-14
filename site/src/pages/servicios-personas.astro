@@ -8,7 +8,7 @@ import { migasSchema } from '../lib/schema';
 import { SERVICIOS_PERSONAS } from '../config/personas';
 ---
 <Base
-  title="Servicios legales para personas en Bogotá — Laura Riaño"
+  title="Servicios legales para personas en Bogotá — Marca & Empresa"
   description="Contratos, tutelas, derechos de petición, familia, consumidor y acoso laboral. Te explico qué se puede hacer, sin tecnicismos y sin compromiso."
   borrador
   schema={[migasSchema(Astro.site, [{ nombre: 'Inicio', ruta: '/' }, { nombre: 'Servicios para personas' }])]}
@@ -40,17 +40,17 @@ import { SERVICIOS_PERSONAS } from '../config/personas';
 </Base>
 
 <style>
-  .hero { background: var(--calido); padding-block: 56px 64px; }
+  .hero { background: var(--papel-sombra); padding-block: 56px 64px; }
   .hero h1 { margin-bottom: 14px; }
   .servicios { list-style: none; padding: 0; display: grid; gap: 16px; }
   @media (min-width: 760px) { .servicios { grid-template-columns: 1fr 1fr; } }
   .servicios li {
     max-width: none; padding: 28px 24px; border-radius: var(--radio); background: #fff;
-    border: 1px solid rgba(50, 16, 48, 0.1); scroll-margin-top: 84px; display: grid; gap: 12px; align-content: start;
+    border: 1px solid rgba(0, 40, 112, 0.1); scroll-margin-top: 84px; display: grid; gap: 12px; align-content: start;
   }
   .servicios h2 { font-size: 1.7rem; }
   @media (min-width: 960px) { .servicios h2 { font-size: 2rem; } }
-  .servicios p { color: var(--texto-secundario); }
+  .servicios p { color: var(--gris-pizarra); }
   .servicios .btn { justify-self: start; }
-  .servicios li:target { border-color: var(--dorado); box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.25); }
+  .servicios li:target { border-color: var(--cobalto); box-shadow: 0 0 0 3px rgba(51, 70, 200, 0.25); }
 </style>
