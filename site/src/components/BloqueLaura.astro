@@ -1,5 +1,5 @@
 ---
-// Bloque corto «Sobre Laura» (estrategia §7.7). Las señales sin confirmar llevan [CONFIRMAR]
+// Bloque corto «Sobre Laura» (estrategia §7.7). Señales confirmadas por Laura el 2026-10-14.
 // y bloquean producción hasta que Laura las valide o se retiren.
 import { Image } from 'astro:assets';
 import foto from '../assets/fotos/laura-4.jpeg';
@@ -16,14 +16,13 @@ const { enlace = true } = Astro.props;
     <div>
       <p class="etiqueta">La abogada detrás de tu caso</p>
       <h2>Hola, soy Laura Riaño</h2>
-      <p>Soy abogada y sé que enfrentar temas legales puede sentirse como un laberinto. Mi trabajo es acompañarte y guiarte a la salida de forma clara, precisa y eficiente.</p>
+      <p>Soy abogada especialista y sé que enfrentar temas legales puede sentirse como un laberinto. Mi trabajo es acompañarte y guiarte a la salida de forma clara, precisa y eficiente.</p>
       <p>Trabajo con personas que necesitan resolver algo concreto y con emprendedores que están construyendo un negocio y quieren hacerlo bien desde el comienzo. En los dos casos mi punto de partida es el mismo: que entiendas qué estás haciendo y por qué.</p>
-      <p>[CONFIRMAR: 1-2 frases de formación — universidad, especialización, áreas de profundización]</p>
       <ul class="senales">
         <li>Bogotá y atención virtual en toda Colombia</li>
         <li>Trato directo: hablas conmigo, no con un asistente</li>
-        <li>+7 años de experiencia [CONFIRMAR]</li>
-        <li>Tarjeta profesional N.º ____ — Consejo Superior de la Judicatura [CONFIRMAR]</li>
+        <li>Abogada especialista</li>
+        <li>+7 años de experiencia</li>
       </ul>
       {enlace && <a class="btn btn--borde" href={url('/sobre-laura')}>Conoce más sobre mí</a>}
     </div>

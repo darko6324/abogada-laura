@@ -7,7 +7,7 @@ vertical: negocio
 etapa: crea
 formulario: crear-empresa
 orden: 1
-estado: borrador
+estado: confirmado
 
 hero:
   h1: Crear tu empresa en Colombia, bien hecho desde el primer día
@@ -42,7 +42,7 @@ incluye:
     - '**Estructura de capital y participación** entre los accionistas.'
     - '**Definición de administración y representación legal:** quién firma, hasta qué monto, qué necesita autorización.'
     - '**Reglas de decisión y quórum:** cómo se aprueban las cosas y qué pasa si no hay acuerdo.'
-    - '**Acuerdo entre socios o accionistas**, cuando hay más de uno. [CONFIRMAR si va incluido o es servicio aparte]'
+    - '**Acuerdo entre socios o accionistas**, cuando hay más de uno.'
     - '**Orientación durante el proceso de formalización** ante la Cámara de Comercio y sobre los registros que siguen.'
     - '**Explicación de qué viene después** y qué obligaciones periódicas adquiere tu empresa.'
 
@@ -66,8 +66,8 @@ proceso:
 noIncluye:
   titulo: Para que no haya sorpresas
   items:
-    - '**Los derechos de registro de la Cámara de Comercio y demás costos oficiales no están incluidos en mis honorarios.** Son valores fijados por las entidades, se pagan directamente a ellas y te los indico por separado antes de empezar. [TARIFA]'
-    - '**No presto servicios contables ni tributarios.** Puedo explicarte qué decisiones societarias tienen efecto tributario y en qué momento conviene que hables con un contador. Si no tienes uno, puedo articularme con el profesional que elijas. [CONFIRMAR]'
+    - '**Los derechos de registro de la Cámara de Comercio y demás costos oficiales no están incluidos en mis honorarios.** Son valores fijados por las entidades, se pagan directamente a ellas y te los indico por separado antes de empezar.'
+    - '**No presto servicios contables ni tributarios.** Puedo explicarte qué decisiones societarias tienen efecto tributario y en qué momento conviene que hables con un contador. Si no tienes uno, puedo articularme con el profesional que elijas.'
     - '**Los tiempos de respuesta de las entidades no dependen de mí**, y no te los voy a prometer.'
     - '**El registro de tu marca es un proceso distinto** al de crear la empresa y se solicita ante otra autoridad. [Ver registro de marca](/registro-de-marca)'
 
@@ -88,7 +88,7 @@ relacionados:
 
 faq:
   - p: ¿Cuánto cuesta crear una empresa en Colombia?
-    r: 'Hay dos costos distintos. Los costos oficiales —derechos de registro de la Cámara de Comercio y demás— los fijan las entidades según el capital y la actividad, y se pagan directamente a ellas. Mis honorarios profesionales dependen del alcance: no es lo mismo una sociedad de un solo accionista que una con tres socios y acuerdo entre ellos. Cuéntame tu caso y te paso una propuesta con todo desglosado antes de empezar. [TARIFA]'
+    r: 'Hay dos costos distintos. Los costos oficiales —derechos de registro de la Cámara de Comercio y demás— los fijan las entidades según el capital y la actividad, y se pagan directamente a ellas. Mis honorarios profesionales dependen del alcance: no es lo mismo una sociedad de un solo accionista que una con tres socios y acuerdo entre ellos. Cuéntame tu caso y te paso una propuesta con todo desglosado antes de empezar.'
   - p: ¿Puedo crear una SAS yo mismo?
     r: Sí. La ley permite constituir una SAS por documento privado en la mayoría de los casos, y existen modelos disponibles. La pregunta no es si puedes, sino si ese documento estándar va a servirte cuando aparezca una situación que no previó. Si vas a ser el único accionista y tu operación es sencilla, hacerlo solo es una opción razonable. Si te asocias con alguien, ahí es donde el acompañamiento cambia las cosas.
   - p: ¿Qué es mejor, SAS o persona natural con establecimiento de comercio?

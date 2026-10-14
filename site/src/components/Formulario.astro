@@ -211,12 +211,14 @@ const condicionales: Record<string, { pregunta: string; opciones: string[] }> = 
       const endpoint = form.dataset.endpoint;
       if (endpoint) {
         try {
+          // text/plain evita la consulta previa de CORS, que Apps Script no responde.
           const r = await fetch(endpoint, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(lead),
           });
-          if (!r.ok) throw new Error(String(r.status));
+          const res = await r.json().catch(() => ({ ok: r.ok }));
+          if (!r.ok || !res.ok) throw new Error(res.error || String(r.status));
           emitir('form_submit', { servicio_seleccionado: servicio, respuesta_condicional: detalle });
           location.href = `${form.dataset.gracias}?s=${encodeURIComponent(servicio)}`;
           return;

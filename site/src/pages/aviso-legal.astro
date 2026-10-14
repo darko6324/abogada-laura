@@ -1,18 +1,84 @@
 ---
-// El texto del aviso legal lo redacta o aprueba Laura (estrategia §23, punto 7). No se escribe aquí.
+// Aviso legal del sitio. Borrador redactado el 2026-10-14 para revisión y aprobación de Laura.
+// Sigue en `borrador` hasta que ella lo apruebe.
 import Base from '../layouts/Base.astro';
-import { AVISO_GENERAL } from '../config/site';
+import { SITE } from '../config/site';
+import { url } from '../lib/url';
 ---
-<Base title="Aviso legal — Marca & Empresa" description="Aviso legal del sitio abogadalaura.com." borrador>
+<Base
+  title="Aviso legal — Marca & Empresa"
+  description="Quién está detrás de este sitio, alcance de la información publicada, propiedad intelectual y ley aplicable."
+  borrador
+>
   <section class="sec">
-    <div class="wrap texto">
+    <article class="wrap legal">
+      <p class="etiqueta">Documento legal</p>
       <h1>Aviso legal</h1>
-      <p>{AVISO_GENERAL}</p>
-      <p>[CONFIRMAR: texto completo del aviso legal, redactado o aprobado por Laura]</p>
-    </div>
+      <p class="legal__fecha">Vigente desde el 14 de octubre de 2026</p>
+
+      <h2>1. Quién está detrás de este sitio</h2>
+      <p>
+        Este sitio pertenece a {SITE.abogada}, abogada, quien presta sus servicios bajo la marca Marca &amp; Empresa,
+        con domicilio en {SITE.ciudad} D.C., Colombia. Puedes escribir a {SITE.correo} o al WhatsApp {SITE.telefonoVisible}.
+      </p>
+
+      <h2>2. La información de este sitio es general</h2>
+      <p>
+        Los textos de este sitio explican temas de marca, empresa, contratos y otros asuntos de forma general y
+        orientativa. No son asesoría jurídica para un caso concreto: cada situación depende de sus propios hechos y debe
+        revisarse de forma individual.
+      </p>
+      <p>
+        Las normas, las tarifas oficiales y los procedimientos de las entidades cambian con el tiempo. Aunque el contenido
+        se revisa, puede no estar actualizado en el momento en que lo leas. Antes de tomar una decisión importante,
+        consulta tu caso.
+      </p>
+
+      <h2>3. Cuándo empieza una relación abogado-cliente</h2>
+      <p>
+        Escribir por el formulario, por WhatsApp o por correo no crea una relación abogado-cliente ni obliga a ninguna de
+        las partes. Esa relación empieza cuando se acuerda por escrito el alcance del servicio y los honorarios. Aun así,
+        lo que cuentes desde el primer mensaje se trata con reserva.
+      </p>
+
+      <h2>4. Lo que no se promete</h2>
+      <p>
+        Los resultados de los trámites dependen de decisiones de autoridades y de terceros, como la Superintendencia de
+        Industria y Comercio en el registro de marcas o las Cámaras de Comercio en la creación de empresas. Por eso no se
+        promete el resultado de ningún trámite ni plazos que dependan de una entidad. Las tasas y costos oficiales no hacen
+        parte de los honorarios y se informan por separado.
+      </p>
+
+      <h2>5. Propiedad intelectual</h2>
+      <p>
+        Los textos, el diseño, las fotografías, los logos y los demás contenidos de este sitio pertenecen a su titular o
+        se usan con autorización. Puedes leerlos y compartir enlaces a ellos. Para copiarlos, modificarlos o usarlos con
+        fines comerciales necesitas autorización previa y por escrito.
+      </p>
+
+      <h2>6. Enlaces a otros sitios</h2>
+      <p>
+        Este sitio puede enlazar a páginas de entidades públicas o de terceros. Esas páginas tienen sus propias
+        condiciones y su contenido no depende de Marca &amp; Empresa.
+      </p>
+
+      <h2>7. Datos personales</h2>
+      <p>
+        El tratamiento de los datos que entregues en este sitio se rige por la
+        <a href={url('/politica-de-tratamiento-de-datos')}>Política de Tratamiento de Datos Personales</a>.
+      </p>
+
+      <h2>8. Ley aplicable</h2>
+      <p>Este aviso y el uso del sitio se rigen por las leyes de la República de Colombia.</p>
+    </article>
   </section>
 </Base>
 
 <style>
-  .texto > * + * { margin-top: 16px; }
+  .legal { max-width: 820px; }
+  .legal h1 { margin-bottom: 8px; }
+  .legal h2 { font-size: 1.5rem; margin: 40px 0 12px; }
+  @media (min-width: 960px) { .legal h2 { font-size: 1.75rem; } }
+  .legal p { margin-bottom: 10px; }
+  .legal__fecha { color: var(--gris-pizarra); font-size: 0.95rem; margin-bottom: 28px !important; }
 </style>

@@ -28,4 +28,5 @@ jobs:
         continue-on-error: true
         env:
           PUBLIC_SITE_MODE: produccion
+          PUBLIC_LEADS_ENDPOINT: ${{ vars.LEADS_ENDPOINT }}
         run: npm run build

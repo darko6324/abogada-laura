@@ -6,6 +6,7 @@ name: Deploy sitio (GitHub Pages)
 #   SITE_MODE  preview | produccion   (por defecto: preview)
 #   SITE_URL   https://darko6324.github.io  → el día D: https://www.abogadalaura.com
 #   BASE_PATH  /abogada-laura                → el día D: /
+#   LEADS_ENDPOINT  URL /exec del receptor de leads (api/leads, Apps Script)
 # En modo produccion el build FALLA si queda algún borrador, [CONFIRMAR] o [TARIFA].
 on:
   push:
@@ -34,6 +35,7 @@ jobs:
       PUBLIC_SITE_MODE: ${{ vars.SITE_MODE || 'preview' }}
       SITE_URL: ${{ vars.SITE_URL || 'https://darko6324.github.io' }}
       BASE_PATH: ${{ vars.BASE_PATH || '/abogada-laura' }}
+      PUBLIC_LEADS_ENDPOINT: ${{ vars.LEADS_ENDPOINT }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

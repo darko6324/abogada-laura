@@ -8,7 +8,7 @@ vertical: negocio
 etapa: protege
 formulario: registro-de-marca
 orden: 2
-estado: borrador
+estado: confirmado
 
 hero:
   h1: Protege el nombre de tu negocio
@@ -39,13 +39,13 @@ incluye:
   titulo: En qué te acompaño
   items:
     - '**Revisión inicial del signo.** Qué quieres registrar exactamente: la palabra, el logo, o ambos. No siempre conviene lo mismo.'
-    - '**Búsqueda de antecedentes marcarios.** Revisar si hay marcas registradas o solicitadas que puedan entrar en conflicto con la tuya, antes de invertir en el trámite. [CONFIRMAR si va incluido o se cotiza aparte]'
+    - '**Búsqueda de antecedentes marcarios.** Revisar si hay marcas registradas o solicitadas que puedan entrar en conflicto con la tuya, antes de invertir en el trámite.'
     - '**Identificación de productos y servicios** que vas a amparar. Un registro protege para lo que se pide, no para todo.'
     - '**Clasificación aplicable** según la clasificación internacional vigente.'
     - '**Análisis jurídico previo.** Un concepto honesto sobre las posibilidades y los riesgos de tu caso, antes de que pagues las tasas.'
     - '**Preparación y presentación de la solicitud** ante la autoridad competente.'
     - '**Seguimiento del trámite** y aviso de cada actuación.'
-    - '**Respuesta a requerimientos u oposiciones**, cuando el alcance contratado lo contemple. [CONFIRMAR]'
+    - '**Respuesta a requerimientos u oposiciones**, cuando el alcance contratado lo contemple.'
 
 proceso:
   titulo: El proceso
@@ -70,7 +70,7 @@ noIncluye:
     - '**Que tu marca será registrada.** La concesión del registro es una decisión de la autoridad competente. Lo que sí puedo hacer es revisar antecedentes, darte un concepto honesto sobre el riesgo antes de que inviertas y preparar la solicitud lo mejor posible.'
     - '**Que nadie va a oponerse.** Cualquier tercero con interés legítimo puede presentar oposición dentro del trámite. Una búsqueda previa reduce mucho la probabilidad de sorpresas, pero no la elimina.'
     - '**Un plazo exacto.** Las etapas del trámite las maneja la entidad.'
-    - '**Las tasas oficiales no están incluidas en mis honorarios.** Son valores fijados por la autoridad, se actualizan periódicamente y se pagan directamente a ella. Te indico el valor vigente antes de iniciar. [TARIFA]'
+    - '**Las tasas oficiales no están incluidas en mis honorarios.** Son valores fijados por la autoridad, se actualizan periódicamente y se pagan directamente a ella. Te indico el valor vigente antes de iniciar.'
   cierre: Si alguien te asegura el registro de una marca, desconfía. Nadie puede.
 
 porQue:
@@ -88,7 +88,7 @@ relacionados:
 
 faq:
   - p: ¿Cuánto cuesta registrar una marca en Colombia?
-    r: 'Hay dos valores: las tasas oficiales, que fija la autoridad competente, se actualizan periódicamente y se pagan directamente a ella —varían según cuántas clases quieras amparar—, y mis honorarios profesionales por el acompañamiento. Te doy los dos por separado antes de que inicies. [TARIFA]'
+    r: 'Hay dos valores: las tasas oficiales, que fija la autoridad competente, se actualizan periódicamente y se pagan directamente a ella —varían según cuántas clases quieras amparar—, y mis honorarios profesionales por el acompañamiento. Te doy los dos por separado antes de que inicies.'
   - p: ¿Cómo sé si mi marca ya está registrada?
     r: 'Existen bases de datos públicas de consulta de la autoridad de propiedad industrial. Una búsqueda básica la puedes hacer tú. Lo que aporta el análisis profesional es evaluar riesgos de confusión: dos marcas no tienen que ser idénticas para chocar entre sí, y ahí es donde falla la búsqueda hecha por cuenta propia.'
   - p: ¿Registrar mi empresa no protege ya el nombre?
@@ -98,9 +98,9 @@ faq:
   - p: ¿Registro la palabra o el logo?
     r: Protegen cosas distintas. La palabra protege el nombre en sí, independientemente de cómo lo escribas. El logo protege esa representación gráfica concreta. Lo evaluamos según tu negocio y tu presupuesto.
   - p: ¿Cuánto dura el registro?
-    r: La norma establece un plazo de vigencia con posibilidad de renovación. Te indico las fechas exactas de tu registro cuando se concede y te aviso cuándo corresponde renovar. [CONFIRMAR si el seguimiento de renovación es un servicio ofrecido]
+    r: La norma establece un plazo de vigencia con posibilidad de renovación. Te indico las fechas exactas de tu registro cuando se concede y te aviso cuándo corresponde renovar.
   - p: ¿Sirve en otros países?
-    r: El registro es territorial. Un registro en Colombia protege en Colombia. Si planeas vender fuera, hay que evaluar una estrategia distinta. [CONFIRMAR si Laura acompaña registros internacionales]
+    r: El registro es territorial. Un registro en Colombia protege en Colombia. Si planeas vender fuera, hay que evaluar una estrategia distinta, y también te acompaño en eso.
 
 cierre:
   titulo: Antes de invertir en tu marca, revisemos si puedes usarla

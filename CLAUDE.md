@@ -7,7 +7,7 @@ La estrategia completa vive en el Project «Laura Abogada» (`estrategia-web-v2.
 ## Stack
 - `site/` — Astro 5, estático, desplegado en GitHub Pages por `.github/workflows/deploy-site.yml` en cada push a `main`.
 - Contenido en Markdown dentro de `site/src/content/` (servicios, faq, blog). Sin CMS.
-- `api/` (Fase 3) — endpoint de leads en Cloud Run; guarda en Google Sheets.
+- `api/leads/` — receptor de leads en Google Apps Script (cuenta de David); guarda en el Sheet «Leads — Marca & Empresa» y avisa a Laura por correo. Su URL `/exec` va en la variable del repo `LEADS_ENDPOINT`.
 - Fuentes autoalojadas (@fontsource: Libre Caslon Text y Montserrat), imágenes por `astro:assets`. Nada de Google Fonts por `<link>`.
 - Favicon: isotipo M&E azul sobre fondo blanco (`site/public/isotipo-*.png` y `favicon.ico`). Si se cambia, usar un nombre de archivo nuevo: los navegadores guardan el ícono en caché por nombre.
 
@@ -21,7 +21,7 @@ La estrategia completa vive en el Project «Laura Abogada» (`estrategia-web-v2.
 7. **Enlaces internos:** siempre con `url()` de `src/lib/url.ts` (el sitio vive bajo `/abogada-laura/` hasta el día D).
 8. **No enlazar a páginas que no existen** desde menú o footer.
 9. **Sin secretos en el repo.** Es público. Credenciales solo en GitHub Secrets.
-10. **No escribir textos legales** (política de datos, aviso legal): los redacta o aprueba Laura.
+10. **Textos legales** (política de datos, aviso legal): cualquier cambio necesita la aprobación de Laura antes de publicarse.
 
 ## Modos
 - `PUBLIC_SITE_MODE=preview` (por defecto): muestra borradores con aviso, todo con `noindex`.

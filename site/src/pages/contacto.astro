@@ -8,20 +8,18 @@ import { migasSchema } from '../lib/schema';
 <Base
   title="Contacto — Marca & Empresa"
   description="Cuéntame tu situación por WhatsApp o por el formulario. Primera conversación sin compromiso."
-  borrador
   schema={[migasSchema(Astro.site, [{ nombre: 'Inicio', ruta: '/' }, { nombre: 'Contacto' }])]}
 >
   <section class="hero">
     <div class="wrap">
       <p class="etiqueta">Contacto</p>
       <h1>Cuéntame tu situación</h1>
-      <p class="destacado">Por el formulario o directo por WhatsApp, como te quede más fácil. Primera conversación sin compromiso. [CONFIRMAR]</p>
+      <p class="destacado">Por el formulario o directo por WhatsApp, como te quede más fácil. Primera conversación sin compromiso.</p>
       <ul class="canales">
         <li><a class="btn btn--whatsapp" href={whatsappUrl()} target="_blank" rel="noopener" data-evento="whatsapp_click" data-ubicacion="contacto">WhatsApp {SITE.telefonoVisible}</a></li>
         <li><a href={`mailto:${SITE.correo}`} data-evento="email_click">{SITE.correo}</a></li>
         <li><a href={SITE.instagram} target="_blank" rel="noopener">Instagram {SITE.instagramUsuario}</a></li>
       </ul>
-      <p class="horario">Horario de atención: [CONFIRMAR]</p>
     </div>
   </section>
 

@@ -1,6 +1,6 @@
 ---
 // /sobre-laura. La versión larga depende de los datos de §23-B (formación, trayectoria).
-// Todo lo no confirmado va con [CONFIRMAR] y bloquea producción.
+// Datos confirmados por Laura el 2026-10-14. La tarjeta profesional no se publica por decisión suya.
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Formulario from '../components/Formulario.astro';
@@ -10,7 +10,6 @@ import { migasSchema } from '../lib/schema';
 <Base
   title="Laura Riaño, abogada — Marca & Empresa"
   description="Abogada en Bogotá. Acompaño a personas y emprendedores a tomar decisiones legales con claridad. Conoce cómo trabajo y en qué puedo ayudarte."
-  borrador
   schema={[migasSchema(Astro.site, [{ nombre: 'Inicio', ruta: '/' }, { nombre: 'Sobre Laura' }])]}
 >
   <section class="sec">
@@ -22,13 +21,12 @@ import { migasSchema } from '../lib/schema';
       <div class="texto">
         <p class="etiqueta">Sobre mí</p>
         <h1>Hola, soy Laura Riaño</h1>
-        <p class="destacado">Soy abogada y sé que enfrentar temas legales puede sentirse como un laberinto. Mi trabajo es acompañarte y guiarte a la salida de forma clara, precisa y eficiente.</p>
+        <p class="destacado">Soy abogada especialista y sé que enfrentar temas legales puede sentirse como un laberinto. Mi trabajo es acompañarte y guiarte a la salida de forma clara, precisa y eficiente.</p>
         <p>Trabajo con personas que necesitan resolver algo concreto y con emprendedores que están construyendo un negocio y quieren hacerlo bien desde el comienzo. En los dos casos mi punto de partida es el mismo: que entiendas qué estás haciendo y por qué.</p>
         <p>El derecho no tiene por qué ser complicado. Yo me encargo de que no lo sea.</p>
 
         <h2>Formación y trayectoria</h2>
-        <p>[CONFIRMAR: universidad, año de grado, especializaciones y diplomados]</p>
-        <p>[CONFIRMAR: áreas de profundización y años de ejercicio]</p>
+        <p>Soy abogada especialista, con más de siete años de ejercicio.</p>
 
         <h2>Cómo trabajo</h2>
         <ul>
@@ -39,8 +37,6 @@ import { migasSchema } from '../lib/schema';
           <li><strong>Bogotá y toda Colombia.</strong> Atención presencial en Bogotá y virtual en todo el país.</li>
         </ul>
 
-        <h2>Datos profesionales</h2>
-        <p>Tarjeta profesional N.º ____ — Consejo Superior de la Judicatura [CONFIRMAR]</p>
       </div>
     </div>
   </section>

@@ -7,7 +7,7 @@ vertical: negocio
 etapa: contrata
 formulario: contrato
 orden: 3
-estado: borrador
+estado: confirmado
 
 hero:
   h1: Contratos que protegen tu negocio de verdad
@@ -37,7 +37,7 @@ incluye:
   items:
     - '**Con tus clientes.** Prestación de servicios, suministro, contratos comerciales a la medida de tu operación.'
     - '**Con tus proveedores.** Condiciones, plazos, responsabilidades y consecuencias del incumplimiento.'
-    - '**Con aliados.** Acuerdos de colaboración, distribución o representación. [CONFIRMAR alcance]'
+    - '**Con aliados.** Acuerdos de colaboración, distribución o representación.'
     - '**De confidencialidad (NDA).** Cuando vas a compartir información sensible de tu negocio.'
     - '**Con quienes trabajan contigo.** Contratos laborales y de prestación de servicios, según el tipo de relación que realmente exista.'
     - '**A la medida de tu modelo de negocio.** Si tu forma de operar no encaja en ningún molde estándar, se escribe uno.'
@@ -46,7 +46,7 @@ incluye:
     items:
       - '**Revisión antes de firmar.** Te mandaron un contrato: lo reviso y te explico en lenguaje normal qué estás aceptando, qué cláusulas me preocupan y qué pediría cambiar.'
       - '**Negociación contractual.** Acompañamiento en la negociación de las cláusulas, no solo el concepto.'
-      - '**Auditoría de tus contratos actuales.** Revisión de los documentos que ya estás usando para detectar vacíos. [CONFIRMAR]'
+      - '**Auditoría de tus contratos actuales.** Revisión de los documentos que ya estás usando para detectar vacíos.'
 
 proceso:
   titulo: El proceso
@@ -68,13 +68,13 @@ noIncluye:
   titulo: Claridad sobre el alcance
   items:
     - '**Un contrato no impide que la otra parte incumpla.** Lo que hace es dejar claro qué pasa si incumple y darte con qué reclamar.'
-    - '**La representación en un proceso judicial es un servicio distinto** del de redactar o revisar. Si tu caso ya está en conflicto, hablamos de eso por separado. [CONFIRMAR]'
-    - '**Gastos de terceros** —autenticaciones, notaría cuando se requiera, registros— no están incluidos en los honorarios y se indican por separado. [TARIFA]'
+    - '**La representación en un proceso judicial es un servicio distinto** del de redactar o revisar. Si tu caso ya está en conflicto, hablamos de eso por separado.'
+    - '**Gastos de terceros** —autenticaciones, notaría cuando se requiera, registros— no están incluidos en los honorarios y se indican por separado.'
 
 porQue:
   titulo: Qué cambia cuando lo hago yo
   parrafos:
-    - 'Los contratos son mi área de mayor trabajo y son la razón por la que la mayoría de mis clientes me contactan por primera vez. No trabajo con formatos: pregunto cómo funciona tu negocio antes de escribir. Y te explico el documento completo, porque el objetivo no es que tengas un papel firmado sino que sepas exactamente en qué te estás metiendo. [CONFIRMAR]'
+    - 'Los contratos son mi área de mayor trabajo y son la razón por la que la mayoría de mis clientes me contactan por primera vez. No trabajo con formatos: pregunto cómo funciona tu negocio antes de escribir. Y te explico el documento completo, porque el objetivo no es que tengas un papel firmado sino que sepas exactamente en qué te estás metiendo.'
 
 relacionados:
   intro: Otras etapas de tu negocio
@@ -88,7 +88,7 @@ relacionados:
 
 faq:
   - p: ¿Cuánto cuesta un contrato?
-    r: Depende del tipo y de la complejidad de la relación. No es lo mismo un NDA estándar que un contrato de suministro con varias entregas y penalidades. Cuéntame de qué se trata y te paso una propuesta antes de empezar. [TARIFA]
+    r: Depende del tipo y de la complejidad de la relación. No es lo mismo un NDA estándar que un contrato de suministro con varias entregas y penalidades. Cuéntame de qué se trata y te paso una propuesta antes de empezar.
   - p: ¿Puedo usar una plantilla de internet?
     r: 'Puedes, y para algunas relaciones muy simples puede ser suficiente. El riesgo está en que las plantillas fueron escritas para otro negocio y suelen callar justo en lo que importa: propiedad de lo que produces, plazos de pago, alcance de los cambios y qué pasa si alguien se retira antes.'
   - p: Me enviaron un contrato y necesito responder pronto. ¿Alcanzas?

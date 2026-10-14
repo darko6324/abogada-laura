@@ -26,9 +26,9 @@ const pasos = [
     pregunta: '«Que cada acuerdo esté bien hecho»',
   },
   {
-    n: '04', verbo: 'Crece', titulo: 'Crece acompañado', ruta: null, ir: 'Muy pronto',
-    home: 'Cuando cada mes hay algo legal que revisar, tiene más sentido tener a alguien de confianza que buscar un abogado nuevo cada vez. [CONFIRMAR]',
-    hub: 'Acuerdos entre socios, reformas estatutarias, documentos del negocio digital y acompañamiento jurídico recurrente para empresas sin departamento legal. [CONFIRMAR]',
+    n: '04', verbo: 'Crece', titulo: 'Crece acompañado', ruta: '#contacto', ir: 'Cuéntame tu caso',
+    home: 'Cuando cada mes hay algo legal que revisar, tiene más sentido tener a alguien de confianza que buscar un abogado nuevo cada vez.',
+    hub: 'Acuerdos entre socios, reformas estatutarias, documentos del negocio digital y acompañamiento jurídico recurrente para empresas sin departamento legal.',
     pregunta: '«Ya no puedo con todo yo solo»',
   },
 ];
@@ -47,7 +47,7 @@ const pasos = [
     return (
       <li>
         {p.ruta
-          ? <a class="ciclo__paso" href={url(p.ruta)} data-evento="servicio_card_click" data-servicio-destino={p.ruta}>{cuerpo}</a>
+          ? <a class="ciclo__paso" href={p.ruta.startsWith('#') ? p.ruta : url(p.ruta)} data-evento="servicio_card_click" data-servicio-destino={p.ruta}>{cuerpo}</a>
           : <div class="ciclo__paso ciclo__paso--pendiente">{cuerpo}</div>}
       </li>
     );

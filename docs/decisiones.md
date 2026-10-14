@@ -30,3 +30,10 @@
 - **Crecimiento digital** (web, marketing, automatización) entra al formulario y a la home. Todavía no tiene landing.
 - **Confirmado por David (2026-10-14):** Marca & Empresa usa el mismo WhatsApp y correo de Laura, y Laura presta todos los servicios, incluido el digital. El descriptor del logo («Soluciones integrales para tu negocio») se deja por ahora.
 - **Favicon (2026-10-14):** pasa al isotipo M&E azul sobre fondo blanco, con archivos `isotipo-*.png`. Se cambió el nombre de los archivos porque Chrome seguía mostrando el ícono de Astro que se publicó en la Fase 1 como `favicon.ico`.
+
+## 2026-10-14 · Confirmaciones y leads
+
+- **Laura confirmó todo el contenido.** Las landings, la home, el hub, personas, contacto y sobre-laura pasan a `confirmado`. La tarjeta profesional no se publica; se la presenta como «abogada especialista» sin nombrar el área. Se retiró «Horario de atención» porque no hay uno definido.
+- **Política de datos y aviso legal** redactados por Claude a pedido de David, en `borrador` hasta que David y Laura los aprueben. Falta la dirección física de notificaciones (Decreto 1377, art. 13).
+- **Leads con Google Apps Script en lugar de Cloud Run.** Se puede montar sin proyecto de Cloud ni facturación y desde el navegador. Código en `api/leads/`. Guarda en el Sheet «Leads — Marca & Empresa» (cuenta de David, compartido con Laura como editora) y le avisa a Laura por correo. No registra la IP del visitante: la prueba de la autorización es fecha, hora, página y texto aceptado.
+- El formulario envía `text/plain` para evitar la consulta previa de CORS que Apps Script no responde.
