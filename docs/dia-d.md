@@ -2,7 +2,10 @@
 
 Estado al 2026-10-14: el sitio está listo para producción (la guardia pasa) y el formulario guarda leads en el Sheet. Falta el DNS.
 
-**Bloqueo:** `abogadalaura.com` no está en la cuenta de GoDaddy de David (solo aparece `laempanadaguerrera.com`). Hace falta entrar con la cuenta donde está el dominio (la de Laura o la de quien montó la v1) o que esa persona agregue a David como delegado (GoDaddy → Configuración → Acceso de delegado).
+El dominio está en otra cuenta de GoDaddy (no en la de David). David abrió sesión en ella el 2026-10-14.
+
+**2026-10-14:** registro TXT creado y ya visible en DNS público (dns.google). GitHub todavía lo marca «Unverified»: su resolvedor guarda la respuesta negativa del primer intento; reintentar **Verify** en una o dos horas.
+DNS actual: `A @ 216.198.79.1` y `CNAME www → …vercel-dns-017.com` (Vercel), TTL 1 h. Los CNAME `bounces.cloud*.em` y `sable.cloud*._domainkey` son del correo de GoDaddy: **no tocarlos**.
 
 ## 1. Verificar el dominio en GitHub (ya iniciado)
 Registro TXT a crear en el DNS del dominio:
