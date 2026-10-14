@@ -37,3 +37,5 @@
 - **Política de datos y aviso legal** redactados por Claude a pedido de David, en `borrador` hasta que David y Laura los aprueben. Falta la dirección física de notificaciones (Decreto 1377, art. 13).
 - **Leads con Google Apps Script en lugar de Cloud Run.** Se puede montar sin proyecto de Cloud ni facturación y desde el navegador. Código en `api/leads/`. Guarda en el Sheet «Leads — Marca & Empresa» (cuenta de David, compartido con Laura como editora) y le avisa a Laura por correo. No registra la IP del visitante: la prueba de la autorización es fecha, hora, página y texto aceptado.
 - El formulario envía `text/plain` para evitar la consulta previa de CORS que Apps Script no responde.
+- **Textos legales aprobados (2026-10-14)** por David y Laura, con el nombre completo (Laura Valentina Riaño Pacheco) y la dirección de notificaciones (Carrera 76 # 80B-16, Minuto de Dios, Bogotá).
+- **Receptor de leads publicado** como aplicación web de Apps Script (versión 1, acceso «Cualquiera», se ejecuta como David). Probado desde github.io: la fila llega al Sheet. La URL `/exec` quedó como valor por defecto en el workflow.

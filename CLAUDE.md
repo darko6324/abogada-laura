@@ -7,7 +7,7 @@ La estrategia completa vive en el Project «Laura Abogada» (`estrategia-web-v2.
 ## Stack
 - `site/` — Astro 5, estático, desplegado en GitHub Pages por `.github/workflows/deploy-site.yml` en cada push a `main`.
 - Contenido en Markdown dentro de `site/src/content/` (servicios, faq, blog). Sin CMS.
-- `api/leads/` — receptor de leads en Google Apps Script (cuenta de David); guarda en el Sheet «Leads — Marca & Empresa» y avisa a Laura por correo. Su URL `/exec` va en la variable del repo `LEADS_ENDPOINT`.
+- `api/leads/` — receptor de leads en Google Apps Script (cuenta de David); guarda en el Sheet «Leads — Marca & Empresa» y avisa a Laura por correo. Su URL `/exec` está en `.github/workflows/deploy-site.yml` (se puede reemplazar con la variable del repo `LEADS_ENDPOINT`).
 - Fuentes autoalojadas (@fontsource: Libre Caslon Text y Montserrat), imágenes por `astro:assets`. Nada de Google Fonts por `<link>`.
 - Favicon: isotipo M&E azul sobre fondo blanco (`site/public/isotipo-*.png` y `favicon.ico`). Si se cambia, usar un nombre de archivo nuevo: los navegadores guardan el ícono en caché por nombre.
 

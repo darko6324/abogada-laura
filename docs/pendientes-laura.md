@@ -1,6 +1,6 @@
 # Pendientes por confirmar con Laura
 
-**2026-10-14:** Laura confirmó todo lo de A y B («sí a todo»). La tarjeta profesional no se publica; se la presenta como abogada especialista. Quedan: aprobar la política de datos y el aviso legal (borradores en el sitio) y la dirección física de notificaciones.
+**2026-10-14:** Laura confirmó todo lo de A y B («sí a todo»). La tarjeta profesional no se publica; se la presenta como abogada especialista. La política de datos y el aviso legal quedaron aprobados el mismo día, con nombre completo y dirección. No queda nada bloqueante.
 
 Fuente: estrategia §23. Marcar ✅ con fecha cuando Laura lo confirme por escrito. Nada de esta lista se publica antes.
 

@@ -28,5 +28,5 @@ jobs:
         continue-on-error: true
         env:
           PUBLIC_SITE_MODE: produccion
-          PUBLIC_LEADS_ENDPOINT: ${{ vars.LEADS_ENDPOINT }}
+          PUBLIC_LEADS_ENDPOINT: ${{ vars.LEADS_ENDPOINT || 'https://script.google.com/macros/s/AKfycbw-Wq5DYY5Jh43d97VxDOoPti5obAyneknSyDuUSEvHTK2yZdikUJukSQSuI_KJnXLT/exec' }}
         run: npm run build

@@ -35,7 +35,7 @@ jobs:
       PUBLIC_SITE_MODE: ${{ vars.SITE_MODE || 'preview' }}
       SITE_URL: ${{ vars.SITE_URL || 'https://darko6324.github.io' }}
       BASE_PATH: ${{ vars.BASE_PATH || '/abogada-laura' }}
-      PUBLIC_LEADS_ENDPOINT: ${{ vars.LEADS_ENDPOINT }}
+      PUBLIC_LEADS_ENDPOINT: ${{ vars.LEADS_ENDPOINT || 'https://script.google.com/macros/s/AKfycbw-Wq5DYY5Jh43d97VxDOoPti5obAyneknSyDuUSEvHTK2yZdikUJukSQSuI_KJnXLT/exec' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
