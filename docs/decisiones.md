@@ -47,3 +47,8 @@
 - **Consent Mode v2:** todo arranca en `denied` y pasa a `granted` solo si la persona acepta en el aviso de cookies, como promete la política de datos («se te pedirá permiso antes de activarlas»). La elección se guarda en `localStorage` (`consentimiento-cookies`).
 - **Eventos al dataLayer:** cada clic en un elemento con `data-evento` (whatsapp_click, phone_click, email_click, cta_click, segmento_click, servicio_card_click, faq_open) y los del formulario (form_start, form_submit, form_error). Sin datos personales.
 - Pendiente con Laura: añadir a la política de datos (§6 encargados) a Google Analytics/Tag Manager cuando se configure la etiqueta de GA4.
+- **GA4:** cuenta nueva «Marca & Empresa» (cuenta de David), propiedad `abogadalaura.com` (559064376), flujo web `G-Q17JRREKSY`, zona Colombia, pesos.
+- **Contenedor GTM** importado desde `docs/medicion/gtm-contenedor.json`: etiqueta de Google (Initialization - All Pages) y «GA4 - Eventos del sitio» con un activador de evento personalizado y una variable de capa de datos por parámetro. Pendiente: publicarlo y marcar `form_submit` y `whatsapp_click` como eventos clave en GA4.
+
+## 2026-10-15 · Día D completado
+- Certificado emitido tras quitar y volver a poner el dominio personalizado (el chequeo DNS estaba atascado). **Enforce HTTPS** activo. `abogadalaura.com` redirige a `https://www.abogadalaura.com/`. Formulario con endpoint en producción.
