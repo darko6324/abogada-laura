@@ -2,7 +2,10 @@
  * Receptor de leads de Marca & Empresa (Google Apps Script, desplegado como aplicación web).
  *
  * El formulario del sitio envía un POST con JSON (Content-Type text/plain para evitar la consulta previa de CORS).
- * Cada envío válido queda como una fila en la hoja «Leads — Marca & Empresa» y se avisa por correo a Laura.
+ * Cada envío válido queda como una fila en la hoja «Leads — Marca & Empresa» y se avisa a Laura por correo y por Telegram.
+ *
+ * Telegram: el token del bot y el chat de Laura viven en Propiedades del script (Configuración del proyecto →
+ * Propiedades del script), nunca en este archivo: TELEGRAM_TOKEN y TELEGRAM_CHAT_ID. Ver conectarTelegram().
  *
  * Despliegue: Implementar → Nueva implementación → Aplicación web
  *   Ejecutar como: Yo (la cuenta dueña del Sheet) · Quién tiene acceso: Cualquier usuario
@@ -62,6 +65,7 @@ function doPost(e) {
     }
 
     avisar(fila);
+    avisarTelegram(fila);
     return responder({ ok: true });
   } catch (err) {
     console.error(err);
@@ -109,6 +113,78 @@ function avisar(f) {
   }
 }
 
+/** Aviso por Telegram. Si falta configuración o Telegram falla, el lead igual queda guardado. */
+function avisarTelegram(f) {
+  try {
+    const props = PropertiesService.getScriptProperties();
+    const token = props.getProperty('TELEGRAM_TOKEN');
+    const chats = String(props.getProperty('TELEGRAM_CHAT_ID') || '').split(',').map((c) => c.trim()).filter(String);
+    if (!token || !chats.length) return;
+
+    const numero = String(f[4]).replace(/\D/g, '');
+    const wa = 'https://wa.me/' + (numero.length === 10 ? '57' + numero : numero);
+    const html = [
+      '<b>Nueva solicitud: ' + esc(f[1]) + '</b>' + (f[2] ? ' (' + esc(f[2]) + ')' : ''),
+      '',
+      '👤 ' + esc(f[3]),
+      '📱 <a href="' + wa + '">' + esc(f[4]) + '</a> (abrir WhatsApp)',
+      '✉️ ' + esc(f[5]),
+      f[6] ? '\n💬 ' + esc(f[6]).slice(0, 1500) : '',
+      '',
+      '📄 Página: ' + esc(f[7]),
+      '<a href="https://docs.google.com/spreadsheets/d/' + SHEET_ID + '">Abrir la hoja de leads</a>',
+    ].filter((l) => l !== null).join('\n');
+
+    chats.forEach((chat) => {
+      const r = UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+        method: 'post',
+        contentType: 'application/json',
+        payload: JSON.stringify({ chat_id: chat, text: html, parse_mode: 'HTML', disable_web_page_preview: true }),
+        muteHttpExceptions: true,
+      });
+      if (r.getResponseCode() !== 200) console.error('Telegram respondió ' + r.getResponseCode() + ': ' + r.getContentText().slice(0, 200));
+    });
+  } catch (err) {
+    console.error('No se pudo avisar por Telegram', err);
+  }
+}
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+/**
+ * Ejecutar desde el editor DESPUÉS de que Laura (y quien más deba recibir avisos) le escriba /start al bot.
+ * Lee quién le ha escrito al bot, guarda esos chats en TELEGRAM_CHAT_ID y les manda un mensaje de prueba.
+ * Requiere que TELEGRAM_TOKEN ya esté en Propiedades del script.
+ */
+function conectarTelegram() {
+  const props = PropertiesService.getScriptProperties();
+  const token = props.getProperty('TELEGRAM_TOKEN');
+  if (!token) throw new Error('Falta TELEGRAM_TOKEN en Propiedades del script.');
+  const r = JSON.parse(UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/getUpdates', { muteHttpExceptions: true }).getContentText());
+  if (!r.ok) throw new Error('Telegram no aceptó el token: ' + r.description);
+
+  const chats = {};
+  (r.result || []).forEach((u) => {
+    const m = u.message || u.my_chat_member;
+    if (m && m.chat && m.chat.type === 'private') chats[m.chat.id] = [m.chat.first_name, m.chat.last_name].filter(String).join(' ');
+  });
+  const ids = Object.keys(chats);
+  if (!ids.length) throw new Error('Nadie le ha escrito al bot todavía. Que Laura abra el bot en Telegram, toque Iniciar (/start) y vuelve a ejecutar esto.');
+
+  props.setProperty('TELEGRAM_CHAT_ID', ids.join(','));
+  ids.forEach((id) => {
+    UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+      method: 'post',
+      contentType: 'application/json',
+      payload: JSON.stringify({ chat_id: id, text: '✅ Listo. Aquí te llegará un aviso cada vez que alguien deje sus datos en abogadalaura.com.' }),
+      muteHttpExceptions: true,
+    });
+  });
+  console.log('Avisos de Telegram conectados para: ' + ids.map((id) => chats[id]).join(', '));
+}
+
 function responder(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
@@ -117,4 +193,5 @@ function responder(obj) {
 function autorizar() {
   SpreadsheetApp.openById(SHEET_ID).getName();
   MailApp.getRemainingDailyQuota();
+  UrlFetchApp.fetch('https://api.telegram.org', { muteHttpExceptions: true });
 }
