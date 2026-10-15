@@ -1,19 +1,20 @@
 ---
 // Política de Tratamiento de Datos Personales (Ley 1581 de 2012 y Decreto 1377 de 2013, compilado en el Decreto 1074 de 2015).
-// Redactada el 2026-10-14 y aprobada por David y Laura el mismo día. Cualquier cambio necesita su aprobación.
+// Versión 1 redactada y aprobada el 2026-10-14. Versión 2 (2026-10-15): cookies de medición con consentimiento.
+// Cualquier cambio necesita la aprobación de Laura.
 import Base from '../layouts/Base.astro';
 import { SITE } from '../config/site';
 import { url } from '../lib/url';
 ---
 <Base
-  title="Política de Tratamiento de Datos Personales — Marca & Empresa"
-  description="Cómo se recogen, usan, guardan y protegen tus datos personales en Marca & Empresa, y cómo ejercer tus derechos."
+  title="Política de Datos Personales y Cookies — Marca & Empresa"
+  description="Cómo se recogen, usan, guardan y protegen tus datos personales en Marca & Empresa, qué cookies usa el sitio y cómo ejercer tus derechos."
 >
   <section class="sec">
     <article class="wrap legal">
       <p class="etiqueta">Documento legal</p>
-      <h1>Política de Tratamiento de Datos Personales</h1>
-      <p class="legal__fecha">Versión 1 · Vigente desde el 14 de octubre de 2026</p>
+      <h1>Política de Tratamiento de Datos Personales y Cookies</h1>
+      <p class="legal__fecha">Versión 2 · Vigente desde el 15 de octubre de 2026</p>
 
       <p>
         Esta política explica qué datos personales se recogen a través de este sitio y de los canales de contacto de
@@ -52,9 +53,13 @@ import { url } from '../lib/url';
       </ul>
       <p><strong>Los que se generan al enviar el formulario:</strong> la fecha y hora del envío, la página desde la que escribiste, la página que te trajo al sitio y el texto exacto de la autorización que aceptaste. Sirven para dejar prueba de tu autorización, como exige la ley.</p>
       <p>
-        <strong>Cookies:</strong> por ahora este sitio no usa cookies de analítica ni de publicidad. Si más adelante se
-        usan, se te pedirá permiso antes de activarlas. El proveedor del alojamiento del sitio puede registrar datos
-        técnicos de la conexión, como la dirección IP, para su seguridad y funcionamiento.
+        <strong>Los que se recogen al navegar, solo si lo aceptas:</strong> datos de uso del sitio, como las páginas que
+        visitas, los botones que usas, el tipo de dispositivo, la ciudad aproximada y la página que te trajo. Se recogen
+        con cookies de medición y se analizan de forma agregada. Ver la sección 6.
+      </p>
+      <p>
+        El proveedor del alojamiento del sitio puede registrar datos técnicos de la conexión, como la dirección IP, para
+        su seguridad y funcionamiento.
       </p>
 
       <h2>4. Para qué se usan</h2>
@@ -65,7 +70,7 @@ import { url } from '../lib/url';
         <li>Gestionar la relación con quienes contratan: comunicaciones del caso, facturación, pagos y seguimiento.</li>
         <li>Cumplir obligaciones legales, contables, tributarias y profesionales.</li>
         <li>Atender consultas y reclamos sobre tus datos.</li>
-        <li>Elaborar estadísticas internas sin identificar a nadie, por ejemplo cuántas solicitudes llegan por cada servicio.</li>
+        <li>Elaborar estadísticas internas sin identificar a nadie, por ejemplo cuántas solicitudes llegan por cada servicio o qué páginas se visitan más, para mejorar el sitio y los servicios.</li>
       </ol>
       <p>Tus datos no se venden ni se ceden a terceros para que te ofrezcan sus productos. Si en algún momento se quisieran usar para enviarte información o contenidos que no pediste, se te pedirá una autorización aparte.</p>
 
@@ -81,10 +86,49 @@ import { url } from '../lib/url';
         superior.
       </p>
 
-      <h2>6. Quién más puede tratar tus datos</h2>
+      <h2 id="cookies">6. Cookies</h2>
+      <p>
+        Las cookies son pequeños archivos que un sitio guarda en tu navegador. Este sitio usa dos tipos:
+      </p>
+      <ul>
+        <li>
+          <strong>Necesarias:</strong> guardan tu decisión sobre las cookies para no volver a preguntarte. Se guarda en
+          el almacenamiento local de tu navegador con el nombre <code>consentimiento-cookies</code> y no identifica a
+          nadie. No necesitan tu permiso porque sin ellas el aviso aparecería en cada visita.
+        </li>
+        <li>
+          <strong>De medición (Google Analytics):</strong> sirven para saber cuántas personas visitan el sitio, desde
+          dónde llegan y qué páginas o botones usan. Las coloca Google a través de Google Tag Manager y Google Analytics.
+          <strong>Solo se activan si las aceptas.</strong> Si las rechazas o no respondes, no se activan.
+        </li>
+      </ul>
+      <div class="legal__tabla">
+        <table>
+          <thead>
+            <tr><th>Cookie</th><th>Proveedor</th><th>Para qué sirve</th><th>Duración</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>_ga</code></td><td>Google Analytics</td><td>Distinguir visitantes de forma anónima</td><td>2 años</td></tr>
+            <tr><td><code>_ga_Q17JRREKSY</code></td><td>Google Analytics</td><td>Mantener el estado de la visita</td><td>2 años</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Hoy el sitio no usa cookies de publicidad. Si más adelante se usan, por ejemplo para mostrarte anuncios de
+        Marca &amp; Empresa en otros sitios o redes sociales, se te pedirá permiso antes de activarlas y esta política se
+        actualizará.
+      </p>
+      <p>
+        <strong>Cómo cambiar tu decisión:</strong> en cualquier momento desde el enlace
+        «Preferencias de cookies» al pie de cada página. También puedes borrar las cookies desde la configuración de tu
+        navegador.
+      </p>
+
+      <h2>7. Quién más puede tratar tus datos</h2>
       <p>Para funcionar se usan proveedores que actúan como encargados del tratamiento:</p>
       <ul>
         <li><strong>Google LLC</strong> (Google Sheets y Google Apps Script): guarda las solicitudes que llegan por el formulario.</li>
+        <li><strong>Google LLC</strong> (Google Analytics y Google Tag Manager): mide de forma agregada el uso del sitio, solo si aceptas las cookies de medición.</li>
         <li><strong>GitHub, Inc.</strong>: aloja este sitio web.</li>
         <li><strong>WhatsApp (Meta Platforms, Inc.)</strong>: si escribes por WhatsApp, esa conversación también se rige por las condiciones de esa aplicación.</li>
       </ul>
@@ -94,14 +138,15 @@ import { url } from '../lib/url';
         medidas de seguridad adecuadas. Tus datos también pueden entregarse a una autoridad que los pida legalmente.
       </p>
 
-      <h2>7. Cuánto tiempo se guardan</h2>
+      <h2>8. Cuánto tiempo se guardan</h2>
       <ul>
         <li><strong>Si escribiste pero no contrataste:</strong> hasta 24 meses desde el último contacto. Después se eliminan.</li>
         <li><strong>Si contrataste un servicio:</strong> durante la relación y después por el tiempo que exijan las normas contables, tributarias y de ejercicio profesional.</li>
         <li><strong>Prueba de tu autorización:</strong> mientras se traten tus datos y por el tiempo necesario para demostrar que la diste.</li>
+        <li><strong>Datos de medición en Google Analytics:</strong> 14 meses. Después Google los elimina.</li>
       </ul>
 
-      <h2>8. Tus derechos</h2>
+      <h2>9. Tus derechos</h2>
       <p>Como titular tienes derecho a:</p>
       <ol>
         <li>Conocer, actualizar y corregir tus datos.</li>
@@ -112,7 +157,7 @@ import { url } from '../lib/url';
         <li>Acceder gratis a tus datos.</li>
       </ol>
 
-      <h2>9. Cómo ejercer tus derechos</h2>
+      <h2>10. Cómo ejercer tus derechos</h2>
       <p>
         Escribe a <strong>{SITE.correo}</strong> con el asunto «Datos personales». Indica tu nombre, cómo identificarte,
         qué pides y un medio para responderte. Lo atiende directamente {SITE.abogada}.
@@ -122,14 +167,14 @@ import { url } from '../lib/url';
         <li><strong>Reclamos</strong> (corregir, actualizar, eliminar o revocar): se responden en un máximo de 15 días hábiles, prorrogables por 8 días hábiles más con aviso previo. Si al reclamo le falta información, se te pedirá dentro de los 5 días siguientes; si pasan 2 meses sin que la envíes, se entenderá que desististe.</li>
       </ul>
 
-      <h2>10. Seguridad y reserva</h2>
+      <h2>11. Seguridad y reserva</h2>
       <p>
         Los datos se guardan con acceso restringido a las personas que atienden tu caso y con las medidas técnicas que
         ofrecen los proveedores. Lo que cuentes sobre tu caso está además protegido por el deber de reserva profesional
         de la abogada, aunque no llegues a contratar.
       </p>
 
-      <h2>11. Cambios a esta política</h2>
+      <h2>12. Cambios a esta política</h2>
       <p>
         Si esta política cambia de forma importante, se publicará la nueva versión en este sitio con su fecha y, cuando
         corresponda, se te pedirá una nueva autorización.
@@ -143,10 +188,15 @@ import { url } from '../lib/url';
 <style>
   .legal { max-width: 820px; }
   .legal h1 { margin-bottom: 8px; }
-  .legal h2 { font-size: 1.5rem; margin: 40px 0 12px; }
+  .legal h2 { font-size: 1.5rem; margin: 40px 0 12px; scroll-margin-top: 96px; }
   @media (min-width: 960px) { .legal h2 { font-size: 1.75rem; } }
   .legal p, .legal li { margin-bottom: 10px; }
   .legal ul, .legal ol { padding-left: 1.3em; }
   .legal__fecha { color: var(--gris-pizarra); font-size: 0.95rem; margin-bottom: 28px !important; }
   .legal__relacion { margin-top: 40px; }
+  .legal__tabla { overflow-x: auto; margin: 6px 0 16px; }
+  .legal table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 520px; }
+  .legal th, .legal td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  .legal th { color: var(--azul-notarial); font-weight: 600; }
+  .legal code { font-size: 0.9em; background: var(--papel-sombra); padding: 1px 5px; border-radius: 4px; }
 </style>

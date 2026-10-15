@@ -38,7 +38,7 @@ const anio = new Date().getFullYear();
     </div>
 
     <div class="pie__legal">
-      <p class="pie__enlaces">{LEGALES.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}</p>
+      <p class="pie__enlaces">{LEGALES.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}<button type="button" class="pie__cookies" data-abrir-cookies>Preferencias de cookies</button></p>
       <p class="pie__aviso">{AVISO_GENERAL}</p>
       <p>© {anio} {SITE.marca}. Todos los derechos reservados.</p>
     </div>
@@ -56,6 +56,7 @@ const anio = new Date().getFullYear();
   .pie__grid { display: grid; gap: 28px; }
   @media (min-width: 760px) { .pie__grid { grid-template-columns: repeat(4, 1fr); } }
   .pie__h { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--acento-claro); margin-bottom: 10px; }
+  .pie__cookies { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline; cursor: pointer; min-height: 44px; }
   .pie__legal { margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 13px; color: #b9c4ea; display: grid; gap: 10px; }
   .pie__enlaces { display: flex; flex-wrap: wrap; gap: 4px 20px; }
   .pie__enlaces a { display: inline; }

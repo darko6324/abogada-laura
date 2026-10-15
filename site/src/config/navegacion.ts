@@ -22,5 +22,5 @@ export const PERSONAS: Enlace[] = [
 
 export const LEGALES: Enlace[] = [
   { texto: 'Aviso legal', ruta: '/aviso-legal' },
-  { texto: 'Política de Tratamiento de Datos Personales', ruta: '/politica-de-tratamiento-de-datos' },
+  { texto: 'Política de datos y cookies', ruta: '/politica-de-tratamiento-de-datos' },
 ];

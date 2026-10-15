@@ -43,7 +43,7 @@ const activo = MODO === 'produccion' && !!GTM_ID;
     <div class="cookies" role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
       <p>
         Usamos cookies de medición para saber cómo se usa el sitio y mejorarlo. Solo se activan si las aceptas.
-        <a href={url('/politica-de-tratamiento-de-datos')}>Más información</a>.
+        <a href={url('/politica-de-tratamiento-de-datos#cookies')}>Más información</a>.
       </p>
       <div class="cookies__botones">
         <button type="button" class="btn btn--borde" data-cookies="no">Rechazar</button>
@@ -68,8 +68,25 @@ const activo = MODO === 'produccion' && !!GTM_ID;
               });
               window.dataLayer.push({ event: 'consentimiento_aceptado' });
             }
+            if (!si && window.gtag) {
+              window.gtag('consent', 'update', {
+                analytics_storage: 'denied', ad_storage: 'denied',
+                ad_user_data: 'denied', ad_personalization: 'denied'
+              });
+              // Borra las cookies de Google Analytics si ya existían.
+              document.cookie.split(';').map(function (c) { return c.split('=')[0].trim(); })
+                .filter(function (n) { return n.indexOf('_ga') === 0; })
+                .forEach(function (n) {
+                  var d = location.hostname.replace(/^www\./, '');
+                  document.cookie = n + '=; Max-Age=0; path=/; domain=.' + d;
+                  document.cookie = n + '=; Max-Age=0; path=/';
+                });
+            }
             aviso.hidden = true;
           });
+        });
+        document.addEventListener('click', function (e) {
+          if (e.target.closest && e.target.closest('[data-abrir-cookies]') && aviso) aviso.hidden = false;
         });
         // Clics marcados con data-evento → dataLayer (WhatsApp, llamadas, CTA, FAQ…).
         document.addEventListener('click', function (e) {
