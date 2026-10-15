@@ -58,3 +58,9 @@
 - Search Console: propiedad de dominio verificada por TXT, sitemap enviado, indexación solicitada para las 5 páginas principales.
 - Attorney JSON-LD con dirección completa (SEO local).
 - Detalle y pendientes en `docs/medicion/README.md`. Ajuste de la política de datos para aprobación de Laura en `docs/medicion/politica-ajuste-analitica.md`.
+
+## 2026-10-15 · Feed de Instagram en el home
+- Feed propio en lugar de Elfsight (el plan gratis de Elfsight ya está ocupado por La Empanada Guerrera y tiene tope de 200 vistas).
+- `site/scripts/instagram.mjs` trae las 6 últimas publicaciones de @marcayempresa con la API de Instagram (Instagram Login) y guarda las imágenes en `src/assets/instagram/`. El sitio no carga nada de Instagram al visitarlo: sin cookies de terceros y optimizado por `astro:assets`.
+- El deploy corre una vez al día (cron 6:15 a. m. Bogotá) para refrescar el feed. Token en el secreto `IG_TOKEN`; sin token, la sección muestra solo el botón «Seguir en Instagram».
+- Evento nuevo `instagram_click` (`ubicacion`: home-seguir / home-publicacion).

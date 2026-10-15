@@ -8,6 +8,7 @@ import ComoTrabajo from '../components/ComoTrabajo.astro';
 import BloqueLaura from '../components/BloqueLaura.astro';
 import Formulario from '../components/Formulario.astro';
 import Faq from '../components/Faq.astro';
+import InstagramFeed from '../components/InstagramFeed.astro';
 import retrato from '../assets/fotos/laura-3.jpeg';
 import { url } from '../lib/url';
 import { faqSchema } from '../lib/schema';
@@ -192,13 +193,16 @@ const faq = [
     </div>
   </section>
 
-  <!-- 8 · Formulario -->
+  <!-- 8 · Instagram: últimas publicaciones de @marcayempresa -->
+  <InstagramFeed />
+
+  <!-- 9 · Formulario -->
   <Formulario
     titulo="Agenda tu asesoría"
     intro="Cuéntanos qué quieres proteger, crear o lanzar. Te decimos con franqueza qué se puede hacer y por dónde empezar."
   />
 
-  <!-- 9 · FAQ -->
+  <!-- 10 · FAQ -->
   <Faq preguntas={faq} />
 </Base>
 

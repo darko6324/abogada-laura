@@ -15,6 +15,9 @@ on:
       - 'site/**'
       - '.github/workflows/deploy-site.yml'
   workflow_dispatch:
+  # Una vez al día (6:15 a. m. en Bogotá) para traer las últimas publicaciones de Instagram.
+  schedule:
+    - cron: '15 11 * * *'
 
 permissions:
   contents: read
@@ -44,6 +47,10 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
       - run: npm ci
+      - name: Últimas publicaciones de Instagram
+        run: node scripts/instagram.mjs
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

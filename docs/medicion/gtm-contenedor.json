@@ -250,7 +250,7 @@
               {
                 "type": "TEMPLATE",
                 "key": "arg1",
-                "value": "^(whatsapp_click|phone_click|email_click|cta_click|segmento_click|servicio_card_click|faq_open|form_start|form_submit|form_error)$"
+                "value": "^(whatsapp_click|phone_click|email_click|cta_click|segmento_click|servicio_card_click|faq_open|instagram_click|form_start|form_submit|form_error)$"
               }
             ]
           }
