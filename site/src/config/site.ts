@@ -15,6 +15,8 @@ export const SITE = {
   /** La abogada que presta todos los servicios: marca, empresa y crecimiento digital. */
   abogada: 'Laura Riaño',
   ciudad: 'Bogotá',
+  /** Dirección de notificaciones aprobada por Laura (2026-10-14), publicada en los textos legales. */
+  direccion: 'Carrera 76 # 80B-16, Minuto de Dios',
   pais: 'CO',
   // Número en formato internacional, sin +, espacios ni guiones. Marca & Empresa usa el mismo de Laura.
   whatsapp: '573218180713',

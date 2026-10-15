@@ -52,3 +52,9 @@
 
 ## 2026-10-15 · Día D completado
 - Certificado emitido tras quitar y volver a poner el dominio personalizado (el chequeo DNS estaba atascado). **Enforce HTTPS** activo. `abogadalaura.com` redirige a `https://www.abogadalaura.com/`. Formulario con endpoint en producción.
+
+## 2026-10-15 · Medición, SEO y remarketing
+- Tag Manager publicado (v2). GA4 configurado: retención 14 meses, Google Signals, 6 dimensiones personalizadas, 4 audiencias, medición mejorada sin «interacciones con formularios» (duplicaba `form_start`/`form_submit`). Vinculado con Search Console.
+- Search Console: propiedad de dominio verificada por TXT, sitemap enviado, indexación solicitada para las 5 páginas principales.
+- Attorney JSON-LD con dirección completa (SEO local).
+- Detalle y pendientes en `docs/medicion/README.md`. Ajuste de la política de datos para aprobación de Laura en `docs/medicion/politica-ajuste-analitica.md`.

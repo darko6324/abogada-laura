@@ -50,7 +50,7 @@ const attorney = {
   image: ogUrl,
   telephone: `+${SITE.whatsapp}`,
   email: SITE.correo,
-  address: { '@type': 'PostalAddress', addressLocality: SITE.ciudad, addressCountry: SITE.pais },
+  address: { '@type': 'PostalAddress', streetAddress: SITE.direccion, addressLocality: SITE.ciudad, addressRegion: 'Bogotá D.C.', addressCountry: SITE.pais },
   areaServed: { '@type': 'Country', name: 'Colombia' },
   knowsLanguage: 'es',
   sameAs: [SITE.instagram],
