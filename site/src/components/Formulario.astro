@@ -148,8 +148,9 @@ const condicionales: Record<string, { pregunta: string; opciones: string[] }> = 
   };
 
   function emitir(evento: string, params: Record<string, string> = {}) {
-    const w = window as unknown as { gtag?: (...a: unknown[]) => void };
-    w.gtag?.('event', evento, { origen_pagina: location.pathname, ...params });
+    // Eventos para Google Tag Manager (dataLayer). Sin datos personales.
+    const w = window as unknown as { dataLayer?: Record<string, unknown>[] };
+    w.dataLayer?.push({ event: evento, origen_pagina: location.pathname, ...params });
   }
 
   document.querySelectorAll<HTMLFormElement>('form.form').forEach((form) => {

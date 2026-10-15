@@ -24,5 +24,8 @@ export const SITE = {
   instagramUsuario: '@marcayempresa',
 } as const;
 
+/** Google Tag Manager. Solo se carga en producción y con Consent Mode: nada se mide sin permiso. */
+export const GTM_ID = 'GTM-PTVKZWZD';
+
 export const AVISO_GENERAL =
   'La información publicada en este sitio es de carácter general y orientativo. No constituye asesoría jurídica para un caso particular ni crea una relación abogado-cliente. Cada situación debe evaluarse de forma individual.';

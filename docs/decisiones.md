@@ -41,3 +41,9 @@
 - **Receptor de leads publicado** como aplicación web de Apps Script (versión 1, acceso «Cualquiera», se ejecuta como David). Probado desde github.io: la fila llega al Sheet. La URL `/exec` quedó como valor por defecto en el workflow.
 - **Zona horaria del Sheet** pasó a Bogotá (GMT-5). La fila de prueba conserva la hora anterior; las nuevas llegan bien.
 - **Dominio:** verificación de `abogadalaura.com` iniciada en GitHub Pages. El dominio no está en la cuenta de GoDaddy de David; los pasos siguen en `docs/dia-d.md`.
+
+## 2026-10-15 · Google Tag Manager
+- **GTM `GTM-PTVKZWZD`** en todas las páginas, solo en producción (`src/components/Medicion.astro`).
+- **Consent Mode v2:** todo arranca en `denied` y pasa a `granted` solo si la persona acepta en el aviso de cookies, como promete la política de datos («se te pedirá permiso antes de activarlas»). La elección se guarda en `localStorage` (`consentimiento-cookies`).
+- **Eventos al dataLayer:** cada clic en un elemento con `data-evento` (whatsapp_click, phone_click, email_click, cta_click, segmento_click, servicio_card_click, faq_open) y los del formulario (form_start, form_submit, form_error). Sin datos personales.
+- Pendiente con Laura: añadir a la política de datos (§6 encargados) a Google Analytics/Tag Manager cuando se configure la etiqueta de GA4.

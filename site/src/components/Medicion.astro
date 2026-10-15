@@ -1,0 +1,103 @@
+---
+// Google Tag Manager con Consent Mode v2.
+// Promesa de la política de datos: no se activan cookies de analítica ni de publicidad sin permiso.
+// Por eso todo arranca en «denied» y solo cambia a «granted» cuando la persona acepta en el aviso.
+// Solo se carga en producción (en la vista previa no hay medición).
+import { GTM_ID, MODO } from '../config/site';
+import { url } from '../lib/url';
+
+interface Props { parte: 'head' | 'body' }
+const { parte } = Astro.props;
+const activo = MODO === 'produccion' && !!GTM_ID;
+---
+{activo && parte === 'head' && (
+  <script is:inline define:vars={{ GTM_ID }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    var elegido = null;
+    try { elegido = localStorage.getItem('consentimiento-cookies'); } catch (e) {}
+    var permiso = elegido === 'si' ? 'granted' : 'denied';
+    gtag('consent', 'default', {
+      analytics_storage: permiso,
+      ad_storage: permiso,
+      ad_user_data: permiso,
+      ad_personalization: permiso,
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',GTM_ID);
+  </script>
+)}
+
+{activo && parte === 'body' && (
+  <>
+    <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+      height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+
+    <div class="cookies" role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
+      <p>
+        Usamos cookies de medición para saber cómo se usa el sitio y mejorarlo. Solo se activan si las aceptas.
+        <a href={url('/politica-de-tratamiento-de-datos')}>Más información</a>.
+      </p>
+      <div class="cookies__botones">
+        <button type="button" class="btn btn--borde" data-cookies="no">Rechazar</button>
+        <button type="button" class="btn btn--primario" data-cookies="si">Aceptar</button>
+      </div>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var aviso = document.querySelector('.cookies');
+        var elegido = null;
+        try { elegido = localStorage.getItem('consentimiento-cookies'); } catch (e) {}
+        if (aviso && !elegido) aviso.hidden = false;
+        document.querySelectorAll('[data-cookies]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var si = b.getAttribute('data-cookies') === 'si';
+            try { localStorage.setItem('consentimiento-cookies', si ? 'si' : 'no'); } catch (e) {}
+            if (si && window.gtag) {
+              window.gtag('consent', 'update', {
+                analytics_storage: 'granted', ad_storage: 'granted',
+                ad_user_data: 'granted', ad_personalization: 'granted'
+              });
+              window.dataLayer.push({ event: 'consentimiento_aceptado' });
+            }
+            aviso.hidden = true;
+          });
+        });
+        // Clics marcados con data-evento → dataLayer (WhatsApp, llamadas, CTA, FAQ…).
+        document.addEventListener('click', function (e) {
+          var el = e.target.closest && e.target.closest('[data-evento]');
+          if (!el || !window.dataLayer) return;
+          var datos = { event: el.getAttribute('data-evento'), origen_pagina: location.pathname };
+          ['ubicacion', 'servicio', 'posicion', 'segmento', 'servicio-destino', 'pregunta'].forEach(function (k) {
+            var v = el.getAttribute('data-' + k);
+            if (v) datos[k.replace('-', '_')] = v;
+          });
+          window.dataLayer.push(datos);
+        });
+      })();
+    </script>
+  </>
+)}
+
+<style>
+  .cookies {
+    position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 70;
+    max-width: 560px; margin-inline: auto;
+    background: var(--blanco, #fff); color: var(--tinta);
+    border: 1px solid var(--linea); border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(19, 32, 63, 0.18);
+    padding: 18px 20px; font-size: 0.95rem;
+  }
+  .cookies p { margin: 0 0 14px; }
+  .cookies a { color: var(--cobalto); }
+  .cookies__botones { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+  .cookies .btn { min-height: 44px; }
+</style>

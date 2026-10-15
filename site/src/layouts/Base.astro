@@ -13,6 +13,7 @@ import Footer from '../components/Footer.astro';
 import WhatsAppFlotante from '../components/WhatsAppFlotante.astro';
 import AvisoBorrador from '../components/AvisoBorrador.astro';
 import BarraMovil from '../components/BarraMovil.astro';
+import Medicion from '../components/Medicion.astro';
 import { SITE, ES_PREVIEW } from '../config/site';
 import { url } from '../lib/url';
 import retrato from '../assets/fotos/laura-3.jpeg';
@@ -59,6 +60,7 @@ const attorney = {
 <html lang="es-CO">
   <head>
     <meta charset="UTF-8" />
+    <Medicion parte="head" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -87,6 +89,7 @@ const attorney = {
     <slot name="head" />
   </head>
   <body>
+    <Medicion parte="body" />
     <a class="sr-only" href="#contenido">Saltar al contenido</a>
     {ES_PREVIEW && borrador && <AvisoBorrador />}
     <Header whatsapp={whatsapp} />
