@@ -66,11 +66,27 @@ async function traer() {
   console.log(`Instagram: ${posts.length} publicaciones guardadas.`);
 }
 
+// Renueva el token en cada build para que no venza (dura 60 días; se puede renovar si tiene más de 24 h).
+// Nunca imprime el token: solo dice cuántos días le quedan y si Meta devolvió el mismo valor.
+async function mantenerVivo() {
+  try {
+    const r = await pedir(`${API}/refresh_access_token?grant_type=ig_refresh_token&access_token=${TOKEN}`);
+    const j = await r.json();
+    const dias = Math.round(j.expires_in / 86400);
+    const mismo = j.access_token === TOKEN;
+    console.log(`Instagram: token renovado, vence en ${dias} días${mismo ? '' : ' (Meta devolvió un valor nuevo: actualizar IG_TOKEN)'}.`);
+    if (!mismo) console.log('::warning::Meta devolvió un token nuevo. Genera uno en Meta for Developers y actualiza el secreto IG_TOKEN.');
+  } catch (e) {
+    console.log(`Instagram: no se pudo renovar el token todavía (${e.message.slice(0, 80)}).`);
+  }
+}
+
 if (!TOKEN) {
   console.log('Instagram: sin IG_TOKEN, se usan los datos guardados.');
 } else {
   try {
-    await (process.argv.includes('--refrescar') ? refrescar() : traer());
+    if (process.argv.includes('--refrescar')) await refrescar();
+    else { await traer(); await mantenerVivo(); }
   } catch (e) {
     console.warn(`Instagram: ${e.message}. Se usan los datos guardados.`);
     if (process.argv.includes('--refrescar')) process.exit(1);

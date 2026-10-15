@@ -64,3 +64,6 @@
 - `site/scripts/instagram.mjs` trae las 6 últimas publicaciones de @marcayempresa con la API de Instagram (Instagram Login) y guarda las imágenes en `src/assets/instagram/`. El sitio no carga nada de Instagram al visitarlo: sin cookies de terceros y optimizado por `astro:assets`.
 - El deploy corre una vez al día (cron 6:15 a. m. Bogotá) para refrescar el feed. Token en el secreto `IG_TOKEN`; sin token, la sección muestra solo el botón «Seguir en Instagram».
 - Evento nuevo `instagram_click` (`ubicacion`: home-seguir / home-publicacion).
+- **Conexión (2026-10-15):** app de Meta «Marca y Empresa Web» (ID 1108126338842576), creada desde el Facebook de Laura Riaño, sin portafolio comercial. Solo el permiso `instagram_business_basic`. @marcayempresa es evaluadora de Instagram de la app (modo desarrollo; no hace falta publicarla). Token en el secreto `IG_TOKEN`.
+- **Token:** cada build diario lo renueva (`refresh_access_token`) y el log dice cuántos días le quedan, sin imprimirlo. Si un día Meta devolviera un valor nuevo, el log deja un aviso: generar otro token en Meta for Developers → Casos de uso → API de Instagram → «Generar token» y reemplazar `IG_TOKEN`.
+- Con 4 o 5 publicaciones se muestran 3, para que la cuadrícula de 3 columnas no quede con hueco.

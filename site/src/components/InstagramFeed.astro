@@ -18,6 +18,8 @@ const posts = (datos.posts as Post[])
   .map((p) => ({ ...p, img: porNombre[p.imagen] }))
   .filter((p) => p.img)
   .slice(0, 6);
+// La cuadrícula es de 3 columnas: con 4 o 5 publicaciones se muestran 3 para que no quede un hueco.
+const visibles = posts.length >= 6 ? posts : posts.slice(0, Math.min(posts.length, 3));
 
 const resumen = (t: string) => {
   const limpio = t.replace(/#[\p{L}\d_]+/gu, '').replace(/\s+/g, ' ').trim();
@@ -41,9 +43,9 @@ const fecha = (iso: string) =>
       </a>
     </div>
 
-    {posts.length > 0 && (
+    {visibles.length > 0 && (
       <ul class="ig__grid">
-        {posts.map((p) => (
+        {visibles.map((p) => (
           <li>
             <a class="ig__post" href={p.enlace} target="_blank" rel="noopener"
                data-evento="instagram_click" data-ubicacion="home-publicacion">
@@ -74,6 +76,8 @@ const fecha = (iso: string) =>
   .ig__cabeza h2 { margin-bottom: 10px; }
   .ig__grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   @media (min-width: 700px) { .ig__grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+  /* En móvil (2 columnas) la tercera de tres quedaría sola: se oculta. */
+  @media (max-width: 699px) { .ig__grid li:nth-child(3):last-child { display: none; } }
   .ig__post {
     position: relative; display: block; aspect-ratio: 1; overflow: hidden;
     border-radius: var(--radio); background: var(--papel-sombra); color: var(--blanco); text-decoration: none;
