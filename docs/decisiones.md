@@ -67,3 +67,8 @@
 - **Conexión (2026-10-15):** app de Meta «Marca y Empresa Web» (ID 1108126338842576), creada desde el Facebook de Laura Riaño, sin portafolio comercial. Solo el permiso `instagram_business_basic`. @marcayempresa es evaluadora de Instagram de la app (modo desarrollo; no hace falta publicarla). Token en el secreto `IG_TOKEN`.
 - **Token:** dura 60 días (generado el 2026-10-15, vence hacia el 2026-12-14). Cada build llama a `refresh_access_token` y el log dice cuántos días le quedan, sin imprimirlo; Meta devuelve un valor nuevo que el workflow no puede guardar sin un token personal de GitHub. **Renovación manual antes del vencimiento:** Meta for Developers → app «Marca y Empresa Web» → Casos de uso → API de Instagram → Configuración de la API → «Generar token», y reemplazar el secreto `IG_TOKEN`. Si vence, la sección de Instagram queda solo con el título y el botón «Seguir en Instagram» (las fotos no se guardan en el repo).
 - Con 4 o 5 publicaciones se muestran 3, para que la cuadrícula de 3 columnas no quede con hueco.
+
+## 2026-10-15 · Avisos de leads por Telegram
+- Bot `@marcayempresaleads_bot` (creado por David con @BotFather). Token en Propiedades del script (`TELEGRAM_TOKEN`), nunca en el repo. `conectarTelegram()` guarda en `TELEGRAM_CHAT_ID` los chats que le escribieron `/start` al bot.
+- El proyecto de Apps Script es **«Leads Marca y Empresa»** (ID `1liaK2kLR7JTc9wU8o4kD41GBtVyjK7M9Vlq_I2aQ0ecmCIVdgS6n9A2_`, cuenta de David). Estaba en la papelera de Apps Script; se restauró el 2026-10-15. No borrarlo: es el receptor del formulario.
+- Implementación «Formulario del sitio» → versión 2 (mismo `/exec`). Si Telegram falla, el lead igual se guarda y el correo igual sale.
