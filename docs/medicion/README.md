@@ -49,7 +49,7 @@ Todos llevan `origen_pagina`.
   - Empezaron el formulario y no lo enviaron.
   - Contactaron (formulario o WhatsApp) — para excluir en campañas de captación.
 - Vinculado con Search Console.
-- **Pendiente:** marcar como eventos clave `form_submit`, `whatsapp_click` y `phone_click` (Administrar → Eventos → estrella). Analytics solo los deja marcar cuando ya los recibió.
+- **Eventos clave (2026-10-16):** `form_submit`, `whatsapp_click` y `phone_click`. (Los de ejemplo `close_convert_lead`, `purchase` y `qualify_lead` vienen de Google y no se usan.)
 
 ## SEO
 
@@ -67,3 +67,5 @@ Todos llevan `origen_pagina`.
 ## Observación del 2026-10-15
 
 Desde el Chrome de David, varias peticiones a `analytics.google.com/g/collect` respondieron 503 y no llegaron a Analytics (solo llegó una visita de varias). Las etiquetas sí se disparan y la petición a `stats.g.doubleclick.net` responde 204. Probablemente es algo de esa conexión o navegador (bloqueador, DNS con filtro, VPN). Comprobar desde otro dispositivo y red (por ejemplo, el celular con datos móviles) en Analytics → Tiempo real.
+
+**Revisión del 2026-10-16:** Analytics ya recibe datos. Del 15 de octubre: 4 usuarios, 24 vistas de página, 88 eventos, y llegaron los 13 eventos personalizados y automáticos (incluidos `form_submit`, `whatsapp_click`, `phone_click` e `instagram_click`). El 503 del Chrome de David no impide la medición en general.
