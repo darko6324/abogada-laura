@@ -1,0 +1,84 @@
+---
+// Listado del blog (estrategia §17). En producción solo aparecen los artículos confirmados.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { ES_PREVIEW, AVISO_GENERAL } from '../../config/site';
+import { url } from '../../lib/url';
+import { migasSchema } from '../../lib/schema';
+
+const articulos = (await getCollection('blog'))
+  .filter((a) => ES_PREVIEW || a.data.estado === 'confirmado')
+  .sort((a, b) => b.data.publicado.valueOf() - a.data.publicado.valueOf());
+
+const fecha = (d: Date) =>
+  d.toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const schema = [migasSchema(Astro.site, [{ nombre: 'Inicio', ruta: '/' }, { nombre: 'Blog' }])];
+---
+<Base
+  title="Blog legal para emprendedores y empresas — Marca & Empresa"
+  description="Artículos sobre registro de marca, creación de empresa y contratos en Colombia, explicados sin tecnicismos."
+  schema={schema}
+  noindex={articulos.length === 0}
+>
+  <section class="hero">
+    <div class="wrap">
+      <nav class="migas" aria-label="Ruta"><a href={url('/')}>Inicio</a> <span aria-hidden="true">/</span> Blog</nav>
+      <h1>Lo que conviene entender antes de decidir</h1>
+      <p class="destacado">
+        Dudas reales de quien está creando o protegiendo un negocio en Colombia, respondidas en palabras normales.
+      </p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      {articulos.length === 0 ? (
+        <p>Todavía no hay artículos publicados.</p>
+      ) : (
+        <ul class="lista">
+          {articulos.map((a) => (
+            <li>
+              <a href={url(`/blog/${a.id}`)}>
+                <h2>{a.data.titulo}</h2>
+                <p>{a.data.descripcion}</p>
+                <span class="meta">
+                  {fecha(a.data.publicado)}
+                  {ES_PREVIEW && a.data.estado === 'borrador' && <em class="borrador">borrador</em>}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+
+  <div class="wrap aviso"><p>{AVISO_GENERAL}</p></div>
+</Base>
+
+<style>
+  .hero { background: var(--azul-notarial); color: #fff; padding-block: 48px 64px; }
+  @media (min-width: 960px) { .hero { padding-block: 72px 88px; } }
+  .hero h1 { color: #fff; max-width: 20ch; margin-bottom: 18px; }
+  .hero .destacado { color: #e3e8f8; }
+  .migas { font-size: 14px; margin-bottom: 20px; color: #b9c4ea; }
+  .migas a { color: var(--hielo); }
+
+  .lista { list-style: none; padding: 0; display: grid; gap: 18px; }
+  @media (min-width: 960px) { .lista { grid-template-columns: 1fr 1fr; gap: 24px; } }
+  .lista a {
+    display: block; height: 100%; background: #fff; text-decoration: none; color: inherit;
+    border: 1px solid rgba(0, 40, 112, 0.1); border-left: 3px solid var(--cobalto);
+    border-radius: 12px; padding: 24px;
+  }
+  .lista a:hover { border-color: var(--azul-notarial); border-left-color: var(--azul-notarial); }
+  .lista h2 { font-size: 1.3rem; margin-bottom: 8px; }
+  .lista p { color: var(--gris-pizarra); }
+  .meta { display: block; margin-top: 14px; font-size: 14px; color: var(--gris-pizarra); }
+  .borrador {
+    margin-left: 8px; font-style: normal; font-size: 12px; font-weight: 600;
+    background: #fff4d6; border: 1px solid #e3cf98; color: #6b5310; padding: 2px 8px; border-radius: 5px;
+  }
+  .aviso { padding-block: 24px; font-size: 14px; font-style: italic; color: var(--gris-pizarra); }
+</style>
