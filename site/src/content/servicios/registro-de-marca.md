@@ -29,7 +29,7 @@ educativo:
   titulo: 'Empresa, establecimiento, dominio y marca: cuatro cosas distintas'
   parrafos:
     - Esta confusión es la más común que veo, y es cara.
-    - '**Registro mercantil / razón social.** Cuando creas tu empresa, queda inscrita en el registro mercantil con una razón social. Eso identifica a tu sociedad como persona jurídica. **No te da derechos sobre el nombre como marca.**'
+    - '**Registro mercantil / razón social.** Cuando [creas tu empresa](/crear-empresa), queda inscrita en el registro mercantil con una razón social. Eso identifica a tu sociedad como persona jurídica. **No te da derechos sobre el nombre como marca.**'
     - '**Establecimiento de comercio y nombre comercial.** El nombre con el que operas frente al público. La protección del nombre comercial en Colombia está ligada al uso y es más limitada y más difícil de probar que la de una marca registrada.'
     - '**Dominio web y usuario de redes sociales.** Que tengas el .com o el arroba en Instagram no te da ningún derecho marcario. Funciona también al revés: hay quien registra un dominio y luego descubre que la marca es de otro.'
     - '**Marca registrada.** Es el único de los cuatro que te da un derecho exclusivo sobre el signo para identificar determinados productos o servicios, en el territorio y por el tiempo que establece la norma, con posibilidad de renovación. Se solicita ante la autoridad competente en propiedad industrial en Colombia y se concede o se niega mediante una decisión de esa entidad.'

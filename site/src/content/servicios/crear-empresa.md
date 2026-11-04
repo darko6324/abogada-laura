@@ -1,8 +1,8 @@
 ---
 # Estrategia §8 · Landing «Creación de empresa»
 titulo: Crear tu empresa
-metaTitle: Abogada para crear tu empresa en Colombia | SAS y estatutos
-metaDescription: Constituir una empresa no es llenar un formulario. Te acompaño a elegir el tipo societario, redactar estatutos a la medida y formalizar tu negocio.
+metaTitle: Asesoría para constituir una SAS en Colombia | Abogada
+metaDescription: Constituir una empresa no es llenar un formulario. Te acompaño a elegir el tipo societario, redactar los estatutos y formalizar tu SAS ante la Cámara.
 vertical: negocio
 etapa: crea
 formulario: crear-empresa
@@ -31,7 +31,7 @@ educativo:
     - '**Qué tipo de sociedad te conviene.** La SAS es la más común en Colombia porque es flexible y permite un solo accionista, pero «la más común» no significa «la mejor para tu caso». Depende de con quién te asocias, qué actividad vas a desarrollar y cómo planeas repartir el control.'
     - '**Qué dicen tus estatutos.** Los estatutos son las reglas internas de tu empresa. Los modelos gratuitos que circulan sirven para que el documento pase el registro, no para resolver tus conflictos. Casi ninguno dice qué pasa si un socio quiere vender su parte, ni cómo se rompe un empate en una decisión.'
     - '**Cómo se reparte y quién decide.** Participación y control no son lo mismo. Se pueden diseñar de forma distinta, y esa es una de las decisiones más importantes que vas a tomar.'
-    - '**Qué puede hacer tu empresa.** El objeto social define el campo de acción. Muy estrecho te limita; copiado de internet puede no cubrir lo que realmente haces.'
+    - '**Qué puede hacer tu empresa.** El objeto social define el campo de acción. Muy estrecho te limita; copiado de internet puede no cubrir lo que realmente haces, y condiciona los [contratos que vas a firmar](/contratos-empresas) con clientes y proveedores.'
 
 incluye:
   titulo: En qué te acompaño
