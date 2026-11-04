@@ -1,0 +1,120 @@
+---
+// Artículo del blog. Cada uno enlaza a UNA landing como destino principal (estrategia §16).
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { ES_PREVIEW, AVISO_GENERAL, SITE } from '../../config/site';
+import { whatsappUrl, mensajePara } from '../../lib/whatsapp';
+import { url } from '../../lib/url';
+import { migasSchema } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const todos = await getCollection('blog');
+  return todos
+    .filter((a) => ES_PREVIEW || a.data.estado === 'confirmado')
+    .map((a) => ({ params: { articulo: a.id }, props: { entrada: a } }));
+}
+
+const { entrada } = Astro.props;
+const d = entrada.data;
+const { Content } = await render(entrada);
+
+// Servicio relacionado: destino principal del artículo. Si no está publicado, no se enlaza (regla 8).
+const servicio = await getEntry('servicios', d.servicio);
+const enlazaServicio = servicio && (ES_PREVIEW || servicio.data.estado === 'confirmado');
+const clave = enlazaServicio ? (servicio.data.whatsapp ?? servicio.id) : 'home';
+const wa = whatsappUrl(mensajePara(clave));
+
+const fecha = (f: Date) => f.toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
+const iso = (f: Date) => f.toISOString().slice(0, 10);
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: d.titulo,
+    description: d.descripcion,
+    datePublished: iso(d.publicado),
+    ...(d.actualizado ? { dateModified: iso(d.actualizado) } : {}),
+    author: { '@id': new URL(url('/'), Astro.site).href + '#abogada' },
+    publisher: { '@id': new URL(url('/'), Astro.site).href + '#abogada' },
+    inLanguage: 'es-CO',
+    mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+  },
+  migasSchema(Astro.site, [
+    { nombre: 'Inicio', ruta: '/' },
+    { nombre: 'Blog', ruta: '/blog' },
+    { nombre: d.titulo },
+  ]),
+];
+---
+<Base title={`${d.titulo} — ${SITE.marca}`} description={d.descripcion} whatsapp={clave}
+      borrador={d.estado === 'borrador'} schema={schema}>
+  <section class="hero">
+    <div class="wrap">
+      <nav class="migas" aria-label="Ruta">
+        <a href={url('/')}>Inicio</a> <span aria-hidden="true">/</span>
+        <a href={url('/blog')}>Blog</a>
+      </nav>
+      <h1>{d.titulo}</h1>
+      <p class="fechas">
+        <time datetime={iso(d.publicado)}>{fecha(d.publicado)}</time>
+        {d.actualizado && <> · Actualizado el <time datetime={iso(d.actualizado)}>{fecha(d.actualizado)}</time></>}
+      </p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <article class="articulo"><Content /></article>
+    </div>
+  </section>
+
+  {enlazaServicio && (
+    <section class="sec sec--oscura">
+      <div class="wrap cta">
+        <p class="etiqueta">¿Y en tu caso?</p>
+        <h2>{servicio.data.cierre.titulo}</h2>
+        <p class="destacado">{servicio.data.cierre.texto}</p>
+        <div class="fila-botones">
+          <a class="btn btn--primario" href={url(`/${servicio.id}`)}
+             data-evento="blog_to_service" data-articulo={entrada.id} data-servicio-destino={servicio.id}>
+            {servicio.data.hero.cta}
+          </a>
+          <a class="btn btn--claro" href={wa} target="_blank" rel="noopener"
+             data-evento="whatsapp_click" data-ubicacion="articulo" data-servicio={clave}>
+            {servicio.data.hero.ctaWhatsapp}
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <div class="wrap aviso"><p>{AVISO_GENERAL}</p></div>
+</Base>
+
+<style>
+  .hero { background: var(--azul-notarial); color: #fff; padding-block: 48px 56px; }
+  @media (min-width: 960px) { .hero { padding-block: 72px 80px; } }
+  .hero h1 { color: #fff; max-width: 24ch; margin-bottom: 14px; }
+  .migas { font-size: 14px; margin-bottom: 20px; color: #b9c4ea; }
+  .migas a { color: var(--hielo); }
+  .fechas { color: #b9c4ea; font-size: 14px; }
+
+  .articulo { max-width: 68ch; }
+  .articulo :global(> * + *) { margin-top: 18px; }
+  .articulo :global(h2) { margin-top: 44px; font-size: 1.6rem; }
+  .articulo :global(h3) { margin-top: 32px; font-size: 1.15rem; }
+  .articulo :global(ul), .articulo :global(ol) { padding-left: 1.2em; display: grid; gap: 10px; }
+  .articulo :global(a) { color: var(--azul-notarial); text-underline-offset: 3px; }
+  .articulo :global(strong) { font-weight: 600; }
+  .articulo :global(blockquote) {
+    margin-top: 28px; padding: 18px 22px; background: #fff;
+    border: 1px solid rgba(0, 40, 112, 0.1); border-left: 3px solid var(--cobalto); border-radius: 12px;
+    font-family: var(--serif); font-size: 1.2rem; font-style: italic;
+  }
+  .articulo :global(blockquote p) { margin: 0; }
+
+  .cta h2 { color: #fff; max-width: 22ch; }
+  .cta .destacado { color: #e3e8f8; }
+  .aviso { padding-block: 24px; font-size: 14px; font-style: italic; color: var(--gris-pizarra); }
+</style>

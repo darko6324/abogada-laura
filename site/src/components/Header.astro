@@ -3,11 +3,19 @@ import { Image } from 'astro:assets';
 import logo from '../assets/marca/logo-horizontal-azul.png';
 import { url } from '../lib/url';
 import { whatsappUrl, mensajePara } from '../lib/whatsapp';
-import { SITE } from '../config/site';
+import { SITE, ES_PREVIEW } from '../config/site';
 import { NEGOCIO, PERSONAS } from '../config/navegacion';
+import { getCollection } from 'astro:content';
 
 interface Props { whatsapp?: string }
 const { whatsapp } = Astro.props;
+const rutasVisibles = new Set((await getCollection('servicios'))
+  .filter((s) => ES_PREVIEW || s.data.estado === 'confirmado')
+  .map((s) => `/${s.id}`));
+// Regla 8: el menú solo enlaza servicios que existen en este build.
+const NEGOCIO_VISIBLE = NEGOCIO.filter((e) => rutasVisibles.has(e.ruta));
+const hayBlog = (await getCollection('blog')).some((a) => ES_PREVIEW || a.data.estado === 'confirmado');
+
 ---
 <header class="nav">
   <div class="nav__in">
@@ -20,7 +28,7 @@ const { whatsapp } = Astro.props;
         <summary>Para tu negocio</summary>
         <div class="drop__panel">
           <a href={url('/emprendedores-y-empresas')}><strong>Todo para tu negocio</strong></a>
-          {NEGOCIO.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}
+          {NEGOCIO_VISIBLE.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}
         </div>
       </details>
       <details class="drop">
@@ -31,6 +39,7 @@ const { whatsapp } = Astro.props;
         </div>
       </details>
       <a href={url('/sobre-laura')}>Quién te asesora</a>
+      {hayBlog && <a href={url('/blog')}>Blog</a>}
       <a href={url('/contacto')}>Contacto</a>
     </nav>
 
@@ -50,8 +59,9 @@ const { whatsapp } = Astro.props;
       <b>Es para mi negocio</b><span>Registro de marca, crear empresa, contratos</span>
     </a>
     <ul class="movil__lista">
-      {NEGOCIO.map((e) => <li><a href={url(e.ruta)}>{e.texto}</a></li>)}
+      {NEGOCIO_VISIBLE.map((e) => <li><a href={url(e.ruta)}>{e.texto}</a></li>)}
       <li><a href={url('/sobre-laura')}>Quién te asesora</a></li>
+      {hayBlog && <li><a href={url('/blog')}>Blog</a></li>}
       <li><a href={url('/contacto')}>Contacto</a></li>
     </ul>
   </div>
