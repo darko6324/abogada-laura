@@ -8,7 +8,9 @@ export const NEGOCIO: Enlace[] = [
   { texto: 'Registro de marca', ruta: '/registro-de-marca' },
   { texto: 'Crear tu empresa', ruta: '/crear-empresa' },
   { texto: 'Contratos para tu negocio', ruta: '/contratos-empresas' },
-  // Fase 3, tras confirmar alcance: /acuerdo-de-socios · /negocios-digitales · /abogada-para-empresas
+  { texto: 'Negocios digitales', ruta: '/negocios-digitales' },
+  // Fase 3, tras confirmar alcance: /abogada-para-empresas.
+  // /acuerdo-de-socios queda fuera del plan por decisión de David (2026-11-04).
 ];
 
 export const PERSONAS: Enlace[] = [

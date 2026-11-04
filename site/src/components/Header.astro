@@ -9,6 +9,11 @@ import { getCollection } from 'astro:content';
 
 interface Props { whatsapp?: string }
 const { whatsapp } = Astro.props;
+const rutasVisibles = new Set((await getCollection('servicios'))
+  .filter((s) => ES_PREVIEW || s.data.estado === 'confirmado')
+  .map((s) => `/${s.id}`));
+// Regla 8: el menú solo enlaza servicios que existen en este build.
+const NEGOCIO_VISIBLE = NEGOCIO.filter((e) => rutasVisibles.has(e.ruta));
 const hayBlog = (await getCollection('blog')).some((a) => ES_PREVIEW || a.data.estado === 'confirmado');
 
 ---
@@ -23,7 +28,7 @@ const hayBlog = (await getCollection('blog')).some((a) => ES_PREVIEW || a.data.e
         <summary>Para tu negocio</summary>
         <div class="drop__panel">
           <a href={url('/emprendedores-y-empresas')}><strong>Todo para tu negocio</strong></a>
-          {NEGOCIO.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}
+          {NEGOCIO_VISIBLE.map((e) => <a href={url(e.ruta)}>{e.texto}</a>)}
         </div>
       </details>
       <details class="drop">
@@ -54,7 +59,7 @@ const hayBlog = (await getCollection('blog')).some((a) => ES_PREVIEW || a.data.e
       <b>Es para mi negocio</b><span>Registro de marca, crear empresa, contratos</span>
     </a>
     <ul class="movil__lista">
-      {NEGOCIO.map((e) => <li><a href={url(e.ruta)}>{e.texto}</a></li>)}
+      {NEGOCIO_VISIBLE.map((e) => <li><a href={url(e.ruta)}>{e.texto}</a></li>)}
       <li><a href={url('/sobre-laura')}>Quién te asesora</a></li>
       {hayBlog && <li><a href={url('/blog')}>Blog</a></li>}
       <li><a href={url('/contacto')}>Contacto</a></li>
