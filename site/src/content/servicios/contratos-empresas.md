@@ -29,7 +29,7 @@ educativo:
   titulo: La diferencia entre un contrato y una plantilla
   parrafos:
     - 'Una plantilla está escrita para un negocio promedio que no existe. Sirve para que haya un papel firmado. El problema aparece en los detalles que la plantilla no conoce: cuándo se considera entregado tu trabajo, qué pasa si el cliente pide cambios sin parar, quién es dueño de lo que produces, en cuánto tiempo te tienen que pagar y qué puedes hacer si no te pagan.'
-    - Eso no se resuelve cambiando los nombres en un documento. Se resuelve preguntando cómo funciona tu negocio y escribiendo desde ahí.
+    - 'Eso no se resuelve cambiando los nombres en un documento. Se resuelve preguntando cómo funciona tu negocio y escribiendo desde ahí: con quién contratas, qué entregas y qué activos tuyos están en juego —desde la [marca con la que operas](/registro-de-marca) hasta la [sociedad que firma](/crear-empresa)—.'
     - '**Mi enfoque no es «te hago un contrato». Es entender cómo trabajas y estructurar la relación comercial para que el contrato te sirva el día que lo necesites.**'
 
 incluye:
