@@ -1,0 +1,93 @@
+---
+// Últimos artículos del blog en la home.
+// Solo aparece si hay artículos visibles en este build: en producción, mientras
+// todos estén en borrador, la sección no existe (regla 8, no enlazar lo que no hay).
+import { getCollection } from 'astro:content';
+import { ES_PREVIEW } from '../config/site';
+import { url } from '../lib/url';
+
+const articulos = (await getCollection('blog'))
+  .filter((a) => ES_PREVIEW || a.data.estado === 'confirmado')
+  .sort((a, b) => b.data.publicado.valueOf() - a.data.publicado.valueOf())
+  .slice(0, 3);
+
+const fecha = (d: Date) => d.toLocaleDateString('es-CO', { year: 'numeric', month: 'long' });
+---
+{articulos.length > 0 && (
+  <section class="sec articulos">
+    <div class="wrap">
+      <div class="articulos__cab">
+        <div>
+          <p class="etiqueta">Para entender antes de decidir</p>
+          <h2>Dudas que aparecen antes de dar el paso</h2>
+        </div>
+        <a class="articulos__todos" href={url('/blog')}>Ver todos los artículos →</a>
+      </div>
+
+      <ul class="articulos__lista">
+        {articulos.map((a) => (
+          <li>
+            <a href={url(`/blog/${a.id}`)} data-evento="blog_card_click" data-articulo={a.id}>
+              <h3>{a.data.titulo}</h3>
+              <p>{a.data.descripcion}</p>
+              <span class="articulos__pie">
+                <time datetime={a.data.publicado.toISOString().slice(0, 10)}>{fecha(a.data.publicado)}</time>
+                {ES_PREVIEW && a.data.estado === 'borrador' && <em class="articulos__borrador">borrador</em>}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<style>
+  .articulos__cab {
+    display: grid; gap: 14px; margin-bottom: 32px;
+    padding-bottom: 20px; border-bottom: 1px solid var(--linea);
+  }
+  @media (min-width: 900px) {
+    .articulos__cab { grid-template-columns: 1fr auto; align-items: end; gap: 28px; }
+  }
+  .articulos__cab h2 { margin-top: 2px; max-width: 18ch; }
+  .articulos__todos {
+    justify-self: start; color: var(--cobalto); font-weight: 600; font-size: 15px;
+    text-decoration: none; padding-block: 10px;
+  }
+  @media (min-width: 900px) { .articulos__todos { justify-self: end; } }
+  .articulos__todos:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .articulos__lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+  @media (min-width: 720px) { .articulos__lista { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+
+  .articulos__lista a {
+    display: flex; flex-direction: column; height: 100%;
+    background: var(--blanco); border: 1px solid var(--linea); border-top: 3px solid var(--cobalto);
+    border-radius: var(--radio); padding: 24px 22px 20px;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .articulos__lista a:hover {
+    border-color: var(--azul-notarial); border-top-color: var(--azul-notarial);
+    box-shadow: 0 10px 26px rgba(0, 40, 112, 0.1); transform: translateY(-2px);
+  }
+  .articulos__lista a:focus-visible { outline: 2px solid var(--cobalto); outline-offset: 3px; }
+
+  .articulos__lista h3 {
+    font-family: var(--serif); font-size: 1.22rem; line-height: 1.25;
+    color: var(--azul-notarial); margin-bottom: 10px;
+  }
+  .articulos__lista p { color: var(--gris-pizarra); font-size: 15px; line-height: 1.6; flex: 1; }
+  .articulos__pie {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--papel-sombra);
+    font-size: 13px; color: var(--gris-pizarra);
+  }
+  .articulos__borrador {
+    font-style: normal; font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; background: #fff4d6; border: 1px solid #e3cf98;
+    color: #6b5310; padding: 2px 7px; border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) { .articulos__lista a { transition: none; } }
+</style>
