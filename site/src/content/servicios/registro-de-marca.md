@@ -2,8 +2,8 @@
 # Estrategia §9 · Landing «Registro de marca»
 # Regla crítica: en ningún punto se promete que la marca quedará registrada.
 titulo: Registro de marca
-metaTitle: Registro de marca en Colombia — acompañamiento legal
-metaDescription: Registrar tu empresa no protege tu marca. Búsqueda de antecedentes, clasificación y acompañamiento durante la solicitud ante la autoridad competente.
+metaTitle: 'Registro de marca en Colombia: acompañamiento ante la SIC'
+metaDescription: Registrar tu empresa no protege tu marca. Búsqueda de antecedentes, clasificación y acompañamiento en la solicitud ante la SIC.
 vertical: negocio
 etapa: protege
 formulario: registro-de-marca
@@ -12,7 +12,7 @@ estado: confirmado
 
 hero:
   h1: Protege el nombre de tu negocio
-  intro: Tener tu empresa registrada no protege tu marca. Son dos cosas distintas y muchos lo descubren cuando ya es tarde. Te acompaño en todo el proceso de solicitud de registro ante la autoridad competente.
+  intro: Tener tu empresa registrada no protege tu marca. Son dos cosas distintas y muchos lo descubren cuando ya es tarde. Te acompaño en todo el proceso de solicitud de registro ante la Superintendencia de Industria y Comercio (SIC).
   cta: Quiero proteger mi marca
   ctaWhatsapp: Consultar por WhatsApp
 
@@ -32,7 +32,7 @@ educativo:
     - '**Registro mercantil / razón social.** Cuando [creas tu empresa](/crear-empresa), queda inscrita en el registro mercantil con una razón social. Eso identifica a tu sociedad como persona jurídica. **No te da derechos sobre el nombre como marca.**'
     - '**Establecimiento de comercio y nombre comercial.** El nombre con el que operas frente al público. La protección del nombre comercial en Colombia está ligada al uso y es más limitada y más difícil de probar que la de una marca registrada.'
     - '**Dominio web y usuario de redes sociales.** Que tengas el .com o el arroba en Instagram no te da ningún derecho marcario. Funciona también al revés: hay quien registra un dominio y luego descubre que la marca es de otro.'
-    - '**Marca registrada.** Es el único de los cuatro que te da un derecho exclusivo sobre el signo para identificar determinados productos o servicios, en el territorio y por el tiempo que establece la norma, con posibilidad de renovación. Se solicita ante la autoridad competente en propiedad industrial en Colombia y se concede o se niega mediante una decisión de esa entidad.'
+    - '**Marca registrada.** Es el único de los cuatro que te da un derecho exclusivo sobre el signo para identificar determinados productos o servicios, en el territorio y por el tiempo que establece la norma, con posibilidad de renovación. Se solicita ante la Superintendencia de Industria y Comercio (SIC), que administra el sistema de propiedad industrial en Colombia, y se concede o se niega mediante una decisión suya.'
     - 'Dicho corto: **la empresa protege a la sociedad, la marca protege el nombre.** Una no incluye a la otra.'
 
 incluye:
@@ -43,12 +43,12 @@ incluye:
     - '**Identificación de productos y servicios** que vas a amparar. Un registro protege para lo que se pide, no para todo.'
     - '**Clasificación aplicable** según la clasificación internacional vigente.'
     - '**Análisis jurídico previo.** Un concepto honesto sobre las posibilidades y los riesgos de tu caso, antes de que pagues las tasas.'
-    - '**Preparación y presentación de la solicitud** ante la autoridad competente.'
+    - '**Preparación y presentación de la solicitud** ante la SIC.'
     - '**Seguimiento del trámite** y aviso de cada actuación.'
     - '**Respuesta a requerimientos u oposiciones**, cuando el alcance contratado lo contemple.'
 
 proceso:
-  titulo: El proceso
+  titulo: El proceso ante la SIC, paso a paso
   pasos:
     - t: Me cuentas qué quieres proteger
       d: El nombre, el logo, y a qué se dedica tu negocio.
@@ -59,18 +59,18 @@ proceso:
     - t: Definimos clases
       d: Qué productos o servicios va a amparar tu registro.
     - t: Preparo y presento la solicitud
-      d: Ante la autoridad competente, con la documentación que corresponda.
+      d: Ante la SIC, con la documentación que corresponda.
     - t: Seguimiento
       d: 'Te informo de cada etapa: publicación, eventuales oposiciones y decisión.'
-  nota: El trámite tiene etapas y tiempos definidos por la entidad. Te explico cuáles son y en qué punto vas, pero los plazos de la autoridad no dependen de mí.
+  nota: El trámite tiene etapas y tiempos definidos por la SIC. Te explico cuáles son y en qué punto vas, pero los plazos de la entidad no dependen de mí.
 
 noIncluye:
   titulo: Lo que ningún abogado serio te va a prometer
   items:
-    - '**Que tu marca será registrada.** La concesión del registro es una decisión de la autoridad competente. Lo que sí puedo hacer es revisar antecedentes, darte un concepto honesto sobre el riesgo antes de que inviertas y preparar la solicitud lo mejor posible.'
+    - '**Que tu marca será registrada.** La concesión del registro es una decisión de la SIC. Lo que sí puedo hacer es revisar antecedentes, darte un concepto honesto sobre el riesgo antes de que inviertas y preparar la solicitud lo mejor posible.'
     - '**Que nadie va a oponerse.** Cualquier tercero con interés legítimo puede presentar oposición dentro del trámite. Una búsqueda previa reduce mucho la probabilidad de sorpresas, pero no la elimina.'
     - '**Un plazo exacto.** Las etapas del trámite las maneja la entidad.'
-    - '**Las tasas oficiales no están incluidas en mis honorarios.** Son valores fijados por la autoridad, se actualizan periódicamente y se pagan directamente a ella. Te indico el valor vigente antes de iniciar.'
+    - '**Las tasas oficiales no están incluidas en mis honorarios.** Son valores fijados por la SIC, se actualizan periódicamente y se pagan directamente a ella. Te indico el valor vigente antes de iniciar.'
   cierre: Si alguien te asegura el registro de una marca, desconfía. Nadie puede.
 
 porQue:
@@ -88,11 +88,11 @@ relacionados:
 
 faq:
   - p: ¿Cuánto cuesta registrar una marca en Colombia?
-    r: 'Hay dos valores: las tasas oficiales, que fija la autoridad competente, se actualizan periódicamente y se pagan directamente a ella —varían según cuántas clases quieras amparar—, y mis honorarios profesionales por el acompañamiento. Te doy los dos por separado antes de que inicies.'
+    r: 'Hay dos valores: las tasas oficiales, que fija la SIC, se actualizan periódicamente y se pagan directamente a ella —varían según cuántas clases quieras amparar—, y mis honorarios profesionales por el acompañamiento. Te doy los dos por separado antes de que inicies.'
   - p: ¿Cómo sé si mi marca ya está registrada?
-    r: 'Existen bases de datos públicas de consulta de la autoridad de propiedad industrial. Una búsqueda básica la puedes hacer tú. Lo que aporta el análisis profesional es evaluar riesgos de confusión: dos marcas no tienen que ser idénticas para chocar entre sí, y ahí es donde falla la búsqueda hecha por cuenta propia.'
+    r: 'La SIC tiene una plataforma pública de consulta en línea, el SIPI, donde puedes buscar signos ya registrados o en trámite. Esa búsqueda básica la puedes hacer tú. Lo que aporta el análisis profesional es evaluar riesgos de confusión: dos marcas no tienen que ser idénticas para chocar entre sí, y ahí es donde falla la búsqueda hecha por cuenta propia.'
   - p: ¿Registrar mi empresa no protege ya el nombre?
-    r: No. La inscripción en el registro mercantil identifica a tu sociedad. La protección como marca se obtiene con el registro ante la autoridad de propiedad industrial. Son dos trámites distintos ante entidades distintas.
+    r: 'No. La inscripción en el registro mercantil identifica a tu sociedad. La protección como marca se obtiene con el registro ante la SIC. Son dos trámites distintos ante entidades distintas: la Cámara de Comercio y la Superintendencia.'
   - p: ¿Qué pasa si alguien más ya registró mi nombre?
     r: Depende de para qué productos o servicios lo registró, de hace cuánto y de si tú venías usando el tuyo antes. Hay escenarios distintos y algunos tienen salida. Es un caso para revisar en concreto, no para responder en una página web.
   - p: ¿Registro la palabra o el logo?

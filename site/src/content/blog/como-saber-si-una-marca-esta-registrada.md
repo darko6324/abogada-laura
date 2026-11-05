@@ -2,11 +2,11 @@
 titulo: "¿Cómo saber si una marca ya está registrada en Colombia?"
 descripcion: "La consulta básica la puedes hacer tú. Lo difícil no es encontrar marcas idénticas, sino las parecidas que también te bloquean."
 servicio: registro-de-marca
-publicado: 2026-11-04
+publicado: 2026-12-16
 estado: borrador
 ---
 
-La consulta básica es pública y gratuita: la Superintendencia de Industria y Comercio mantiene bases de datos de consulta donde puedes buscar signos ya registrados o solicitados en Colombia. Entras, escribes el nombre y ves qué aparece.
+La consulta básica es pública y gratuita. La Superintendencia de Industria y Comercio (SIC) tiene una plataforma en línea, el SIPI, donde puedes buscar signos ya registrados o solicitados en Colombia. Entras, escribes el nombre y ves qué aparece.
 
 Eso lo puedes hacer tú mismo esta tarde. El problema es que una búsqueda así responde una pregunta más estrecha de la que crees estar haciendo.
 
@@ -44,7 +44,7 @@ Elegir mal las clases es el error que más caro sale. Un registro en la clase eq
 
 Dos cosas que no aparecen en una consulta pública y que pueden afectarte igual:
 
-- **Solicitudes muy recientes**, que pueden tardar en reflejarse en los sistemas de consulta.
+- **Solicitudes muy recientes**, que pueden tardar en reflejarse en el SIPI.
 - **Nombres comerciales no registrados** pero con uso previo demostrable, que pueden oponerse a tu solicitud aunque nunca aparecieran en ninguna base.
 
 ## Entonces, ¿cuándo vale la pena un análisis profesional?

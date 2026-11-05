@@ -2,7 +2,7 @@
 titulo: "¿Cuánto cuesta crear una empresa en Colombia?"
 descripcion: "Hay dos costos que casi siempre se mezclan: lo que cobran las entidades y lo que cobra quien te acompaña. Conviene verlos por separado."
 servicio: crear-empresa
-publicado: 2026-11-04
+publicado: 2026-11-18
 estado: borrador
 ---
 
