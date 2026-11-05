@@ -27,10 +27,38 @@ const BLOG_CON_ARTICULOS = (() => {
   }
 })();
 
+/**
+ * Los enlaces internos escritos en el cuerpo de los artículos —[texto](/ruta)— no pasan
+ * por url(), así que hay que anteponerles la ruta base a mano. Sin esto funcionan en
+ * producción (base /) pero se rompen en la vista previa, que vive en /abogada-laura/.
+ */
+function enlacesConBase() {
+  const base = BASE_PATH.replace(/\/$/, '');
+  return (arbol) => {
+    if (!base) return;
+    const visita = (n) => {
+      if (n.type === 'element' && n.tagName === 'a') {
+        const href = n.properties?.href;
+        if (
+          typeof href === 'string' &&
+          href.startsWith('/') &&
+          !href.startsWith('//') &&
+          !href.startsWith(`${base}/`)
+        ) {
+          n.properties.href = `${base}${href}`;
+        }
+      }
+      for (const h of n.children || []) visita(h);
+    };
+    visita(arbol);
+  };
+}
+
 export default defineConfig({
   site: SITE_URL,
   base: BASE_PATH,
   trailingSlash: 'ignore',
+  markdown: { rehypePlugins: [enlacesConBase] },
   build: { format: 'directory' },
   integrations: [
     sitemap({
