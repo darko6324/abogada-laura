@@ -1,8 +1,8 @@
 ---
 # Estrategia §8 · Landing «Creación de empresa»
 titulo: Crear tu empresa
-metaTitle: Asesoría para constituir una SAS en Colombia | Abogada
-metaDescription: Constituir una empresa no es llenar un formulario. Te acompaño a elegir el tipo societario, redactar los estatutos y formalizar tu SAS ante la Cámara.
+metaTitle: 'Cómo crear una empresa en Colombia | Asesoría para tu SAS'
+metaDescription: 'Cómo crear una empresa en Colombia sin que sea solo un trámite: elegir el tipo societario, redactar estatutos a la medida y formalizar tu SAS.'
 vertical: negocio
 etapa: crea
 formulario: crear-empresa
@@ -47,7 +47,7 @@ incluye:
     - '**Explicación de qué viene después** y qué obligaciones periódicas adquiere tu empresa.'
 
 proceso:
-  titulo: El proceso, paso a paso
+  titulo: Cómo se crea una empresa, paso a paso
   pasos:
     - t: Hablamos
       d: Me cuentas qué negocio tienes o quieres montar, con quién y hacia dónde va.
@@ -89,6 +89,8 @@ relacionados:
 faq:
   - p: ¿Cuánto cuesta crear una empresa en Colombia?
     r: 'Hay dos costos distintos. Los costos oficiales —derechos de registro de la Cámara de Comercio y demás— los fijan las entidades según el capital y la actividad, y se pagan directamente a ellas. Mis honorarios profesionales dependen del alcance: no es lo mismo una sociedad de un solo accionista que una con tres socios y acuerdo entre ellos. Cuéntame tu caso y te paso una propuesta con todo desglosado antes de empezar.'
+  - p: ¿Cómo creo una empresa en Colombia?
+    r: 'A grandes rasgos: eliges el tipo de sociedad, defines capital y participación, redactas los estatutos, los registras ante la Cámara de Comercio de tu domicilio y después atiendes los registros que siguen —RUT, facturación y las obligaciones periódicas que adquiere la sociedad—. El trámite es la parte fácil. Lo que decide si tu empresa te sirve o te estorba son las decisiones que se toman antes de registrar nada, y ahí es donde te acompaño.'
   - p: ¿Puedo crear una SAS yo mismo?
     r: Sí. La ley permite constituir una SAS por documento privado en la mayoría de los casos, y existen modelos disponibles. La pregunta no es si puedes, sino si ese documento estándar va a servirte cuando aparezca una situación que no previó. Si vas a ser el único accionista y tu operación es sencilla, hacerlo solo es una opción razonable. Si te asocias con alguien, ahí es donde el acompañamiento cambia las cosas.
   - p: ¿Qué es mejor, SAS o persona natural con establecimiento de comercio?
