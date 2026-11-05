@@ -2,7 +2,7 @@
 titulo: "¿Qué pasa si estoy usando una marca que otra persona registró?"
 descripcion: "Depende de para qué la registró, de hace cuánto y de si tú venías usando la tuya antes. No todos los escenarios terminan igual."
 servicio: registro-de-marca
-publicado: 2026-11-04
+publicado: 2027-01-20
 estado: borrador
 ---
 
