@@ -2,7 +2,7 @@
 titulo: "¿SAS o persona natural? Cómo decidir sin copiar la respuesta de otro"
 descripcion: "No hay una opción mejor para todos. Depende del riesgo que asume tu operación, de si te asocias y de qué patrimonio quieres separar."
 servicio: crear-empresa
-publicado: 2026-11-04
+publicado: 2026-11-11
 estado: borrador
 ---
 
