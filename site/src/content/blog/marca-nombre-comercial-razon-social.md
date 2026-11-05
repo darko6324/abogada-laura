@@ -2,7 +2,7 @@
 titulo: "Marca, nombre comercial y razón social: cuál es cuál"
 descripcion: "Tener la empresa registrada no protege el nombre. Son cuatro cosas distintas y conviene saber cuál te protege de verdad."
 servicio: registro-de-marca
-publicado: 2026-11-04
+publicado: 2026-12-09
 estado: borrador
 ---
 
@@ -37,7 +37,7 @@ Funciona también al revés, y esta parte duele más: puedes comprar el dominio,
 
 ## 4. Marca registrada: la única con derecho exclusivo
 
-La marca es el signo que distingue tus productos o servicios en el mercado. Se solicita ante la autoridad competente en propiedad industrial en Colombia, que es la Superintendencia de Industria y Comercio, y se concede o se niega mediante una decisión de esa entidad.
+La marca es el signo que distingue tus productos o servicios en el mercado. Se solicita ante la Superintendencia de Industria y Comercio (SIC) y se concede o se niega mediante una decisión de esa entidad.
 
 Es la única de las cuatro que te da un **derecho exclusivo** sobre el signo: para los productos o servicios que registraste, en el territorio y por el tiempo que establece la norma, con posibilidad de renovación.
 
@@ -64,6 +64,6 @@ Si ya llevas tiempo operando y nunca registraste, no estás tarde necesariamente
 
 ## Lo que nadie te puede prometer
 
-El registro de una marca lo concede la autoridad después de examinar la solicitud y de un periodo en que terceros pueden oponerse. Lo que sí se puede hacer antes de que inviertas es revisar los antecedentes, evaluar el riesgo de confusión con lo que ya está registrado y decirte con franqueza qué tan viable se ve tu caso.
+El registro de una marca lo concede la SIC después de examinar la solicitud y de un periodo en que terceros pueden oponerse. Lo que sí se puede hacer antes de que inviertas es revisar los antecedentes, evaluar el riesgo de confusión con lo que ya está registrado y decirte con franqueza qué tan viable se ve tu caso.
 
 Si alguien te asegura el registro de una marca, desconfía. Esa decisión no depende de quien te lo promete.
