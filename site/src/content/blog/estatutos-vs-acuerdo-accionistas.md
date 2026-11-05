@@ -2,7 +2,7 @@
 titulo: "¿Necesito un acuerdo de accionistas si ya tengo estatutos?"
 descripcion: "Son documentos distintos. Los estatutos son públicos y regulan la sociedad; el acuerdo es privado y regula la relación entre los socios."
 servicio: crear-empresa
-publicado: 2026-11-04
+publicado: 2026-11-25
 estado: borrador
 ---
 
